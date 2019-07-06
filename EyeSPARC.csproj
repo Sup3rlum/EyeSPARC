@@ -115,7 +115,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataManager\StationManager.py" />
+    <Content Include="DataManager\cluster.py" />
+    <Content Include="DataManager\network.py" />
+    <Content Include="DataManager\station.py" />
     <Content Include="eyesparc_logo.ico" />
   </ItemGroup>
   <ItemGroup>
