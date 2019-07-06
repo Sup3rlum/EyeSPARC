@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+using Microsoft.Scripting;
+using Microsoft.Scripting.Hosting;
 
 namespace EyeSPARC.Data
 {
-    public class Network
+    public static class IronPython
     {
+
     }
 }

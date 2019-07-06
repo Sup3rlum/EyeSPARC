@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Cluster.cs" />
+    <Compile Include="Data\IronPython.cs" />
     <Compile Include="Data\Network.cs" />
     <Compile Include="Data\Station.cs" />
     <Compile Include="MainForm.cs">
