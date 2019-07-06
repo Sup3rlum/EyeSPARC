@@ -118,10 +118,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Sapphire\api.py" />
-    <Content Include="Data\Sapphire\cluster.py" />
-    <Content Include="Data\Sapphire\network.py" />
-    <Content Include="Data\Sapphire\station.py" />
+    <Content Include="Data\Sapphire\Sapphire.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="eyesparc_logo.ico" />
   </ItemGroup>
   <ItemGroup>
