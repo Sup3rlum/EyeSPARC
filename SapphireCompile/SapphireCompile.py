@@ -3,16 +3,15 @@ import os
 import subprocess
 
 ipycpath = 'C:\Program Files\IronPython 2.7\ipyc.exe'
-cmd = ' /main:'
+cmd = ' '
 
-for name in glob.glob('C:\Program Files\IronPython 2.7\sapphire\*.py'):
-	cmd += '"' + name + '" '
+_paths1 = ['"' + name + '" ' for name in glob.glob('C:\Program Files\IronPython 2.7\sapphire\*.py')]
+_paths2 = ['"' + name + '" ' for name in glob.glob('C:\Program Files\IronPython 2.7\sapphire\*\*.py')]
 
-for name in glob.glob('C:\Program Files\IronPython 2.7\sapphire\*\*.py'):
-	cmd += '"' + name + '" '
-	
+cmd += ' /main:' + _paths1[0] + ' '
+cmd += ''.join(_paths1)
+cmd += ''.join(_paths2)
 cmd = ipycpath + cmd + '/target:dll'
 
-print(cmd)
 
 subprocess.call(cmd)

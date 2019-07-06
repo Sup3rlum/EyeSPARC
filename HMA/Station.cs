@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EyeSPARC.Data
+namespace HMA
 {
-    class Cluster
+    public class Station
     {
     }
 }
