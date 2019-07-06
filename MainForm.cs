@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+using EyeSPARC.Data;
+
 namespace EyeSPARC
 {
     public partial class MainForm : Form
@@ -19,7 +22,7 @@ namespace EyeSPARC
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Network net = new Network();
         }
     }
 }

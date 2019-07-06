@@ -20,6 +20,8 @@ namespace EyeSPARC.Data
         public static void Initialize()
         {
             ScriptEngine = Python.CreateEngine();
+
+            ICollection<string> _searchpaths = ScriptEngine.GetSearchPaths();
         }
     }
     public enum IronPythonStatus
