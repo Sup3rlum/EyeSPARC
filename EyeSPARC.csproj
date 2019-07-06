@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Cluster.cs" />
+    <Compile Include="Data\Network.cs" />
+    <Compile Include="Data\Station.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,10 +118,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Sapphire\api.py" />
-    <Content Include="Sapphire\cluster.py" />
-    <Content Include="Sapphire\network.py" />
-    <Content Include="Sapphire\station.py" />
+    <Content Include="Data\Sapphire\api.py" />
+    <Content Include="Data\Sapphire\cluster.py" />
+    <Content Include="Data\Sapphire\network.py" />
+    <Content Include="Data\Sapphire\station.py" />
     <Content Include="eyesparc_logo.ico" />
   </ItemGroup>
   <ItemGroup>
