@@ -115,9 +115,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataManager\cluster.py" />
-    <Content Include="DataManager\network.py" />
-    <Content Include="DataManager\station.py" />
+    <Content Include="Sapphire\api.py" />
+    <Content Include="Sapphire\cluster.py" />
+    <Content Include="Sapphire\network.py" />
+    <Content Include="Sapphire\station.py" />
     <Content Include="eyesparc_logo.ico" />
   </ItemGroup>
   <ItemGroup>
