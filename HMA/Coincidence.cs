@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace HMA
 {
-    public class Event
+    class Coincidence
     {
     }
 }
