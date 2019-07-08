@@ -35,40 +35,70 @@ namespace EyeSPARC
             root.Title = "Network";
 
             var _clusterData = net.GetClusters();
-
             var _stationData = net.GetStations();
+            var _countryData = net.GetCountries();
+
+
+            foreach (var k in _countryData)
+            {
+                root.Items.Add(new CountryMenuItem() { Title = k.Value, ID=k.Key });
+            }
+
+            foreach (var k in _clusterData)
+            {
+                int _countryID = k.Key / 10000;
+
+                root.Items[root.Items.FindIndex(a => a.ID == _countryID * 10000)].Items.Add(new ClusterMenuItem() { Title = k.Value, ID = k.Key });
+            }
+
+            foreach (var k in _stationData)
+            {
+                int _countryID = k.Key / 10000;
+                int _clusterID = k.Key / 1000;
+
+                int tmp = root.Items.FindIndex(a => a.ID == _countryID * 10000);
+
+                root.Items[tmp].Items[root.Items[tmp].Items.FindIndex(a => a.ID == _clusterID * 1000)].Items.Add(new StationMenuItem() { Title = k.Value, ID = k.Key });
+            }
 
             networkTreeView.ItemsSource = new List<NetworkMenuItem>() { root };
 
-
-
-
-
         }
     }
-    public class NetworkMenuItem : MenuItem
+    public class NetworkMenuItem
     {
         public NetworkMenuItem()
         {
-            this.Items = new ObservableCollection<ClusterMenuItem>();
+            this.Items = new List<CountryMenuItem>();
         }
 
         public string Title { get; set; }
 
-        public ObservableCollection<ClusterMenuItem> Items { get; set; }
+        public List<CountryMenuItem> Items { get; set; }
+    }
+    public class CountryMenuItem
+    {
+        public CountryMenuItem()
+        {
+            this.Items = new List<ClusterMenuItem>();
+        }
+
+        public string Title { get; set; }
+        public int ID { get; set; }
+
+        public List<ClusterMenuItem> Items { get; set; }
     }
     public class ClusterMenuItem
     {
         public ClusterMenuItem()
         {
-            this.Items = new ObservableCollection<StationMenuItem>();
+            this.Items = new List<StationMenuItem>();
         }
 
         public string Title { get; set; }
-        public string Country { get; set; }
         public int ID { get; set; }
 
-        public ObservableCollection<StationMenuItem> Items { get; set; }
+        public List<StationMenuItem> Items { get; set; }
     }
     public class StationMenuItem
     {

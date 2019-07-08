@@ -44,7 +44,7 @@ namespace EyeAPI
 
             foreach (Match m in _matches)
             {
-                _stationData.Add(Int32.Parse(m.Groups["name"].Value), m.Groups["number"].Value);
+                _stationData.Add(Int32.Parse(m.Groups["number"].Value), m.Groups["name"].Value);
             }
 
             return _stationData;
