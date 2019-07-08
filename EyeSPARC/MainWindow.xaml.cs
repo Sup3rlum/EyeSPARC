@@ -66,6 +66,7 @@ namespace EyeSPARC
         }
 
         public string Title { get; set; }
+        public string Country { get; set; }
         public int ID { get; set; }
 
         public ObservableCollection<StationMenuItem> Items { get; set; }

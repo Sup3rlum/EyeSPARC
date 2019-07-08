@@ -10,7 +10,10 @@ namespace HMA
 {
     public class Network
     {
+        public void GetStations()
+        {
 
+        }
     }
     public enum ConnectionStatus
     {

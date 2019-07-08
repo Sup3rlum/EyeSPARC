@@ -59,8 +59,30 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Title}" />
                                 </StackPanel>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <HierarchicalDataTemplate DataType="{x:Type local:ClusterMenuItem}" ItemsSource="{Binding Items}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Title}" />
+                                            <TextBlock Text=" [ID: " Foreground="Green"/>
+                                            <TextBlock Text="{Binding ID}" Foreground="Green"/>
+                                            <TextBlock Text="]" Foreground="Green"/>
+                                            <TextBlock Text=" (Stations: " Foreground="Blue"/>
+                                            <TextBlock Text="{Binding Items.Count}" Foreground="Blue"/>
+                                            <TextBlock Text=")" Foreground="Blue"/>
+                                        </StackPanel>
+                                        <HierarchicalDataTemplate.ItemTemplate>
+                                            <HierarchicalDataTemplate DataType="{x:Type local:StationMenuItem}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Title}" />
+                                                    <TextBlock Text=" [ID: " Foreground="Blue"/>
+                                                    <TextBlock Text="{Binding ID}" Foreground="Blue"/>
+                                                    <TextBlock Text="]" Foreground="Blue"/>
+                                                </StackPanel>
+                                            </HierarchicalDataTemplate>
+                                        </HierarchicalDataTemplate.ItemTemplate>
+                                    </HierarchicalDataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
                             </HierarchicalDataTemplate>
-
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </Grid>
