@@ -1,0 +1,24 @@
+﻿<Window x:Class="EyeSPARC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyeSPARC"
+        mc:Ignorable="d"
+        Title="EyeSPARC" Height="768" Width="1280" Background="#FF363636">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Background="#FF363636">
+                <MenuItem Header="_File" Foreground="White" Background="#FF363636" BorderThickness="0">
+                    <MenuItem Header="_New" Background="#FF363636" BorderThickness="0"/>
+                    <MenuItem Header="_Open" Background="#FF363636" BorderThickness="0" />
+                    <MenuItem Header="_Save" Background="#FF363636" BorderThickness="0" />
+                    <Separator Background="#FF363636" BorderThickness="0"/>
+                    <MenuItem Header="_Exit" Background="#FF363636" BorderThickness="0"/>
+                </MenuItem>
+
+            </Menu>
+        </DockPanel>
+        <Button Content="Button" Width="76" Height="26" Background="#FFA23D3D" BorderBrush="#FF613333"/>
+    </Grid>
+</Window>

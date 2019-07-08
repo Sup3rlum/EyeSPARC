@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeSPARC", "EyeSPARC.csproj", "{23C3E731-2F35-42BC-A40F-A798EAD7AD59}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMA", "HMA\HMA.csproj", "{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeSPARC", "EyeSPARC\EyeSPARC.csproj", "{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{23C3E731-2F35-42BC-A40F-A798EAD7AD59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23C3E731-2F35-42BC-A40F-A798EAD7AD59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23C3E731-2F35-42BC-A40F-A798EAD7AD59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23C3E731-2F35-42BC-A40F-A798EAD7AD59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
