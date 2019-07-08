@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
+using System.Net;
+
 using EyeAPI;
 
 
@@ -28,29 +30,20 @@ namespace EyeSPARC
         {
             InitializeComponent();
 
+            Network net = new Network();
             NetworkMenuItem root = new NetworkMenuItem();
             root.Title = "Network";
 
-            ClusterMenuItem _cluster = new ClusterMenuItem();
+            var _clusterData = net.GetClusters();
 
-            _cluster.Title = "London";
-            _cluster.ID = 17;
-
-            StationMenuItem station = new StationMenuItem();
-
-            station.Title = "IOP";
-            station.ID = 17001;
-
-
-            _cluster.Items.Add(station);
-
-            root.Items.Add(_cluster);
+            var _stationData = net.GetStations();
 
             networkTreeView.ItemsSource = new List<NetworkMenuItem>() { root };
 
-            Network net = new Network();
 
-            net.GetClusters();
+
+
+
         }
     }
     public class NetworkMenuItem : MenuItem
