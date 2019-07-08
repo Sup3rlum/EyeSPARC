@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
 
-namespace HMA
+namespace EyeAPI
 {
     public class Network
     {

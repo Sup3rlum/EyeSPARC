@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace HMA
+namespace EyeAPI
 {
     public class Event
     {
