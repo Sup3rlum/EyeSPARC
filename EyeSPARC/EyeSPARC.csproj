@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EyeAPI\EyeAPI.csproj">
+      <Project>{620a3e56-0154-4b6b-bd00-bf3cd4cba1ca}</Project>
+      <Name>EyeAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

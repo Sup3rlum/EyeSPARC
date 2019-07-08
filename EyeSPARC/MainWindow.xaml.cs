@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+
+using EyeAPI;
 
 
 namespace EyeSPARC
@@ -45,6 +47,10 @@ namespace EyeSPARC
             root.Items.Add(_cluster);
 
             networkTreeView.ItemsSource = new List<NetworkMenuItem>() { root };
+
+            Network net = new Network();
+
+            net.GetClusters();
         }
     }
     public class NetworkMenuItem : MenuItem
