@@ -46,13 +46,14 @@ namespace EyeSPARC
             {
                 StationTitleLabel.Content = ((Station)e.NewValue).Name;
 
-                var conf = ((Station)e.NewValue).InternalConfig;
+                var conf = ((Station)e.NewValue);
 
-                float lat = Single.Parse(conf["gps_latitude"]);
-                float lon = Single.Parse(conf["gps_longitude"]);
-                float alt = Single.Parse(conf["gps_altitude"]);
+                float lat = conf.GetStationConfigAttribute<float>("gps_latitude");
+                float lon = conf.GetStationConfigAttribute<float>("gps_longitude");
+                float alt = conf.GetStationConfigAttribute<float>("gps_altitude");
 
                 stationMap.Center = new Microsoft.Maps.MapControl.WPF.Location(lat, lon);
+                stationMap.ZoomLevel = 16;
             }
 
         }
