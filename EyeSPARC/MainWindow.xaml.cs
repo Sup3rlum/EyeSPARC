@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
 using System.Net;
+using Microsoft.Maps.MapControl.WPF;
 
 using EyeAPI;
 
@@ -27,6 +28,8 @@ namespace EyeSPARC
     public partial class MainWindow : Window
     {
         Network _network = new Network();
+
+        bool _isMapFullTab = false;
 
         public MainWindow()
         {
@@ -52,10 +55,41 @@ namespace EyeSPARC
                 float lon = conf.GetStationConfigAttribute<float>("gps_longitude");
                 float alt = conf.GetStationConfigAttribute<float>("gps_altitude");
 
-                stationMap.Center = new Microsoft.Maps.MapControl.WPF.Location(lat, lon);
+                stationMap.Center = new Location(lat, lon);
                 stationMap.ZoomLevel = 16;
             }
 
+        }
+
+        private void AerialMapButton_Click(object sender, RoutedEventArgs e)
+        {
+            stationMap.Mode = new AerialMode(true);
+        }
+
+        private void RoadMapButton_Click(object sender, RoutedEventArgs e)
+        {
+            stationMap.Mode = new RoadMode();
+        }
+
+        private void FullTabButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isMapFullTab)
+            {
+                _isMapFullTab = false;
+
+                stationMap.Margin = new Thickness(996, 383, 15, 30);
+
+                FullTabButton.Content = "Expand";
+            }
+            else
+            {
+                _isMapFullTab = true;
+
+                stationMap.Margin = new Thickness(308, 214, 15, 30);
+
+
+                FullTabButton.Content = "Minimize";
+            }
         }
     }
 }

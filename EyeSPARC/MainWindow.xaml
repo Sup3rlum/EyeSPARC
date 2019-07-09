@@ -95,14 +95,16 @@
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
-                    <Label Name="StationTitleLabel" Content="N/A" FontSize="72" Margin="325,22,66,334"/>
+                    <Label Name="StationTitleLabel" Content="N/A" FontSize="40" Margin="325,22,66,334"/>
                     <m:Map x:Name="stationMap" 
                            CredentialsProvider="VptlZZkRfRZj3vFeyLEN~KEz7B36YuDsYV4F61t3K0Q~AtzIKqAVjOqDr5ABYY0-49WyshG3nRUUPSCL3Pss79htpRAJmehGD7jMRlt4LpOs" 
-                           Width="300"
-                           Height="300" 
-                           Mode="Aerial"
-                           Margin="925,323,21,29" 
-                           ZoomLevel="16"/>
+                           Mode="Road"
+                           Margin="996,383,15,29" 
+                           ZoomLevel="16"
+                           Culture="en-gb"/>
+                    <Button Name="AerialMapButton" Content="Aerial" HorizontalAlignment="Left" Margin="996,623,0,0" VerticalAlignment="Top" Width="75" Click="AerialMapButton_Click"/>
+                    <Button Name="RoadMapButton" Content="Road" HorizontalAlignment="Left" Margin="1076,623,0,0" VerticalAlignment="Top" Width="75" Click="RoadMapButton_Click"/>
+                    <Button x:Name="FullTabButton" Content="Expand" HorizontalAlignment="Left" Margin="1156,622,0,0" VerticalAlignment="Top" Width="75" Click="FullTabButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem>
