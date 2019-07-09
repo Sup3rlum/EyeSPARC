@@ -12,6 +12,10 @@ namespace EyeAPI
         string Name;
         StationDataStatus LatestDataStatus;
         StationStatus LatestStatus;
+
+        float Latitude;
+        float Longitude;
+        float Altitude;
     }
 
     public enum StationStatus

@@ -64,43 +64,47 @@ namespace EyeSPARC
             networkTreeView.ItemsSource = new List<NetworkMenuItem>() { root };
 
         }
+
+        private void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            StationTitleLabel.Content = ((NodeMenuItem)e.NewValue).Title;
+        }
     }
-    public class NetworkMenuItem
+    public class NetworkMenuItem : NodeMenuItem
     {
         public NetworkMenuItem()
         {
             this.Items = new List<CountryMenuItem>();
         }
 
-        public string Title { get; set; }
 
         public List<CountryMenuItem> Items { get; set; }
     }
-    public class CountryMenuItem
+    public class CountryMenuItem : NodeMenuItem
     {
         public CountryMenuItem()
         {
             this.Items = new List<ClusterMenuItem>();
         }
 
-        public string Title { get; set; }
-        public int ID { get; set; }
 
         public List<ClusterMenuItem> Items { get; set; }
     }
-    public class ClusterMenuItem
+    public class ClusterMenuItem : NodeMenuItem
     {
         public ClusterMenuItem()
         {
             this.Items = new List<StationMenuItem>();
         }
 
-        public string Title { get; set; }
-        public int ID { get; set; }
-
         public List<StationMenuItem> Items { get; set; }
     }
-    public class StationMenuItem
+    public class StationMenuItem : NodeMenuItem
+    {
+
+    }
+
+    public class NodeMenuItem
     {
         public string Title { get; set; }
         public int ID { get; set; }

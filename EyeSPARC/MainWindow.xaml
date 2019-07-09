@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:local="clr-namespace:EyeSPARC"
         mc:Ignorable="d"
         Title="EyeSPARC" Height="768" Width="1280" Background="#FF363636">
@@ -53,7 +54,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TreeView Name="networkTreeView" Margin="0,0,947,0" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <TreeView Name="networkTreeView" Margin="0,0,947,0" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" SelectedItemChanged="NetworkTreeView_SelectedItemChanged">
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate DataType="{x:Type local:NetworkMenuItem}" ItemsSource="{Binding Items}">
                                 <StackPanel Orientation="Horizontal">
@@ -93,7 +94,15 @@
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
-
+                    <Label Name="StationTitleLabel" Content="N/A" FontSize="72" Margin="325,22,66,334"/>
+                    <m:Map x:Name="stationMap" 
+                           CredentialsProvider="VptlZZkRfRZj3vFeyLEN~KEz7B36YuDsYV4F61t3K0Q~AtzIKqAVjOqDr5ABYY0-49WyshG3nRUUPSCL3Pss79htpRAJmehGD7jMRlt4LpOs" 
+                           Width="300"
+                           Height="300" 
+                           Mode="Aerial"
+                           Margin="925,323,21,29" 
+                           Center="51.5323705,-0.1205357" 
+                           ZoomLevel="16"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -110,6 +119,7 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
+
         </TabControl>
     </Grid>
 
