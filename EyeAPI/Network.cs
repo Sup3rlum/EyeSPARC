@@ -5,42 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.IO;
+
+using Newtonsoft.Json;
 
 
 namespace EyeAPI
 {
     public class Network : NetworkNode
     {
-        public Dictionary<int, string> GetClusters()
-        {
+        public List<Country> Countries { get; set; }
 
-            return GetApiNode("clusters");
-        }
 
-        public Dictionary<int, string> GetStations()
-        {
-
-            return GetApiNode("stations");
-        }
-        public Dictionary<int, string> GetCountries()
-        {
-
-            return GetApiNode("countries");
-        }
-
+        WebClient _wc = new WebClient();
 
         public Dictionary<int, string> GetApiNode(string node)
         {
 
-            WebClient _wc = new WebClient();
+            
 
             Dictionary<int, string> _stationData = new Dictionary<int, string>();
 
             string _data = _wc.DownloadString($"http://data.hisparc.nl/api/{node}");
 
-            Regex rgx = new Regex("{\"name\": \"(?<name>[a-zA-Z ]+)\", \"number\": (?<number>[0-9]+)}");
+            MatchCollection _matches = Regex.Matches(_data, "{\"name\": \"(?<name>[a-zA-Z ]+)\", \"number\": (?<number>[0-9]+)}");
 
-            var _matches = rgx.Matches(_data);
 
             foreach (Match m in _matches)
             {
@@ -49,8 +38,13 @@ namespace EyeAPI
 
             return _stationData;
         }
+        public string GetStationConfigJson(int stationId)
+        {
+            string _dataString = _wc.DownloadString($"http://data.hisparc.nl/api/station/{stationId}/config");
 
-        public List<Country> Countries { get; set; }
+            return _dataString;
+        }
+
 
         public string Load()
         {
@@ -80,9 +74,19 @@ namespace EyeAPI
 
                 int tmp = Countries.FindIndex(a => a.ID == _countryID * 10000);
 
-                Countries[tmp].Clusters[Countries[tmp].Clusters.FindIndex(a => a.ID == _clusterID * 1000)].Stations.Add(new Station() { Name = k.Value, ID = k.Key });
+
+                var _configData = GetStationConfigJson(k.Key);
+
+                Countries[tmp].Clusters[Countries[tmp].Clusters.FindIndex(a => a.ID == _clusterID * 1000)].Stations.Add(new Station(_configData)
+                {
+                    Name = k.Value,
+                    ID = k.Key,
+                }
+                );
             }
 
+
+            
 
             this.Name = "Network";
             this.ID = 0;

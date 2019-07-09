@@ -26,11 +26,13 @@ namespace EyeSPARC
     /// </summary>
     public partial class MainWindow : Window
     {
+        Network _network = new Network();
+
         public MainWindow()
         {
             InitializeComponent();
 
-            Network _network = new Network();
+
             _network.Load();
 
 
@@ -40,9 +42,19 @@ namespace EyeSPARC
 
         private void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            StationTitleLabel.Content = ((NetworkNode)e.NewValue).Name;
+            if (e.NewValue.GetType() == typeof(Station))
+            {
+                StationTitleLabel.Content = ((Station)e.NewValue).Name;
 
-            stationMap.Center = new Microsoft.Maps.MapControl.WPF.Location();
+                var conf = ((Station)e.NewValue).InternalConfig;
+
+                float lat = Single.Parse(conf["gps_latitude"]);
+                float lon = Single.Parse(conf["gps_longitude"]);
+                float alt = Single.Parse(conf["gps_altitude"]);
+
+                stationMap.Center = new Microsoft.Maps.MapControl.WPF.Location(lat, lon);
+            }
+
         }
     }
 }
