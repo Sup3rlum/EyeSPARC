@@ -9,27 +9,27 @@ using System.Text.RegularExpressions;
 
 namespace EyeAPI
 {
-    public class Network
+    public class Network : NetworkNode
     {
         public Dictionary<int, string> GetClusters()
         {
 
-            return GetNode("clusters");
+            return GetApiNode("clusters");
         }
 
         public Dictionary<int, string> GetStations()
         {
 
-            return GetNode("stations");
+            return GetApiNode("stations");
         }
         public Dictionary<int, string> GetCountries()
         {
 
-            return GetNode("countries");
+            return GetApiNode("countries");
         }
 
 
-        public Dictionary<int, string> GetNode(string node)
+        public Dictionary<int, string> GetApiNode(string node)
         {
 
             WebClient _wc = new WebClient();
@@ -49,6 +49,49 @@ namespace EyeAPI
 
             return _stationData;
         }
+
+        public List<Country> Countries { get; set; }
+
+        public string Load()
+        {
+            Countries = new List<Country>();
+
+            var _clusterData = GetApiNode("clusters");
+            var _stationData = GetApiNode("stations");
+            var _countryData = GetApiNode("countries");
+
+
+            foreach (var k in _countryData)
+            {
+                Countries.Add(new Country { Name = k.Value, ID = k.Key });
+            }
+
+            foreach (var k in _clusterData)
+            {
+                int _countryID = k.Key / 10000;
+
+                Countries[Countries.FindIndex(a => a.ID == _countryID * 10000)].Clusters.Add(new Cluster() { Name = k.Value, ID = k.Key });
+            }
+
+            foreach (var k in _stationData)
+            {
+                int _countryID = k.Key / 10000;
+                int _clusterID = k.Key / 1000;
+
+                int tmp = Countries.FindIndex(a => a.ID == _countryID * 10000);
+
+                Countries[tmp].Clusters[Countries[tmp].Clusters.FindIndex(a => a.ID == _clusterID * 1000)].Stations.Add(new Station() { Name = k.Value, ID = k.Key });
+            }
+
+
+            this.Name = "Network";
+            this.ID = 0;
+
+            return "";
+        }
+
+        
+
     }
     public enum ConnectionStatus
     {

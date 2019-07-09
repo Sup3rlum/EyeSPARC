@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace EyeAPI
 {
-    public class Station
+    public class Station : NetworkNode
     {
-        int ID;
-        string Name;
-        StationDataStatus LatestDataStatus;
-        StationStatus LatestStatus;
+        public StationDataStatus LatestDataStatus = StationDataStatus.Unknown;
+        public StationStatus LatestStatus = StationStatus.Unknown;
 
-        float Latitude;
-        float Longitude;
-        float Altitude;
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
+        public float Altitude { get; set; }
+
+
+
     }
 
     public enum StationStatus

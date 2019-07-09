@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EyeAPI
 {
-    public class Cluster : NetworkNode
+    public class Country : NetworkNode
     {
-        public List<Station> Stations { get; set; }
+        public List<Cluster> Clusters { get; set; }
 
-        public Cluster()
+        public Country()
         {
-            Stations = new List<Station>();
+            Clusters = new List<Cluster>();
         }
     }
 }

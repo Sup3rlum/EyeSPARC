@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:local="clr-namespace:EyeSPARC"
+        xmlns:eye="clr-namespace:EyeAPI;assembly=EyeAPI"
         mc:Ignorable="d"
         Title="EyeSPARC" Height="768" Width="1280" Background="#FF363636">
     <Grid>
@@ -56,31 +57,31 @@
                 <Grid>
                     <TreeView Name="networkTreeView" Margin="0,0,947,0" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" SelectedItemChanged="NetworkTreeView_SelectedItemChanged">
                         <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate DataType="{x:Type local:NetworkMenuItem}" ItemsSource="{Binding Items}">
+                            <HierarchicalDataTemplate DataType="{x:Type eye:Network}" ItemsSource="{Binding Countries}">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Title}" />
+                                    <TextBlock Text="{Binding Name}" />
                                 </StackPanel>
                                 <HierarchicalDataTemplate.ItemTemplate>
-                                    <HierarchicalDataTemplate DataType="{x:Type local:CountryMenuItem}" ItemsSource="{Binding Items}">
+                                    <HierarchicalDataTemplate DataType="{x:Type eye:Country}" ItemsSource="{Binding Clusters}">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Title}" />
+                                            <TextBlock Text="{Binding Name}" />
                                             <TextBlock Text=" [Count: " Foreground="Green"/>
-                                            <TextBlock Text="{Binding Items.Count}" Foreground="Green"/>
+                                            <TextBlock Text="{Binding Clusters.Count}" Foreground="Green"/>
                                             <TextBlock Text="]" Foreground="Green"/>
 
                                         </StackPanel>
                                         <HierarchicalDataTemplate.ItemTemplate>
-                                            <HierarchicalDataTemplate DataType="{x:Type local:ClusterMenuItem}" ItemsSource="{Binding Items}">
+                                            <HierarchicalDataTemplate DataType="{x:Type eye:Cluster}" ItemsSource="{Binding Stations}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Title}" />
+                                                    <TextBlock Text="{Binding Name}" />
                                                     <TextBlock Text=" [Count: " Foreground="Green"/>
-                                                    <TextBlock Text="{Binding Items.Count}" Foreground="Green"/>
+                                                    <TextBlock Text="{Binding Stations.Count}" Foreground="Green"/>
                                                     <TextBlock Text="]" Foreground="Green"/>
                                                 </StackPanel>
                                                 <HierarchicalDataTemplate.ItemTemplate>
-                                                    <HierarchicalDataTemplate DataType="{x:Type local:StationMenuItem}">
+                                                    <HierarchicalDataTemplate DataType="{x:Type eye:Station}">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Title}" />
+                                                            <TextBlock Text="{Binding Name}" />
                                                             <TextBlock Text=" [ID: " Foreground="Blue"/>
                                                             <TextBlock Text="{Binding ID}" Foreground="Blue"/>
                                                             <TextBlock Text="]" Foreground="Blue"/>
@@ -101,7 +102,6 @@
                            Height="300" 
                            Mode="Aerial"
                            Margin="925,323,21,29" 
-                           Center="51.5323705,-0.1205357" 
                            ZoomLevel="16"/>
                 </Grid>
             </TabItem>
