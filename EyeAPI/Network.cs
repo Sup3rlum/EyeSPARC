@@ -21,9 +21,6 @@ namespace EyeAPI
 
         public Dictionary<int, string> GetApiNode(string node)
         {
-
-            
-
             Dictionary<int, string> _stationData = new Dictionary<int, string>();
 
             string _data = _wc.DownloadString($"http://data.hisparc.nl/api/{node}");
@@ -86,8 +83,7 @@ namespace EyeAPI
             }
 
 
-            
-
+           
             this.Name = "Network";
             this.ID = 0;
 

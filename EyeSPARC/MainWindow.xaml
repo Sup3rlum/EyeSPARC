@@ -20,8 +20,7 @@
 
             </Menu>
         </DockPanel>
-
-        <TabControl Margin="10,47,10,10" Background="LightGray">
+        <TabControl Margin="10,47,977,10">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Foreground" Value="White"/>
@@ -54,76 +53,148 @@
                         <TextBlock Text="Network" Margin="2,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+                <TreeView 
+                    Name="networkTreeView" 
+                    Margin="0,0,0,0" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                    Grid.ColumnSpan="3" 
+                    SelectedItemChanged="NetworkTreeView_SelectedItemChanged"
+                    BorderThickness="0">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type eye:Network}" ItemsSource="{Binding Countries}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <HierarchicalDataTemplate DataType="{x:Type eye:Country}" ItemsSource="{Binding Clusters}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock Text=" [Count: " Foreground="Green"/>
+                                        <TextBlock Text="{Binding Clusters.Count}" Foreground="Green"/>
+                                        <TextBlock Text="]" Foreground="Green"/>
+
+                                    </StackPanel>
+                                    <HierarchicalDataTemplate.ItemTemplate>
+                                        <HierarchicalDataTemplate DataType="{x:Type eye:Cluster}" ItemsSource="{Binding Stations}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" />
+                                                <TextBlock Text=" [Count: " Foreground="Green"/>
+                                                <TextBlock Text="{Binding Stations.Count}" Foreground="Green"/>
+                                                <TextBlock Text="]" Foreground="Green"/>
+                                            </StackPanel>
+                                            <HierarchicalDataTemplate.ItemTemplate>
+                                                <HierarchicalDataTemplate DataType="{x:Type eye:Station}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}" />
+                                                        <TextBlock Text=" [ID: " Foreground="Blue"/>
+                                                        <TextBlock Text="{Binding ID}" Foreground="Blue"/>
+                                                        <TextBlock Text="]" Foreground="Blue"/>
+                                                    </StackPanel>
+                                                </HierarchicalDataTemplate>
+                                            </HierarchicalDataTemplate.ItemTemplate>
+                                        </HierarchicalDataTemplate>
+                                    </HierarchicalDataTemplate.ItemTemplate>
+                                </HierarchicalDataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </TabItem>
+        </TabControl>
+        <TabControl Margin="300,47,10,10">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="#FF0099FF" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="#FF363636" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Station" Margin="2,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
-                    <TreeView Name="networkTreeView" Margin="0,0,947,0" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" SelectedItemChanged="NetworkTreeView_SelectedItemChanged">
-                        <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate DataType="{x:Type eye:Network}" ItemsSource="{Binding Countries}">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Name}" />
-                                </StackPanel>
-                                <HierarchicalDataTemplate.ItemTemplate>
-                                    <HierarchicalDataTemplate DataType="{x:Type eye:Country}" ItemsSource="{Binding Clusters}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Name}" />
-                                            <TextBlock Text=" [Count: " Foreground="Green"/>
-                                            <TextBlock Text="{Binding Clusters.Count}" Foreground="Green"/>
-                                            <TextBlock Text="]" Foreground="Green"/>
+                    
 
-                                        </StackPanel>
-                                        <HierarchicalDataTemplate.ItemTemplate>
-                                            <HierarchicalDataTemplate DataType="{x:Type eye:Cluster}" ItemsSource="{Binding Stations}">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" />
-                                                    <TextBlock Text=" [Count: " Foreground="Green"/>
-                                                    <TextBlock Text="{Binding Stations.Count}" Foreground="Green"/>
-                                                    <TextBlock Text="]" Foreground="Green"/>
-                                                </StackPanel>
-                                                <HierarchicalDataTemplate.ItemTemplate>
-                                                    <HierarchicalDataTemplate DataType="{x:Type eye:Station}">
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Name}" />
-                                                            <TextBlock Text=" [ID: " Foreground="Blue"/>
-                                                            <TextBlock Text="{Binding ID}" Foreground="Blue"/>
-                                                            <TextBlock Text="]" Foreground="Blue"/>
-                                                        </StackPanel>
-                                                    </HierarchicalDataTemplate>
-                                                </HierarchicalDataTemplate.ItemTemplate>
-                                            </HierarchicalDataTemplate>
-                                        </HierarchicalDataTemplate.ItemTemplate>
-                                    </HierarchicalDataTemplate>
-                                </HierarchicalDataTemplate.ItemTemplate>
-                            </HierarchicalDataTemplate>
-                        </TreeView.ItemTemplate>
-                    </TreeView>
-                    <m:Map x:Name="stationMap" 
-                           CredentialsProvider="VptlZZkRfRZj3vFeyLEN~KEz7B36YuDsYV4F61t3K0Q~AtzIKqAVjOqDr5ABYY0-49WyshG3nRUUPSCL3Pss79htpRAJmehGD7jMRlt4LpOs" 
-                           Mode="Road"
-                           Margin="996,383,15,29" 
-                           ZoomLevel="16"
-                           Culture="en-gb"/>
-                    <Button Name="AerialMapButton" Content="Aerial" HorizontalAlignment="Left" Margin="996,623,0,0" VerticalAlignment="Top" Width="75" Click="AerialMapButton_Click"/>
-                    <Button Name="RoadMapButton" Content="Road" HorizontalAlignment="Left" Margin="1076,623,0,0" VerticalAlignment="Top" Width="75" Click="RoadMapButton_Click"/>
-                    <Button x:Name="FullTabButton" Content="Expand" HorizontalAlignment="Left" Margin="1156,622,0,0" VerticalAlignment="Top" Width="75" Click="FullTabButton_Click"/>
 
-                    <StackPanel Margin="325,22,66,334" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="706,619,15,3">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button Name="AerialMapButton" Content="Aerial" Width="72" Click="AerialMapButton_Click"/>
+                        <Button Name="RoadMapButton" Content="Road" Width="72" Click="RoadMapButton_Click"/>
+                        <Button Name="FullTabButton" Content="Expand" Width="73" Click="FullTabButton_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="30,20,66,30" Orientation="Vertical">
                         <Label Name="StationTitleLabel" Content="N/A" FontSize="40"/>
                         <StackPanel Orientation="Horizontal">
                             <Ellipse 
+                                Name="ssEllipse"
                                 Width="10"
                                 Height="10"
-                                Fill="ForestGreen"
+                                Fill="DarkGray"
+                                />
+
+                            <TextBlock 
+                                Name="detectorStatusLabel"
+                                Text="N/A"
+                                Foreground="DarkGray"
+                                />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse 
+                                Name="dsEllipse"
+                                Width="10"
+                                Height="10"
+                                Fill="DarkGray"
+                                />
+
+                            <TextBlock 
+                                Name="dataStatusLabel"
+                                Text="N/A"
+                                Foreground="DarkGray"
                                 />
                         </StackPanel>
                     </StackPanel>
                     
-                    <StackPanel Orientation="Vertical" Margin="996,300,15,280">
+                    <StackPanel Orientation="Vertical" Margin="706,280,15,260">
                         <StackPanel.Resources>
                             <Style x:Key="fontStyle" TargetType="TextBlock">
                                 <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="Foreground" Value="Black"/>
                             </Style>
                         </StackPanel.Resources>
-                        
+
+                        <TextBlock 
+                            Text="Location:"
+                            Foreground="Black"
+                            FontSize="30"
+                            />
+
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Longitude: " Style="{StaticResource fontStyle}"/>
                             <TextBlock Name="LongitudeBoxValue" Text="-10.42" Style="{StaticResource fontStyle}"/>
@@ -141,6 +212,13 @@
                         </StackPanel>
 
                     </StackPanel>
+
+                    <m:Map x:Name="stationMap" 
+                           CredentialsProvider="VptlZZkRfRZj3vFeyLEN~KEz7B36YuDsYV4F61t3K0Q~AtzIKqAVjOqDr5ABYY0-49WyshG3nRUUPSCL3Pss79htpRAJmehGD7jMRlt4LpOs" 
+                           Mode="Road"
+                           Margin="704,393,15,30" 
+                           ZoomLevel="16"
+                           Culture="en-gb"/>
                 </Grid>
             </TabItem>
             <TabItem>

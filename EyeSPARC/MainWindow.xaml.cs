@@ -62,6 +62,19 @@ namespace EyeSPARC
 
                 stationMap.Center = new Location(lat, lon);
                 stationMap.ZoomLevel = 16;
+
+                var _latestDetectorStatus = ((Station)e.NewValue).LatestDetectorStatus;
+                var _latestDataStatus = ((Station)e.NewValue).LatestDataStatus;
+
+
+                detectorStatusLabel.Text = _latestDetectorStatus.ToString();
+                detectorStatusLabel.Foreground = new SolidColorBrush(GetStatusColor(_latestDetectorStatus));
+                ssEllipse.Fill = new SolidColorBrush(GetStatusColor(_latestDetectorStatus));
+
+                dataStatusLabel.Text = _latestDataStatus.ToString();
+                dataStatusLabel.Foreground = new SolidColorBrush(GetStatusColor(_latestDataStatus));
+                dsEllipse.Fill = new SolidColorBrush(GetStatusColor(_latestDataStatus));
+
             }
 
         }
@@ -82,7 +95,7 @@ namespace EyeSPARC
             {
                 _isMapFullTab = false;
 
-                stationMap.Margin = new Thickness(996, 383, 15, 30);
+                stationMap.Margin = new Thickness(704, 393, 15, 30);
 
                 FullTabButton.Content = "Expand";
             }
@@ -90,10 +103,31 @@ namespace EyeSPARC
             {
                 _isMapFullTab = true;
 
-                stationMap.Margin = new Thickness(308, 214, 15, 30);
+                stationMap.Margin = new Thickness(15, 15, 15, 30);
 
 
                 FullTabButton.Content = "Minimize";
+            }
+        }
+
+        public Color GetStatusColor(NodeStatus _status)
+        {
+            switch (_status)
+            {
+                case NodeStatus.Up:
+                    return Colors.LimeGreen;
+
+                case NodeStatus.Down:
+                    return Colors.Red;
+
+                case NodeStatus.Issue:
+                    return Colors.Orange;
+
+                case NodeStatus.Unknown:
+                    return Colors.DarkGray;
+
+                default:
+                    return Colors.Black;
             }
         }
     }

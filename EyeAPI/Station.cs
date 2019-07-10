@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,8 +11,8 @@ namespace EyeAPI
 {
     public class Station : NetworkNode
     {
-        public StationDataStatus LatestDataStatus = StationDataStatus.Unknown;
-        public StationStatus LatestStatus = StationStatus.Unknown;
+        public NodeStatus LatestDataStatus = NodeStatus.Unknown;
+        public NodeStatus LatestDetectorStatus = NodeStatus.Unknown;
 
 
         JObject _jsonObject;
@@ -31,20 +30,12 @@ namespace EyeAPI
 
     }
 
-    public enum StationStatus
+    public enum NodeStatus
     {
         Up,
         Issue,
         Down,
         Unknown
     }
-    public enum StationDataStatus
-    {
-        Up,
-        Issue,
-        Down,
-        Unknown
-    }
-
     
 }
