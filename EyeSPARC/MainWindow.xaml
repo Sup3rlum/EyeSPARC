@@ -107,8 +107,12 @@
 
                     <StackPanel Margin="325,22,66,334" Orientation="Vertical">
                         <Label Name="StationTitleLabel" Content="N/A" FontSize="40"/>
-                        <StackPanel>
-                            
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse 
+                                Width="10"
+                                Height="10"
+                                Fill="ForestGreen"
+                                />
                         </StackPanel>
                     </StackPanel>
                     
