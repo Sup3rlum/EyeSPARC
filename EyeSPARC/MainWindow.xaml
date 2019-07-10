@@ -181,13 +181,45 @@
                         </StackPanel>
                     </StackPanel>
                     
-                    <StackPanel Orientation="Vertical" Margin="706,280,15,260">
+                    <StackPanel Orientation="Vertical" Margin="706,100,15,260">
                         <StackPanel.Resources>
-                            <Style x:Key="fontStyle" TargetType="TextBlock">
+                            <Style TargetType="TextBlock">
                                 <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="Foreground" Value="Black"/>
                             </Style>
                         </StackPanel.Resources>
+
+                        <TextBlock 
+                            Text="Configuration:"
+                            Foreground="Black"
+                            FontSize="30"
+                            Margin="0,0,0,5"
+                            />
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Serial: "/>
+                            <TextBlock Name="label_mas_ver_serial" Text=""/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="FPGA Version: "/>
+                            <TextBlock Name="label_mas_ver_fpga" Margin="0,0,0,10"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Ch1 Voltage: "/>
+                            <TextBlock Name="label_mas_ch1_volt" Text=""/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Ch2 Voltage: "/>
+                            <TextBlock Name="label_mas_ch2_volt" Text=""/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Height="40">
+                            <Button Name="confMoreButton" Content="More info" Width="75" Margin="0,8,10,8" Click="ConfMoreButton_Click"/>
+                            <Button Name="confSwitchButton" Content="Slave" Width="75" Margin="0,8,0,8"/>
+                        </StackPanel>
 
                         <TextBlock 
                             Text="Location:"
@@ -196,19 +228,19 @@
                             />
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Longitude: " Style="{StaticResource fontStyle}"/>
-                            <TextBlock Name="LongitudeBoxValue" Text="-10.42" Style="{StaticResource fontStyle}"/>
+                            <TextBlock Text="Longitude: "/>
+                            <TextBlock Name="LongitudeBoxValue" Text="-10.42"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Latitude: " Style="{StaticResource fontStyle}"/>
-                            <TextBlock Name="LatitudeBoxValue" Text="-10.42" Style="{StaticResource fontStyle}"/>
+                            <TextBlock Text="Latitude: "/>
+                            <TextBlock Name="LatitudeBoxValue" Text="-10.42"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Altitude: " Style="{StaticResource fontStyle}"/>
-                            <TextBlock Name="AltitudeBoxValue" Text="-10.42" Style="{StaticResource fontStyle}"/>
-                            <TextBlock Text=" m" Style="{StaticResource fontStyle}"/>
+                            <TextBlock Text="Altitude: "/>
+                            <TextBlock Name="AltitudeBoxValue" Text="-10.42"/>
+                            <TextBlock Text=" m"/>
                         </StackPanel>
 
                     </StackPanel>

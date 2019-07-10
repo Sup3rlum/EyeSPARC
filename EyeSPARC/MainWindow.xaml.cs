@@ -75,6 +75,20 @@ namespace EyeSPARC
                 dataStatusLabel.Foreground = new SolidColorBrush(GetStatusColor(_latestDataStatus));
                 dsEllipse.Fill = new SolidColorBrush(GetStatusColor(_latestDataStatus));
 
+                float ch1_volt = conf.GetStationConfigAttribute<float>("mas_ch1_voltage");
+                float ch2_volt = conf.GetStationConfigAttribute<float>("mas_ch2_voltage");
+
+                label_mas_ch1_volt.Text = ((int)ch1_volt).ToString();
+                label_mas_ch2_volt.Text = ((int)ch2_volt).ToString();
+
+                string[] _ver = conf.GetStationConfigAttribute<string>("mas_version").Replace("\"","").Replace("    ", "-").Split('-');
+
+                string _serial = _ver[0].Split(':')[1];
+                string _fpga = _ver[1].Split(':')[1];
+
+                label_mas_ver_fpga.Text = _fpga;
+                label_mas_ver_serial.Text = _serial;
+
             }
 
         }
@@ -129,6 +143,11 @@ namespace EyeSPARC
                 default:
                     return Colors.Black;
             }
+        }
+
+        private void ConfMoreButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
