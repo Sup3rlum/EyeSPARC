@@ -55,6 +55,11 @@ namespace EyeSPARC
                 float lon = conf.GetStationConfigAttribute<float>("gps_longitude");
                 float alt = conf.GetStationConfigAttribute<float>("gps_altitude");
 
+
+                LongitudeBoxValue.Text = lon.ToString();
+                LatitudeBoxValue.Text = lat.ToString();
+                AltitudeBoxValue.Text = alt.ToString();
+
                 stationMap.Center = new Location(lat, lon);
                 stationMap.ZoomLevel = 16;
             }
