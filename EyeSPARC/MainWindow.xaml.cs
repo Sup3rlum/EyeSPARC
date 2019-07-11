@@ -52,7 +52,7 @@ namespace EyeSPARC
             {
                 _selectedStation = ((Station)e.NewValue);
 
-                StationTitleLabel.Content = ((Station)e.NewValue).Name;
+                StationTitleLabel.Text = _selectedStation.Name;
 
 
                 float lat = _selectedStation.Configuration.GetAttribute<float>("gps_latitude");
@@ -67,8 +67,8 @@ namespace EyeSPARC
                 stationMap.Center = new Location(lat, lon);
                 stationMap.ZoomLevel = 16;
 
-                var _latestDetectorStatus = ((Station)e.NewValue).LatestDetectorStatus;
-                var _latestDataStatus = ((Station)e.NewValue).LatestDataStatus;
+                var _latestDetectorStatus = _selectedStation.LatestDetectorStatus;
+                var _latestDataStatus = _selectedStation.LatestDataStatus;
 
 
                 detectorStatusLabel.Text = _latestDetectorStatus.ToString();
@@ -151,8 +151,11 @@ namespace EyeSPARC
 
         private void ConfMoreButton_Click(object sender, RoutedEventArgs e)
         {
-            StationConfigWindow _scw = new StationConfigWindow(_selectedStation);
-            _scw.Show();
+            if (_selectedStation != null)
+            {
+                StationConfigWindow _scw = new StationConfigWindow(_selectedStation);
+                _scw.Show();
+            }
         }
     }
 }

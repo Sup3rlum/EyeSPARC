@@ -157,7 +157,12 @@
                     </StackPanel>
 
                     <StackPanel Margin="30,20,66,30" Orientation="Vertical">
-                        <Label Name="StationTitleLabel" Content="N/A" FontSize="40"/>
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Name="StationTitleLabel" Text="N/A" FontSize="40"/>
                         <StackPanel Orientation="Horizontal">
                             <Ellipse 
                                 Name="ssEllipse"
@@ -172,7 +177,7 @@
                                 Foreground="DarkGray"
                                 />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,70">
                             <Ellipse 
                                 Name="dsEllipse"
                                 Width="10"
@@ -186,6 +191,9 @@
                                 Foreground="DarkGray"
                                 />
                         </StackPanel>
+
+                        <TextBlock Text="Data:" FontSize="30"/>
+
                     </StackPanel>
                     
                     <StackPanel Orientation="Vertical" Margin="706,100,15,260">
