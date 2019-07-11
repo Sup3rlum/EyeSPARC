@@ -14,16 +14,33 @@ namespace EyeAPI
         public NodeStatus LatestDataStatus = NodeStatus.Unknown;
         public NodeStatus LatestDetectorStatus = NodeStatus.Unknown;
 
-
-        JObject _jsonObject;
+        public Configuration Configuration { get; set; }
+        
 
         public Station(string _config)
         {
-            _jsonObject = JObject.Parse(_config);
+            Configuration = new Configuration(_config);
+        }
+    }
 
+    public class Configuration
+    {
+        JObject _jsonObject;
+        
+        public string JsonString { get; set; }
+
+        public Configuration(string _json)
+        {
+            _jsonObject = JObject.Parse(_json);
+            JsonString = _json;
         }
 
-        public T GetStationConfigAttribute<T>(string name)
+
+        public Dictionary<string, string> GetAllAttributes()
+        {
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonString);
+        }
+        public T GetAttribute<T>(string name)
         {
             return _jsonObject.Value<T>(name);
         }
