@@ -50,6 +50,7 @@
     <Compile Include="Country.cs" />
     <Compile Include="Data\PublicDB.cs" />
     <Compile Include="Data\DataSheet.cs" />
+    <Compile Include="Data\SimpleDB.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="NetworkNode.cs" />
     <Compile Include="Station.cs" />

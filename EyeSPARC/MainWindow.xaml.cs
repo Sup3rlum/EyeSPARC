@@ -20,6 +20,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 
 using EyeAPI;
+using EyeAPI.Data;
 
 
 namespace EyeSPARC
@@ -48,7 +49,7 @@ namespace EyeSPARC
 
         }
 
-        private void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private async void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue.GetType() == typeof(Station))
             {
@@ -95,8 +96,12 @@ namespace EyeSPARC
                 label_mas_ver_fpga.Text = _fpga;
                 label_mas_ver_serial.Text = _serial;
 
-                _selectedStation.Query();
+                // DataSheet _dataSheet = await Task.Run(() => { return PublicDB.Query(_selectedStation, DataType.Events); });
 
+                var _data = SimpleDB.Query(_selectedStation, DataType.Events);
+
+
+                Console.WriteLine(_data.Length);
             }
 
         }
