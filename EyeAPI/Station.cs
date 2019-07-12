@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Net;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -20,6 +22,18 @@ namespace EyeAPI
         public Station(string _config)
         {
             Configuration = new Configuration(_config);
+        }
+        public void Query()
+        {
+            WebClient _wc = new WebClient();
+
+            var t = _wc.DownloadString("http://data.hisparc.nl/data/17001/events");
+
+            Console.WriteLine(t.Length);
+        }
+        public void GetDailyEvents()
+        {
+
         }
     }
 
@@ -44,7 +58,6 @@ namespace EyeAPI
         {
             return _jsonObject.Value<T>(name);
         }
-
     }
 
     public enum NodeStatus

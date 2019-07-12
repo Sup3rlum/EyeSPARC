@@ -193,9 +193,9 @@
                                 />
                         </StackPanel>
 
-                        <TextBlock Text="Data:" FontSize="30"/>
+                        <TextBlock Text="Latest Data:" FontSize="30"/>
                         <StackPanel Orientation="Horizontal">
-                            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Width="400" Height="400">
+                            <lvc:CartesianChart Name="latestDataChart" Series="{Binding SeriesCollection}" LegendLocation="Right" Width="690" Height="300">
                                 <lvc:CartesianChart.AxisY>
                                     <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                                 </lvc:CartesianChart.AxisY>

@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cluster.cs" />
-    <Compile Include="Coincidence.cs" />
+    <Compile Include="Data\Coincidence.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="Event.cs" />
+    <Compile Include="Data\DataSheet.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="NetworkNode.cs" />
     <Compile Include="Station.cs" />
