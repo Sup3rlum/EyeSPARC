@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EyeAPI.Data
 {
-    public class SimpleDB
+    public class ShowDB
     {
         public static int[] Query(Station _station, DataType _type)
         {

@@ -35,6 +35,11 @@ namespace EyeSPARC
         bool _isMapFullTab = false;
 
         Station _selectedStation { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
+
+        public Func<int, string> YFormatter { get; set; }
+        public Func<int, string> XFormatter { get; set; }
+
 
 
         public MainWindow()
@@ -49,7 +54,7 @@ namespace EyeSPARC
 
         }
 
-        private async void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue.GetType() == typeof(Station))
             {
@@ -98,10 +103,19 @@ namespace EyeSPARC
 
                 // DataSheet _dataSheet = await Task.Run(() => { return PublicDB.Query(_selectedStation, DataType.Events); });
 
-                var _data = SimpleDB.Query(_selectedStation, DataType.Events);
+                var _data = ShowDB.Query(_selectedStation, DataType.Events);
 
+                SeriesCollection = new SeriesCollection();
 
-                Console.WriteLine(_data.Length);
+                SeriesCollection.Add(new LineSeries
+                {
+                    Title = "Average Counts",
+                    Values = new ChartValues<int>(_data.ToList())
+                });
+                YFormatter = value => value.ToString();
+                XFormatter = value => TimeSpan.FromHours((double)value).ToString("hh:mm");
+
+                latestDataChart.DataContext = this;
             }
 
         }
@@ -165,6 +179,11 @@ namespace EyeSPARC
                 StationConfigWindow _scw = new StationConfigWindow(_selectedStation);
                 _scw.Show();
             }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

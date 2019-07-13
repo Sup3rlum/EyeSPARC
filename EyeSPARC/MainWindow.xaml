@@ -161,6 +161,7 @@
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Foreground" Value="Black"/>
+
                             </Style>
                         </StackPanel.Resources>
                         <TextBlock Name="StationTitleLabel" Text="N/A" FontSize="40"/>
@@ -193,17 +194,56 @@
                                 />
                         </StackPanel>
 
-                        <TextBlock Text="Latest Data:" FontSize="30"/>
-                        <StackPanel Orientation="Horizontal">
-                            <lvc:CartesianChart Name="latestDataChart" Series="{Binding SeriesCollection}" LegendLocation="Right" Width="690" Height="300">
-                                <lvc:CartesianChart.AxisY>
-                                    <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                                </lvc:CartesianChart.AxisY>
-                                <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
-                                </lvc:CartesianChart.AxisX>
-                            </lvc:CartesianChart>
-                        </StackPanel>
+                        <TextBlock Text="Latest Data:" FontSize="30" Margin="40,0,0,0"/>
+
+                        <lvc:CartesianChart Name="latestDataChart" Series="{Binding SeriesCollection}" LegendLocation="Right" Height="300" Margin="0,0,160,0">
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>
+
+
+                        <TabControl TabStripPlacement="Bottom" BorderThickness="0" SelectionChanged="TabControl_SelectionChanged">
+                            <TabControl.Resources>
+                                <Style TargetType="TabItem">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="TabItem">
+                                                <Grid Name="Panel">
+                                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Panel" Property="Background" Value="#FF0099FF" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="False">
+                                                        <Setter TargetName="Panel" Property="Background" Value="#FF363636" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TabControl.Resources>
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Network" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                        </TabControl>
+
+
+                            
                     </StackPanel>
                     
                     <StackPanel Orientation="Vertical" Margin="706,100,15,260">
