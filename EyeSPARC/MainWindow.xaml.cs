@@ -35,6 +35,7 @@ namespace EyeSPARC
         bool _isMapFullTab = false;
 
         Station _selectedStation { get; set; }
+
         public SeriesCollection SeriesCollection { get; set; }
 
         public Func<int, string> YFormatter { get; set; }
@@ -103,19 +104,7 @@ namespace EyeSPARC
 
                 // DataSheet _dataSheet = await Task.Run(() => { return PublicDB.Query(_selectedStation, DataType.Events); });
 
-                var _data = ShowDB.Query(_selectedStation, DataType.Events);
-
-                SeriesCollection = new SeriesCollection();
-
-                SeriesCollection.Add(new LineSeries
-                {
-                    Title = "Average Counts",
-                    Values = new ChartValues<int>(_data.ToList())
-                });
-                YFormatter = value => value.ToString();
-                XFormatter = value => TimeSpan.FromHours((double)value).ToString("hh:mm");
-
-                latestDataChart.DataContext = this;
+                DisplayShowData(_selectedStation);
             }
 
         }
@@ -183,7 +172,102 @@ namespace EyeSPARC
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (SeriesCollection != null)
+            {
+                if (eventtimeTab.IsSelected)
+                {
+                    SeriesCollection[0] = new StepLineSeries
+                    {
+                        Title = "Average Event Count",
+                        Values = new ChartValues<int>(_eventtime.Data[0]),
+                        PointGeometry = null,
+                        StrokeThickness = 1
+                    };
+                }
+                else if (pulseheightsTab.IsSelected)
+                {
+                    SeriesCollection[0] = new StepLineSeries
+                    {
+                        Title = "Pulseheights",
+                        Values = new ChartValues<int>(_pulseheight.Data[0]),
+                        PointGeometry = null
+                    };
+                }
+                else if (pulseintegralTab.IsSelected)
+                {
+                    SeriesCollection[0] = new StepLineSeries
+                    {
+                        Title = "Pulseintegral",
+                        Values = new ChartValues<int>(_pulseintegral.Data[0]),
+                        PointGeometry = null
+                    };
+                }
+                else if (singleslowTab.IsSelected)
+                {
+                    SeriesCollection[0] = new StepLineSeries
+                    {
+                        Title = "Singles Low",
+                        Values = new ChartValues<int>(_singleslow.Data[0]),
+                        PointGeometry = null
+                    };
+                }
+                else if (singleshighTab.IsSelected)
+                {
+                    SeriesCollection[0] = new StepLineSeries
+                    {
+                        Title = "Singles High",
+                        Values = new ChartValues<int>(_singleshigh.Data[0]),
+                        PointGeometry = null
+                    };
+                }
+                else if (singlesratelowTab.IsSelected)
+                {
+                    SeriesCollection[0] = new StepLineSeries
+                    {
+                        Title = "Singles Rate Low",
+                        Values = new ChartValues<int>(_singlesratelow.Data[0]),
+                        PointGeometry = null
+                    };
+                }
+                else if (singlesratehighTab.IsSelected)
+                {
+                    SeriesCollection[0] = new StepLineSeries
+                    {
+                        Title = "Singles Rate High",
+                        Values = new ChartValues<int>(_singlesratehigh.Data[0]),
+                        PointGeometry = null
+                    };
+                }
+            }
         }
+        public void DisplayShowData(Station _st)
+        {
+            _eventtime = ShowDB.Query(_selectedStation, ShowDataType.EventTime);
+            _pulseheight = ShowDB.Query(_selectedStation, ShowDataType.PulseHeight);
+            _pulseintegral = ShowDB.Query(_selectedStation, ShowDataType.PulseIntegral);
+
+            _singleslow = ShowDB.Query(_selectedStation, ShowDataType.SinglesLow);
+            _singleshigh = ShowDB.Query(_selectedStation, ShowDataType.SinglesHigh);
+
+            _singlesratelow = ShowDB.Query(_selectedStation, ShowDataType.SinglesRateLow);
+            _singlesratehigh = ShowDB.Query(_selectedStation, ShowDataType.SinglesRateHigh);
+
+            SeriesCollection = new SeriesCollection();
+
+            YFormatter = value => value.ToString();
+            XFormatter = value => TimeSpan.FromHours((double)value).ToString("hh:mm");
+
+
+            SeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Average Event Count",
+                Values = new ChartValues<int>( _eventtime[]),
+                PointGeometry = null
+            });
+
+            latestDataChart.DataContext = this;
+        }
+
+        ShowDataSheet _eventtime, _pulseheight, _pulseintegral, _singleslow, _singleshigh, _singlesratelow, _singlesratehigh;
     }
 }

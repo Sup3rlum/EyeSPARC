@@ -16,16 +16,16 @@ namespace EyeAPI.Data
         DateTime _start;
         DateTime _end;
 
-        DataType _type;
-        public DataType Type { get { return _type; } }
+        PublicDataType _type;
+        public PublicDataType Type { get { return _type; } }
 
         public string Name { get; set; }
 
-        public DataSheet(string name, DataType type)
+        public DataSheet(string name, PublicDataType type)
         {
             Name = name;
 
-            if (type == DataType.Events)
+            if (type == PublicDataType.Events)
             {
                 _tableInternal = new DataTable(name);
 

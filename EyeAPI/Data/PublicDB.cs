@@ -12,7 +12,7 @@ namespace EyeAPI.Data
 {
     public class PublicDB
     {
-        public static DataSheet Query(Station _station, DataType _type, DateTime _start, DateTime _end)
+        public static DataSheet Query(Station _station, PublicDataType _type, DateTime _start, DateTime _end)
         {
 
             DataSheet _sheet = new DataSheet($"{_station.ID}_{_type}_{_start}_{_end}", _type);
@@ -23,7 +23,7 @@ namespace EyeAPI.Data
 
             string url = $"http://data.hisparc.nl/data/{_station.ID}/";
 
-            if (_type == DataType.Events)
+            if (_type == PublicDataType.Events)
                 url += "events/";
 
 
@@ -70,12 +70,12 @@ namespace EyeAPI.Data
             return _sheet;
         } 
 
-        public static DataSheet Query(Station _station, DataType _type)
+        public static DataSheet Query(Station _station, PublicDataType _type)
         {
             return Query(_station, _type, DateTime.Today.AddDays(-1), DateTime.Today);
         }
     }
-    public enum DataType
+    public enum PublicDataType
     {
         Events,
         Weather,

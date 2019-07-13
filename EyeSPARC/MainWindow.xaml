@@ -225,7 +225,7 @@
                                                         <Setter TargetName="Panel" Property="Background" Value="#FF0099FF" />
                                                     </Trigger>
                                                     <Trigger Property="IsSelected" Value="False">
-                                                        <Setter TargetName="Panel" Property="Background" Value="#FF363636" />
+                                                        <Setter TargetName="Panel" Property="Background" Value="White" />
                                                     </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
@@ -233,10 +233,52 @@
                                     </Setter>
                                 </Style>
                             </TabControl.Resources>
-                            <TabItem>
+                            <TabItem Name="eventtimeTab">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Network" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                        <TextBlock Text="Events" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                            <TabItem Name="pulseheightsTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Pulseheights" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                            <TabItem Name="pulseintegralTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="PulseIntegral" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                            <TabItem Name="singleslowTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Singles Low" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                            <TabItem Name="singleshighTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Singles High" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                            <TabItem Name="singlesratelowTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Single Rates Low" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                            <TabItem Name="singlesratehighTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Single Rates High" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
                             </TabItem>
