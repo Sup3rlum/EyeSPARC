@@ -17,26 +17,27 @@ namespace EyeAPI.Data
         {
             WebClient _wc = new WebClient();
 
-            DateTime _yesterday = DateTime.Now.AddDays(-1);
+            DateTime _yesterday = DateTime.Now.AddDays(-2);
 
             string url = $"http://data.hisparc.nl/show/source/{_type.ToString().ToLower()}/{_station.ID}/{_yesterday.Year}/{_yesterday.Month}/{_yesterday.Day}/";
 
-            var _data = _wc.DownloadString(url).Split('\n');
+            var _data = _wc.DownloadString(url).Split('\n').Where(p => p.Length !=0 && p[0] != '#').ToArray();
 
-            ShowDataSheet _sheet = new ShowDataSheet(_data[19].Split('\t').Length);
+
+            ShowDataSheet _sheet = new ShowDataSheet(_data[0].TrimEnd('\t', ' ').Split('\t', ' ').Length - 1);
 
             foreach (var s in _data)
             {
-                _sheet.AddRow(IntegerCast(s.Split('\t')).ToArray());
+                _sheet.AddRow(IntegerCast(s.TrimEnd('\t', ' ').Split('\t', ' ')).ToArray());
             }
            
             return _sheet;
         }
         public static IEnumerable<int> IntegerCast(string[] values)
         {
-            foreach (var s in values)
+            for (int i = 1; i < values.Length; i++)
             {
-                yield return Int32.Parse(s);
+                yield return Int32.Parse(values[i]);
             }
         }
     }
@@ -55,7 +56,7 @@ namespace EyeAPI.Data
 
             for (int i = 0; i < _columnCount; i++)
             {
-                Data[_columnCount] = new List<int>();
+                Data[i] = new List<int>();
             }
         }
         public void AddRow(params int[] values)

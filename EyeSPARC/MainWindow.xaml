@@ -194,9 +194,9 @@
                                 />
                         </StackPanel>
 
-                        <TextBlock Text="Latest Data:" FontSize="30" Margin="40,0,0,0"/>
+                        <TextBlock Name="chartTitle" Text="N/A:" FontSize="30" Margin="40,0,0,0"/>
 
-                        <lvc:CartesianChart Name="latestDataChart" Series="{Binding SeriesCollection}" LegendLocation="Right" Height="300" Margin="0,0,160,0">
+                        <lvc:CartesianChart Name="latestDataChart" Series="{Binding _evSeriesCollection}" LegendLocation="Right" Height="300" Margin="0,0,160,0">
                             <lvc:CartesianChart.AxisY>
                                 <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>

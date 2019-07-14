@@ -36,7 +36,13 @@ namespace EyeSPARC
 
         Station _selectedStation { get; set; }
 
-        public SeriesCollection SeriesCollection { get; set; }
+        public SeriesCollection _evSeriesCollection { get; set; }
+        public SeriesCollection _phSeriesCollection { get; set; }
+        public SeriesCollection _piSeriesCollection { get; set; }
+        public SeriesCollection _slSeriesCollection { get; set; }
+        public SeriesCollection _shSeriesCollection { get; set; }
+        public SeriesCollection _srlSeriesCollection { get; set; }
+        public SeriesCollection _srhSeriesCollection { get; set; }
 
         public Func<int, string> YFormatter { get; set; }
         public Func<int, string> XFormatter { get; set; }
@@ -55,7 +61,7 @@ namespace EyeSPARC
 
         }
 
-        private void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private async void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue.GetType() == typeof(Station))
             {
@@ -102,9 +108,15 @@ namespace EyeSPARC
                 label_mas_ver_fpga.Text = _fpga;
                 label_mas_ver_serial.Text = _serial;
 
-                // DataSheet _dataSheet = await Task.Run(() => { return PublicDB.Query(_selectedStation, DataType.Events); });
+                await Task.Run(() => DownloadShowData(_selectedStation));
 
-                DisplayShowData(_selectedStation);
+                DisplayShowData();
+
+                YFormatter = value => value.ToString();
+                XFormatter = value => TimeSpan.FromHours((double)value).ToString("hh:mm");
+
+
+                latestDataChart.DataContext = this;
             }
 
         }
@@ -172,75 +184,46 @@ namespace EyeSPARC
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SeriesCollection != null)
+            if (eventtimeTab.IsSelected)
             {
-                if (eventtimeTab.IsSelected)
-                {
-                    SeriesCollection[0] = new StepLineSeries
-                    {
-                        Title = "Average Event Count",
-                        Values = new ChartValues<int>(_eventtime.Data[0]),
-                        PointGeometry = null,
-                        StrokeThickness = 1
-                    };
-                }
-                else if (pulseheightsTab.IsSelected)
-                {
-                    SeriesCollection[0] = new StepLineSeries
-                    {
-                        Title = "Pulseheights",
-                        Values = new ChartValues<int>(_pulseheight.Data[0]),
-                        PointGeometry = null
-                    };
-                }
-                else if (pulseintegralTab.IsSelected)
-                {
-                    SeriesCollection[0] = new StepLineSeries
-                    {
-                        Title = "Pulseintegral",
-                        Values = new ChartValues<int>(_pulseintegral.Data[0]),
-                        PointGeometry = null
-                    };
-                }
-                else if (singleslowTab.IsSelected)
-                {
-                    SeriesCollection[0] = new StepLineSeries
-                    {
-                        Title = "Singles Low",
-                        Values = new ChartValues<int>(_singleslow.Data[0]),
-                        PointGeometry = null
-                    };
-                }
-                else if (singleshighTab.IsSelected)
-                {
-                    SeriesCollection[0] = new StepLineSeries
-                    {
-                        Title = "Singles High",
-                        Values = new ChartValues<int>(_singleshigh.Data[0]),
-                        PointGeometry = null
-                    };
-                }
-                else if (singlesratelowTab.IsSelected)
-                {
-                    SeriesCollection[0] = new StepLineSeries
-                    {
-                        Title = "Singles Rate Low",
-                        Values = new ChartValues<int>(_singlesratelow.Data[0]),
-                        PointGeometry = null
-                    };
-                }
-                else if (singlesratehighTab.IsSelected)
-                {
-                    SeriesCollection[0] = new StepLineSeries
-                    {
-                        Title = "Singles Rate High",
-                        Values = new ChartValues<int>(_singlesratehigh.Data[0]),
-                        PointGeometry = null
-                    };
-                }
+                latestDataChart.Series = _evSeriesCollection;
+                chartTitle.Text = "Event count histogram";
+            }
+            else if (pulseheightsTab.IsSelected)
+            {
+                latestDataChart.Series = _phSeriesCollection;
+                chartTitle.Text = "'Pulseheight histogram";
+
+            }
+            else if (pulseintegralTab.IsSelected)
+            {
+                latestDataChart.Series = _piSeriesCollection;
+                chartTitle.Text = "Pulseintegral histogram";
+
+            }
+            else if (singleslowTab.IsSelected)
+            {
+                latestDataChart.Series = _slSeriesCollection;
+                chartTitle.Text = "Singles (per second above low treshold)";
+
+            }
+            else if (singleshighTab.IsSelected)
+            {
+                latestDataChart.Series = _shSeriesCollection;
+                chartTitle.Text = "Singles (per second above high treshold)";
+            }
+            else if (singlesratelowTab.IsSelected)
+            {
+                latestDataChart.Series = _srlSeriesCollection;
+                chartTitle.Text = "Singles rate histogram (above low treshold)";
+            }
+            else if (singlesratehighTab.IsSelected)
+            {
+                latestDataChart.Series = _srhSeriesCollection;
+                chartTitle.Text = "Singles rate histogram (above high treshold)";
             }
         }
-        public void DisplayShowData(Station _st)
+        public void DownloadShowData(Station _st)
         {
             _eventtime = ShowDB.Query(_selectedStation, ShowDataType.EventTime);
             _pulseheight = ShowDB.Query(_selectedStation, ShowDataType.PulseHeight);
@@ -251,21 +234,116 @@ namespace EyeSPARC
 
             _singlesratelow = ShowDB.Query(_selectedStation, ShowDataType.SinglesRateLow);
             _singlesratehigh = ShowDB.Query(_selectedStation, ShowDataType.SinglesRateHigh);
+        }
+        public void DisplayShowData()
+        {
+            _evSeriesCollection = new SeriesCollection();
+            _phSeriesCollection = new SeriesCollection();
+            _piSeriesCollection = new SeriesCollection();
+            _slSeriesCollection = new SeriesCollection();
+            _shSeriesCollection = new SeriesCollection();
+            _srlSeriesCollection = new SeriesCollection();
+            _srhSeriesCollection = new SeriesCollection();
 
-            SeriesCollection = new SeriesCollection();
-
-            YFormatter = value => value.ToString();
-            XFormatter = value => TimeSpan.FromHours((double)value).ToString("hh:mm");
-
-
-            SeriesCollection.Add(new StepLineSeries
+            // Event Time
+            _evSeriesCollection.Add(new StepLineSeries
             {
                 Title = "Average Event Count",
-                Values = new ChartValues<int>( _eventtime[]),
+                Values = new ChartValues<int>(_eventtime.Data[0]),
+                PointGeometry = null,
+                StrokeThickness = 1
+            });
+
+            // Pulsehieghts
+
+            _phSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Pulseheights",
+                Values = new ChartValues<int>(_pulseheight.Data[0]),
+                PointGeometry = null
+            });
+            _phSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Pulseheights",
+                Values = new ChartValues<int>(_pulseheight.Data[1]),
                 PointGeometry = null
             });
 
-            latestDataChart.DataContext = this;
+            // Pulseintegral
+
+            _piSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Pulseintegral",
+                Values = new ChartValues<int>(_pulseintegral.Data[0]),
+                PointGeometry = null
+            });
+            _piSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Pulseintegral",
+                Values = new ChartValues<int>(_pulseintegral.Data[1]),
+                PointGeometry = null
+            });
+
+            // Singles Low 
+
+            _slSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles Low",
+                Values = new ChartValues<int>(_singleslow.Data[0]),
+                PointGeometry = null
+            });
+            _slSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles Low",
+                Values = new ChartValues<int>(_singleslow.Data[1]),
+                PointGeometry = null
+            });
+
+            // Singles High
+
+            _shSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles High",
+                Values = new ChartValues<int>(_singleshigh.Data[0]),
+                PointGeometry = null
+            });
+            _shSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles High",
+                Values = new ChartValues<int>(_singleshigh.Data[1]),
+                PointGeometry = null
+            });
+
+            // Singles Rates Low 
+
+            _srlSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles Rate  Low",
+                Values = new ChartValues<int>(_singlesratelow.Data[0]),
+                PointGeometry = null
+            });
+            _srlSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles Rate Low",
+                Values = new ChartValues<int>(_singlesratelow.Data[1]),
+                PointGeometry = null
+            });
+
+            // Singles Rates High
+
+            _srhSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles Rate High",
+                Values = new ChartValues<int>(_singlesratehigh.Data[0]),
+                PointGeometry = null
+            });
+            _srhSeriesCollection.Add(new StepLineSeries
+            {
+                Title = "Singles Rate High",
+                Values = new ChartValues<int>(_singlesratehigh.Data[1]),
+                PointGeometry = null
+            });
+
         }
 
         ShowDataSheet _eventtime, _pulseheight, _pulseintegral, _singleslow, _singleshigh, _singlesratelow, _singlesratehigh;

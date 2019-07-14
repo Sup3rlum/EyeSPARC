@@ -23,18 +23,6 @@ namespace EyeAPI
         {
             Configuration = new Configuration(_config);
         }
-        public void Query()
-        {
-            WebClient _wc = new WebClient();
-
-            var t = _wc.DownloadString("http://data.hisparc.nl/data/17001/events");
-
-            Console.WriteLine(t.Length);
-        }
-        public void GetDailyEvents()
-        {
-
-        }
     }
 
     public class Configuration
