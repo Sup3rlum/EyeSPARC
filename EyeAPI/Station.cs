@@ -22,7 +22,11 @@ namespace EyeAPI
         public Station(string _config)
         {
             Configuration = new Configuration(_config);
+
+            IsSelected = false;
         }
+
+        public bool IsSelected { get; set; }
     }
 
     public class Configuration

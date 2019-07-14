@@ -13,5 +13,20 @@ namespace EyeSPARC
     /// </summary>
     public partial class App : Application
     {
+        MainWindow _mainWindow;
+        SplashScreenWindow _splashWindow;
+        private async void Application_Startup(object sender, StartupEventArgs e)
+        {
+            _mainWindow = new MainWindow();
+            _splashWindow = new SplashScreenWindow();
+
+            _splashWindow.Show();
+
+            await Task.Run(() => _mainWindow.LoadNetworkItems());
+
+            _splashWindow.Close();
+            _mainWindow.Show();
+
+        }
     }
 }

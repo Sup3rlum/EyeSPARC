@@ -8,7 +8,7 @@
         xmlns:eye="clr-namespace:EyeAPI;assembly=EyeAPI"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="EyeSPARC" Height="768" Width="1280" Background="#FF363636">
+        Title="EyeSPARC" Height="768" Width="1366" Background="#FF363636">
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -21,7 +21,10 @@
 
             </Menu>
         </DockPanel>
-        <TabControl Margin="10,47,977,10">
+        
+        <!-- Right Tab Control -->
+        
+        <TabControl Margin="10,47,1063,10">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Foreground" Value="White"/>
@@ -61,6 +64,12 @@
                     Grid.ColumnSpan="3" 
                     SelectedItemChanged="NetworkTreeView_SelectedItemChanged"
                     BorderThickness="0">
+                    <TreeView.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                      Color="LightSkyBlue" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                      Color="LightSkyBlue" />
+                    </TreeView.Resources>
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate DataType="{x:Type eye:Network}" ItemsSource="{Binding Countries}">
                             <StackPanel Orientation="Horizontal">
@@ -70,7 +79,7 @@
                                 <HierarchicalDataTemplate DataType="{x:Type eye:Country}" ItemsSource="{Binding Clusters}">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding Name}" />
-                                        <TextBlock Text=" [Count: " Foreground="Green"/>
+                                        <TextBlock Text=" [Clusters: " Foreground="Green"/>
                                         <TextBlock Text="{Binding Clusters.Count}" Foreground="Green"/>
                                         <TextBlock Text="]" Foreground="Green"/>
 
@@ -79,13 +88,14 @@
                                         <HierarchicalDataTemplate DataType="{x:Type eye:Cluster}" ItemsSource="{Binding Stations}">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{Binding Name}" />
-                                                <TextBlock Text=" [Count: " Foreground="Green"/>
+                                                <TextBlock Text=" [Stations: " Foreground="Green"/>
                                                 <TextBlock Text="{Binding Stations.Count}" Foreground="Green"/>
                                                 <TextBlock Text="]" Foreground="Green"/>
                                             </StackPanel>
                                             <HierarchicalDataTemplate.ItemTemplate>
                                                 <HierarchicalDataTemplate DataType="{x:Type eye:Station}">
                                                     <StackPanel Orientation="Horizontal">
+                                                        <CheckBox IsChecked="{Binding IsSelected}" Margin="0,0,5,0"/>
                                                         <TextBlock Text="{Binding Name}" />
                                                         <TextBlock Text=" [ID: " Foreground="Blue"/>
                                                         <TextBlock Text="{Binding ID}" Foreground="Blue"/>
@@ -109,6 +119,9 @@
                 </TabItem.Header>
             </TabItem>
         </TabControl>
+        
+        <!-- Left Tab Control -->
+        
         <TabControl Margin="300,47,10,10">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -146,7 +159,7 @@
                     
 
 
-                    <StackPanel Orientation="Horizontal" Margin="706,619,15,3">
+                    <StackPanel Orientation="Horizontal" Margin="792,619,15,3">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Margin" Value="0,0,5,0"/>
@@ -157,7 +170,7 @@
                         <Button Name="FullTabButton" Content="Expand" Width="73" Click="FullTabButton_Click"/>
                     </StackPanel>
 
-                    <StackPanel Margin="30,20,66,30" Orientation="Vertical">
+                    <StackPanel Margin="30,20,152,30" Orientation="Vertical">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Foreground" Value="Black"/>
@@ -165,12 +178,13 @@
                             </Style>
                         </StackPanel.Resources>
                         <TextBlock Name="StationTitleLabel" Text="N/A" FontSize="40"/>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                             <Ellipse 
                                 Name="ssEllipse"
                                 Width="10"
                                 Height="10"
                                 Fill="DarkGray"
+                                Margin="0,0,7,0"
                                 />
 
                             <TextBlock 
@@ -179,12 +193,13 @@
                                 Foreground="DarkGray"
                                 />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,50">
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,50">
                             <Ellipse 
                                 Name="dsEllipse"
                                 Width="10"
                                 Height="10"
                                 Fill="DarkGray"
+                                Margin="0,0,7,0"
                                 />
 
                             <TextBlock 
@@ -196,7 +211,10 @@
 
                         <TextBlock Name="chartTitle" Text="N/A:" FontSize="30" Margin="40,0,0,0"/>
 
-                        <lvc:CartesianChart Name="latestDataChart" Series="{Binding _evSeriesCollection}" LegendLocation="Right" Height="300" Margin="0,0,160,0">
+                        <lvc:CartesianChart Name="latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,160,0">
                             <lvc:CartesianChart.AxisY>
                                 <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
@@ -213,16 +231,18 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="TabItem">
-                                                <Grid Name="Panel">
-                                                    <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="10,2"/>
-                                                </Grid>
+                                                <Border BorderThickness="1,0,0,0" BorderBrush="Black">
+                                                    <Grid Name="Panel">
+                                                        <ContentPresenter x:Name="ContentSite"
+                                                                VerticalAlignment="Center"
+                                                                HorizontalAlignment="Center"
+                                                                ContentSource="Header"
+                                                                Margin="10,2"/>
+                                                    </Grid>
+                                                </Border>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsSelected" Value="True">
-                                                        <Setter TargetName="Panel" Property="Background" Value="#FF0099FF" />
+                                                        <Setter TargetName="Panel" Property="Background" Value="LightSkyBlue" />
                                                     </Trigger>
                                                     <Trigger Property="IsSelected" Value="False">
                                                         <Setter TargetName="Panel" Property="Background" Value="White" />
@@ -288,7 +308,7 @@
                             
                     </StackPanel>
                     
-                    <StackPanel Orientation="Vertical" Margin="706,100,15,260">
+                    <StackPanel Orientation="Vertical" Margin="792,30,15,260">
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="FontSize" Value="16"/>
@@ -355,7 +375,7 @@
                     <m:Map x:Name="stationMap" 
                            CredentialsProvider="VptlZZkRfRZj3vFeyLEN~KEz7B36YuDsYV4F61t3K0Q~AtzIKqAVjOqDr5ABYY0-49WyshG3nRUUPSCL3Pss79htpRAJmehGD7jMRlt4LpOs" 
                            Mode="Road"
-                           Margin="704,393,15,30" 
+                           Margin="790,393,15,30" 
                            ZoomLevel="16"
                            Culture="en-gb"/>
                 </Grid>

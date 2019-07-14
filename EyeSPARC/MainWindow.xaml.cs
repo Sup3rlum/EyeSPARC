@@ -18,6 +18,8 @@ using System.Net;
 using Microsoft.Maps.MapControl.WPF;
 using LiveCharts;
 using LiveCharts.Wpf;
+using LiveCharts.Configurations;
+using LiveCharts.Defaults;
 
 using EyeAPI;
 using EyeAPI.Data;
@@ -53,12 +55,12 @@ namespace EyeSPARC
         {
             InitializeComponent();
 
-
+        }
+        public void LoadNetworkItems()
+        {
             _network.Load();
 
-
-            networkTreeView.ItemsSource = new List<Network>() { _network };
-
+            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });
         }
 
         private async void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -117,6 +119,7 @@ namespace EyeSPARC
 
 
                 latestDataChart.DataContext = this;
+                latestDataChart.DataTooltip.Background = Brushes.DarkGray;
             }
 
         }
@@ -136,7 +139,7 @@ namespace EyeSPARC
             if (_isMapFullTab)
             {
                 _isMapFullTab = false;
-                stationMap.Margin = new Thickness(704, 393, 15, 30);
+                stationMap.Margin = new Thickness(790, 393, 15, 30);
 
                 FullTabButton.Content = "Expand";
             }
@@ -196,7 +199,6 @@ namespace EyeSPARC
             {
                 latestDataChart.Series = _piSeriesCollection;
                 chartTitle.Text = "Pulseintegral histogram";
-
             }
             else if (singleslowTab.IsSelected)
             {
@@ -253,93 +255,75 @@ namespace EyeSPARC
 
             // Pulsehieghts
 
-            _phSeriesCollection.Add(new StepLineSeries
+            for (int i = 0; i < _pulseheight.Data.Length;i++)
             {
-                Title = "Pulseheights",
-                Values = new ChartValues<int>(_pulseheight.Data[0]),
-                PointGeometry = null
-            });
-            _phSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Pulseheights",
-                Values = new ChartValues<int>(_pulseheight.Data[1]),
-                PointGeometry = null
-            });
+
+                _phSeriesCollection.Add(new StepLineSeries
+                {
+                    Title = $"Pulseheights Channel {i+1}",
+                    Values = new ChartValues<int>(_pulseheight.Data[i]),
+                    PointGeometry = null
+                });
+            }
 
             // Pulseintegral
-
-            _piSeriesCollection.Add(new StepLineSeries
+            for (int i = 0; i < _pulseintegral.Data.Length; i++)
             {
-                Title = "Pulseintegral",
-                Values = new ChartValues<int>(_pulseintegral.Data[0]),
-                PointGeometry = null
-            });
-            _piSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Pulseintegral",
-                Values = new ChartValues<int>(_pulseintegral.Data[1]),
-                PointGeometry = null
-            });
 
+                _piSeriesCollection.Add(new StepLineSeries
+                {
+                    Title = $"Pulseintegral Channel {i + 1}",
+                    Values = new ChartValues<int>(_pulseintegral.Data[i]),
+                    PointGeometry = null
+                });
+            }
             // Singles Low 
+            for (int i = 0; i < _singleslow.Data.Length; i++)
+            {
 
-            _slSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Singles Low",
-                Values = new ChartValues<int>(_singleslow.Data[0]),
-                PointGeometry = null
-            });
-            _slSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Singles Low",
-                Values = new ChartValues<int>(_singleslow.Data[1]),
-                PointGeometry = null
-            });
+                _slSeriesCollection.Add(new StepLineSeries
+                {
+                    Title = "Singles Low",
+                    Values = new ChartValues<int>(_singleslow.Data[i]),
+                    PointGeometry = null
+                });
+            }
 
             // Singles High
+            for (int i = 0; i < _singleshigh.Data.Length; i++)
+            {
 
-            _shSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Singles High",
-                Values = new ChartValues<int>(_singleshigh.Data[0]),
-                PointGeometry = null
-            });
-            _shSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Singles High",
-                Values = new ChartValues<int>(_singleshigh.Data[1]),
-                PointGeometry = null
-            });
+                _shSeriesCollection.Add(new StepLineSeries
+                {
+                    Title = "Singles High",
+                    Values = new ChartValues<int>(_singleshigh.Data[i]),
+                    PointGeometry = null
+                });
+            }
 
             // Singles Rates Low 
-
-            _srlSeriesCollection.Add(new StepLineSeries
+            for (int i = 0; i < _singlesratelow.Data.Length; i++)
             {
-                Title = "Singles Rate  Low",
-                Values = new ChartValues<int>(_singlesratelow.Data[0]),
-                PointGeometry = null
-            });
-            _srlSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Singles Rate Low",
-                Values = new ChartValues<int>(_singlesratelow.Data[1]),
-                PointGeometry = null
-            });
 
+                _srlSeriesCollection.Add(new StepLineSeries
+                {
+                    Title = "Singles Rate  Low",
+                    Values = new ChartValues<int>(_singlesratelow.Data[i]),
+                    PointGeometry = null
+                });
+            }
             // Singles Rates High
 
-            _srhSeriesCollection.Add(new StepLineSeries
+            for (int i = 0; i < _singlesratehigh.Data.Length; i++)
             {
-                Title = "Singles Rate High",
-                Values = new ChartValues<int>(_singlesratehigh.Data[0]),
-                PointGeometry = null
-            });
-            _srhSeriesCollection.Add(new StepLineSeries
-            {
-                Title = "Singles Rate High",
-                Values = new ChartValues<int>(_singlesratehigh.Data[1]),
-                PointGeometry = null
-            });
+
+                _srhSeriesCollection.Add(new StepLineSeries
+                {
+                    Title = "Singles Rate High",
+                    Values = new ChartValues<int>(_singlesratehigh.Data[i]),
+                    PointGeometry = null
+                });
+            }
 
         }
 
