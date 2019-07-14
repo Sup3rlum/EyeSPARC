@@ -136,7 +136,6 @@ namespace EyeSPARC
             if (_isMapFullTab)
             {
                 _isMapFullTab = false;
-
                 stationMap.Margin = new Thickness(704, 393, 15, 30);
 
                 FullTabButton.Content = "Expand";
@@ -144,9 +143,7 @@ namespace EyeSPARC
             else
             {
                 _isMapFullTab = true;
-
                 stationMap.Margin = new Thickness(15, 15, 15, 30);
-
 
                 FullTabButton.Content = "Minimize";
             }
@@ -192,7 +189,7 @@ namespace EyeSPARC
             else if (pulseheightsTab.IsSelected)
             {
                 latestDataChart.Series = _phSeriesCollection;
-                chartTitle.Text = "'Pulseheight histogram";
+                chartTitle.Text = "Pulseheight histogram";
 
             }
             else if (pulseintegralTab.IsSelected)
