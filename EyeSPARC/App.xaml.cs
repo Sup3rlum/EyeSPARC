@@ -15,6 +15,7 @@ namespace EyeSPARC
     {
         MainWindow _mainWindow;
         SplashScreenWindow _splashWindow;
+
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
             _mainWindow = new MainWindow();

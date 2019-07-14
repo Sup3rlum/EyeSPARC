@@ -139,14 +139,14 @@ namespace EyeSPARC
             if (_isMapFullTab)
             {
                 _isMapFullTab = false;
-                stationMap.Margin = new Thickness(790, 393, 15, 30);
+                stationMap.Margin = new Thickness(790, 378, 15, 45);
 
                 FullTabButton.Content = "Expand";
             }
             else
             {
                 _isMapFullTab = true;
-                stationMap.Margin = new Thickness(15, 15, 15, 30);
+                stationMap.Margin = new Thickness(15, 15, 15, 45);
 
                 FullTabButton.Content = "Minimize";
             }

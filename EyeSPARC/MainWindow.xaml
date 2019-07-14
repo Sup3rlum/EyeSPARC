@@ -159,7 +159,7 @@
                     
 
 
-                    <StackPanel Orientation="Horizontal" Margin="792,619,15,3">
+                    <StackPanel Orientation="Horizontal" Margin="792,604,15,18">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Margin" Value="0,0,5,0"/>
@@ -209,7 +209,7 @@
                                 />
                         </StackPanel>
 
-                        <TextBlock Name="chartTitle" Text="N/A:" FontSize="30" Margin="40,0,0,0"/>
+                        <TextBlock Name="chartTitle" Text="N/A:" FontSize="26" Margin="40,0,0,0"/>
 
                         <lvc:CartesianChart Name="latestDataChart" 
                                             Series="{Binding _evSeriesCollection}" 
@@ -311,7 +311,7 @@
                     <StackPanel Orientation="Vertical" Margin="792,30,15,260">
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
-                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="FontSize" Value="15"/>
                                 <Setter Property="Foreground" Value="Black"/>
                             </Style>
                         </StackPanel.Resources>
@@ -319,54 +319,142 @@
                         <TextBlock 
                             Text="Configuration:"
                             Foreground="Black"
-                            FontSize="30"
+                            FontSize="26"
                             Margin="0,0,0,5"
                             />
+                        <TabControl BorderThickness="0">
+                            <TabControl.Resources>
+                                <Style TargetType="TabItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="TabItem">
+                                                <Grid Name="Panel">
+                                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="37,2"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Panel" Property="Background" Value="#FF0099FF" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="False">
+                                                        <Setter TargetName="Panel" Property="Background" Value="#FF363636" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TabControl.Resources>
+                            
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Master" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <StackPanel Orientation="Vertical">
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Serial: "/>
-                            <TextBlock Name="label_mas_ver_serial" Text=""/>
-                        </StackPanel>
-                        
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="FPGA Version: "/>
-                            <TextBlock Name="label_mas_ver_fpga" Margin="0,0,0,10"/>
-                        </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Serial: "/>
+                                        <TextBlock Name="label_mas_ver_serial" Text=""/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="FPGA Version: "/>
+                                        <TextBlock Name="label_mas_ver_fpga" Margin="0,0,0,10"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch1 Voltage: "/>
+                                        <TextBlock Name="label_mas_ch1_volt" Text=""/>
+                                    </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Ch1 Voltage: "/>
-                            <TextBlock Name="label_mas_ch1_volt" Text=""/>
-                        </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch2 Voltage: "/>
+                                        <TextBlock Name="label_mas_ch2_volt" Margin="0,0,0,10"/>
+                                    </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Ch2 Voltage: "/>
-                            <TextBlock Name="label_mas_ch2_volt" Text=""/>
-                        </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch1 Tresholds: "/>
+                                        <TextBlock Name="label_mas_ch1_treshold" Text=""/>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch2 Tresholds: "/>
+                                        <TextBlock Name="label_mas_ch2_treshold" Text=""/>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                            </TabItem>
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Slave" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
 
-                        <StackPanel Orientation="Horizontal" Height="40">
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Serial: "/>
+                                        <TextBlock Name="label_slv_ver_serial" Text=""/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="FPGA Version: "/>
+                                        <TextBlock Name="label_slv_ver_fpga" Margin="0,0,0,10"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch1 Voltage: "/>
+                                        <TextBlock Name="label_slv_ch1_volt" Text=""/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch2 Voltage: "/>
+                                        <TextBlock Name="label_slv_ch2_volt" Margin="0,0,0,10"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch1 Tresholds: "/>
+                                        <TextBlock Name="label_slv_ch1_treshold" Text=""/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ch2 Tresholds: "/>
+                                        <TextBlock Name="label_slv_ch2_treshold" Text=""/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </TabItem>
+                        </TabControl>
+
+
+                        <StackPanel Orientation="Horizontal" Height="40" Margin="0,0,0,0">
                             <Button Name="confMoreButton" Content="More info" Width="75" Margin="0,8,10,8" Click="ConfMoreButton_Click"/>
-                            <Button Name="confSwitchButton" Content="Slave" Width="75" Margin="0,8,0,8"/>
                         </StackPanel>
+
+
+
 
                         <TextBlock 
                             Text="Location:"
                             Foreground="Black"
-                            FontSize="30"
+                            FontSize="26"
                             />
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Longitude: "/>
-                            <TextBlock Name="LongitudeBoxValue" Text="-10.42"/>
+                            <TextBlock Name="LongitudeBoxValue" Text=""/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Latitude: "/>
-                            <TextBlock Name="LatitudeBoxValue" Text="-10.42"/>
+                            <TextBlock Name="LatitudeBoxValue" Text=""/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Altitude: "/>
-                            <TextBlock Name="AltitudeBoxValue" Text="-10.42"/>
+                            <TextBlock Name="AltitudeBoxValue" Text=""/>
                             <TextBlock Text=" m"/>
                         </StackPanel>
 
@@ -375,7 +463,7 @@
                     <m:Map x:Name="stationMap" 
                            CredentialsProvider="VptlZZkRfRZj3vFeyLEN~KEz7B36YuDsYV4F61t3K0Q~AtzIKqAVjOqDr5ABYY0-49WyshG3nRUUPSCL3Pss79htpRAJmehGD7jMRlt4LpOs" 
                            Mode="Road"
-                           Margin="790,393,15,30" 
+                           Margin="790,378,15,45" 
                            ZoomLevel="16"
                            Culture="en-gb"/>
                 </Grid>
