@@ -241,20 +241,20 @@
 
                         <TextBlock Name="chartTitle" Text="N/A:" FontSize="26" Margin="40,0,0,0"/>
 
-                        <TabControl TabStripPlacement="Bottom" BorderThickness="0" SelectionChanged="TabControl_SelectionChanged">
+                        <TabControl TabStripPlacement="Bottom" BorderThickness="0,0,0,1" BorderBrush="#FF87C8FA" SelectionChanged="TabControl_SelectionChanged">
                             <TabControl.Resources>
                                 <Style TargetType="TabItem">
                                     <Setter Property="Foreground" Value="White"/>
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="TabItem">
-                                                <Border BorderThickness="1,0,0,0" BorderBrush="Black">
+                                                <Border >
                                                     <Grid Name="Panel">
                                                         <ContentPresenter x:Name="ContentSite"
                                                                 VerticalAlignment="Center"
                                                                 HorizontalAlignment="Center"
                                                                 ContentSource="Header"
-                                                                Margin="10,2"/>
+                                                                Margin="11,6"/>
                                                     </Grid>
                                                 </Border>
                                                 <ControlTemplate.Triggers>
@@ -409,6 +409,44 @@
                                 </lvc:CartesianChart>
 
                             </TabItem>
+                            <TabItem Name="azimuthTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Azimuth" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <lvc:CartesianChart Name="_azimuth_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
+                            </TabItem>
+                            <TabItem Name="zenithTab">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Zenith" Margin="0,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <lvc:CartesianChart Name="_zenith_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
+                            </TabItem>
                         </TabControl>
 
 
@@ -429,7 +467,7 @@
                             FontSize="22"
                             Margin="0,0,0,5"
                             />
-                        <TabControl BorderThickness="0,1,0,0" Background="GhostWhite">
+                        <TabControl BorderThickness="0,1,0,0" >
                             <TabControl.Resources>
                                 <Style TargetType="TabItem">
                                     <Setter Property="Template">
@@ -462,8 +500,13 @@
                                         <TextBlock Text="Master" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
-                                <StackPanel Orientation="Vertical" Margin="10,15,0,20">
-
+                                <StackPanel Orientation="Vertical" Margin="10,10,0,10">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Serial: "/>
                                         <TextBlock Name="label_mas_ver_serial" Text=""/>
@@ -478,19 +521,37 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Ch2 Voltage: "/>
-                                        <TextBlock Name="label_mas_ch2_volt" Margin="0,0,0,10"/>
+                                        <TextBlock Text="Ch2 Voltage: " Foreground="Red"/>
+                                        <TextBlock Name="label_mas_ch2_volt" Margin="0,0,0,10" Foreground="Red"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Ch1 Tresholds: "/>
-                                        <TextBlock Name="label_mas_ch1_treshold" Text=""/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <TextBlock Text="Low: "/>
+                                        <TextBlock Name="label_mas_ch1_treshold_low" Text=""/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,10">
+                                        <TextBlock Text="High: "/>
+                                        <TextBlock Name="label_mas_ch1_treshold_high" Text=""/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Ch2 Tresholds: "/>
-                                        <TextBlock Name="label_mas_ch2_treshold" Text=""/>
+                                        <TextBlock Text="Ch2 Tresholds: " Foreground="Red"/>
                                     </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <TextBlock Text="Low: " Foreground="Red"/>
+                                        <TextBlock Name="label_mas_ch2_treshold_low" Text="" Foreground="Red"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <TextBlock Text="High: " Foreground="Red"/>
+                                        <TextBlock Name="label_mas_ch2_treshold_high" Text="" Foreground="Red"/>
+                                    </StackPanel>
+                                    
                                 </StackPanel>
 
                             </TabItem>
@@ -500,9 +561,12 @@
                                         <TextBlock Text="Slave" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
-
-                                <StackPanel Orientation="Vertical" Margin="10,15,0,20">
-
+                                <StackPanel Orientation="Vertical" Margin="10,10,0,10">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                        </Style>
+                                    </StackPanel.Resources>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Serial: "/>
                                         <TextBlock Name="label_slv_ver_serial" Text=""/>
@@ -512,26 +576,42 @@
                                         <TextBlock Name="label_slv_ver_fpga" Margin="0,0,0,10"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Ch1 Voltage: "/>
-                                        <TextBlock Name="label_slv_ch1_volt" Text=""/>
+                                        <TextBlock Text="Ch3 Voltage: " Foreground="DarkCyan"/>
+                                        <TextBlock Name="label_slv_ch1_volt" Text="" Foreground="DarkCyan"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Ch2 Voltage: "/>
-                                        <TextBlock Name="label_slv_ch2_volt" Margin="0,0,0,10"/>
+                                        <TextBlock Text="Ch4 Voltage: " Foreground="DarkGoldenrod"/>
+                                        <TextBlock Name="label_slv_ch2_volt" Margin="0,0,0,10" Foreground="DarkGoldenrod"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Ch1 Tresholds: "/>
-                                        <TextBlock Name="label_slv_ch1_treshold" Text=""/>
+                                        <TextBlock Text="Ch3 Tresholds: " Foreground="DarkCyan"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <TextBlock Text="Low: " Foreground="DarkCyan"/>
+                                        <TextBlock Name="label_slv_ch1_treshold_low" Text="" Foreground="DarkCyan"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,10">
+                                        <TextBlock Text="High: " Foreground="DarkCyan"/>
+                                        <TextBlock Name="label_slv_ch1_treshold_high" Text="" Foreground="DarkCyan"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Ch2 Tresholds: "/>
-                                        <TextBlock Name="label_slv_ch2_treshold" Text=""/>
+                                        <TextBlock Text="Ch4 Tresholds: " Foreground="DarkGoldenrod"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <TextBlock Text="Low: " Foreground="DarkGoldenrod"/>
+                                        <TextBlock Name="label_slv_ch2_treshold_low" Text="" Foreground="DarkGoldenrod"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <TextBlock Text="High: " Foreground="DarkGoldenrod"/>
+                                        <TextBlock Name="label_slv_ch2_treshold_high" Text="" Foreground="DarkGoldenrod"/>
                                     </StackPanel>
                                 </StackPanel>
-
                             </TabItem>
                             
                         </TabControl>

@@ -58,7 +58,7 @@ namespace EyeSPARC
         }
         public void LoadNetworkItems()
         {
-           /* _network.Load();
+            /*_network.Load();
 
             Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });*/
         }
@@ -124,6 +124,25 @@ namespace EyeSPARC
 
                 label_slv_ver_fpga.Text = slv_fpga;
                 label_slv_ver_serial.Text = slv_serial;
+
+                float mas_ch1_tresh_low = _selectedStation.Configuration.GetAttribute<float>("mas_ch1_thres_low");
+                float mas_ch1_tresh_high = _selectedStation.Configuration.GetAttribute<float>("mas_ch1_thres_high");
+
+                float mas_ch2_tresh_low = _selectedStation.Configuration.GetAttribute<float>("mas_ch2_thres_low");
+                float mas_ch2_tresh_high = _selectedStation.Configuration.GetAttribute<float>("mas_ch2_thres_high");
+
+
+                float slv_ch1_tresh_low = _selectedStation.Configuration.GetAttribute<float>("slv_ch1_thres_low");
+                float slv_ch1_tresh_high = _selectedStation.Configuration.GetAttribute<float>("slv_ch1_thres_high");
+
+                float slv_ch2_tresh_low = _selectedStation.Configuration.GetAttribute<float>("slv_ch2_thres_low");
+                float slv_ch2_tresh_high = _selectedStation.Configuration.GetAttribute<float>("slv_ch2_thres_high");
+
+                label_mas_ch1_treshold_low.Text = ((int)mas_ch1_tresh_low).ToString();
+                label_mas_ch1_treshold_high.Text = ((int)mas_ch1_tresh_high).ToString();
+
+                label_mas_ch2_treshold_low.Text = ((int)mas_ch1_tresh_low).ToString();
+                label_mas_ch2_treshold_high.Text = ((int)mas_ch1_tresh_high).ToString();
 
                 await Task.Run(() => DownloadShowData(_selectedStation));
 

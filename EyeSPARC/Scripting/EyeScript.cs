@@ -8,8 +8,18 @@ namespace EyeSPARC.Scripting
 {
     public class EyeScript
     {
-        public string Raw { get; set; }
-        public ScriptType ScriptType { get; set; }
+        public string Content { get; }
+        private string _content;
+
+        public ScriptType ScriptType { get; }
+        private ScriptType _scriptType;
+
+        public EyeScript(string content, ScriptType type)
+        {
+            _content = content;
+            _scriptType = type;
+        }
+
     }
     public enum ScriptType
     {
