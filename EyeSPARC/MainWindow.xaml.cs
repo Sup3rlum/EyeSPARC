@@ -58,7 +58,7 @@ namespace EyeSPARC
         }
         public void LoadNetworkItems()
         {
-            /*_network.Load();
+           /* _network.Load();
 
             Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });*/
         }
@@ -133,8 +133,18 @@ namespace EyeSPARC
                 XFormatter = value => TimeSpan.FromHours((double)value).ToString("hh:mm");
 
 
-                latestDataChart.DataContext = this;
-                latestDataChart.DataTooltip.Background = Brushes.DarkGray;
+                if (_selectedStation.DetectorConfiguration == DetectorConfiguration.Master)
+                {
+                    dconfEllipse.Fill = Brushes.DarkSlateBlue;
+                    dconfLabel.Foreground = Brushes.DarkSlateBlue;
+                    dconfLabel.Text = "Master Only";
+                }
+                else
+                {
+                    dconfEllipse.Fill = Brushes.Maroon;
+                    dconfLabel.Foreground = Brushes.Maroon;
+                    dconfLabel.Text = "Master And Slave";
+                }
             }
 
         }
@@ -154,7 +164,7 @@ namespace EyeSPARC
             if (_isMapFullTab)
             {
                 _isMapFullTab = false;
-                stationMap.Margin = new Thickness(790, 378, 15, 45);
+                stationMap.Margin = new Thickness(820, 408, 15, 45);
 
                 FullTabButton.Content = "Expand";
             }
@@ -201,39 +211,32 @@ namespace EyeSPARC
         {
             if (eventtimeTab.IsSelected)
             {
-                latestDataChart.Series = _evSeriesCollection;
                 chartTitle.Text = "Event count histogram";
             }
             else if (pulseheightsTab.IsSelected)
             {
-                latestDataChart.Series = _phSeriesCollection;
                 chartTitle.Text = "Pulseheight histogram";
 
             }
             else if (pulseintegralTab.IsSelected)
             {
-                latestDataChart.Series = _piSeriesCollection;
                 chartTitle.Text = "Pulseintegral histogram";
             }
             else if (singleslowTab.IsSelected)
             {
-                latestDataChart.Series = _slSeriesCollection;
                 chartTitle.Text = "Singles (per second above low treshold)";
 
             }
             else if (singleshighTab.IsSelected)
             {
-                latestDataChart.Series = _shSeriesCollection;
                 chartTitle.Text = "Singles (per second above high treshold)";
             }
             else if (singlesratelowTab.IsSelected)
             {
-                latestDataChart.Series = _srlSeriesCollection;
                 chartTitle.Text = "Singles rate histogram (above low treshold)";
             }
             else if (singlesratehighTab.IsSelected)
             {
-                latestDataChart.Series = _srhSeriesCollection;
                 chartTitle.Text = "Singles rate histogram (above high treshold)";
             }
         }
@@ -268,6 +271,8 @@ namespace EyeSPARC
                 StrokeThickness = 1
             });
 
+            _events_latestDataChart.Series = _evSeriesCollection;
+
             // Pulsehieghts
 
             for (int i = 0; i < _pulseheight.Data.Length;i++)
@@ -281,6 +286,8 @@ namespace EyeSPARC
                 });
             }
 
+            _pulseheights_latestDataChart.Series = _phSeriesCollection;
+
             // Pulseintegral
             for (int i = 0; i < _pulseintegral.Data.Length; i++)
             {
@@ -292,6 +299,9 @@ namespace EyeSPARC
                     PointGeometry = null
                 });
             }
+
+            _pulseintegral_latestDataChart.Series = _piSeriesCollection;
+
             // Singles Low 
             for (int i = 0; i < _singleslow.Data.Length; i++)
             {
@@ -303,6 +313,8 @@ namespace EyeSPARC
                     PointGeometry = null
                 });
             }
+
+            _singleslow_latestDataChart.Series = _slSeriesCollection;
 
             // Singles High
             for (int i = 0; i < _singleshigh.Data.Length; i++)
@@ -316,6 +328,8 @@ namespace EyeSPARC
                 });
             }
 
+            _singleshigh_latestDataChart.Series = _shSeriesCollection;
+
             // Singles Rates Low 
             for (int i = 0; i < _singlesratelow.Data.Length; i++)
             {
@@ -327,6 +341,10 @@ namespace EyeSPARC
                     PointGeometry = null
                 });
             }
+
+
+            _rateslow_latestDataChart.Series = _srlSeriesCollection;
+
             // Singles Rates High
 
             for (int i = 0; i < _singlesratehigh.Data.Length; i++)
@@ -339,6 +357,8 @@ namespace EyeSPARC
                     PointGeometry = null
                 });
             }
+
+            _rateshigh_latestDataChart.Series = _srhSeriesCollection;
 
         }
 

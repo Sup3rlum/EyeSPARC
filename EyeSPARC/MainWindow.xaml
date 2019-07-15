@@ -175,24 +175,24 @@
 
 
 
-                    <StackPanel Orientation="Horizontal" Margin="792,604,15,15">
+                    <StackPanel Orientation="Horizontal" Margin="820,604,15,15">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Margin" Value="0,0,5,0"/>
                             </Style>
                         </StackPanel.Resources>
-                        <Button Name="AerialMapButton" Content="Aerial" Width="72" Click="AerialMapButton_Click"/>
-                        <Button Name="RoadMapButton" Content="Road" Width="72" Click="RoadMapButton_Click"/>
-                        <Button Name="FullTabButton" Content="Expand" Width="73" Click="FullTabButton_Click"/>
+                        <Button Name="AerialMapButton" Content="Aerial" Width="62" Click="AerialMapButton_Click"/>
+                        <Button Name="RoadMapButton" Content="Road" Width="62" Click="RoadMapButton_Click"/>
+                        <Button Name="FullTabButton" Content="Expand" Width="63" Click="FullTabButton_Click"/>
                     </StackPanel>
 
-                    <StackPanel Margin="30,20,152,30" Orientation="Vertical">
+                    <StackPanel Margin="30,20,230,30" Orientation="Vertical">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Foreground" Value="Black"/>
                             </Style>
                         </StackPanel.Resources>
-                        <TextBlock Name="StationTitleLabel" Text="N/A" FontSize="40"/>
+                        <TextBlock Name="StationTitleLabel" Text="N/A" FontSize="40" Margin="0,0,0,10"/>
                         <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                             <Ellipse 
                                 Name="ssEllipse"
@@ -241,19 +241,6 @@
 
                         <TextBlock Name="chartTitle" Text="N/A:" FontSize="26" Margin="40,0,0,0"/>
 
-                        <lvc:CartesianChart Name="latestDataChart" 
-                                            Series="{Binding _evSeriesCollection}" 
-                                            LegendLocation="Right" 
-                                            Height="300" Margin="0,0,160,0">
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                        </lvc:CartesianChart>
-
-
                         <TabControl TabStripPlacement="Bottom" BorderThickness="0" SelectionChanged="TabControl_SelectionChanged">
                             <TabControl.Resources>
                                 <Style TargetType="TabItem">
@@ -282,6 +269,11 @@
                                         </Setter.Value>
                                     </Setter>
                                 </Style>
+                                <Style TargetType="lvc:CartesianChart">
+                                    <Setter Property="DisableAnimations" Value="True"/>
+                                    <Setter Property="DataTooltip" Value="{x:Null}"/>
+                                    <Setter Property="Hoverable" Value="False"/>
+                                </Style>
                             </TabControl.Resources>
                             <TabItem Name="eventtimeTab">
                                 <TabItem.Header>
@@ -289,6 +281,18 @@
                                         <TextBlock Text="Events" Margin="0,0,0,0" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <lvc:CartesianChart Name="_events_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
                             </TabItem>
                             <TabItem Name="pulseheightsTab">
                                 <TabItem.Header>
@@ -296,6 +300,18 @@
                                         <TextBlock Text="Pulseheights" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
+                                <lvc:CartesianChart Name="_pulseheights_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
                             </TabItem>
                             <TabItem Name="pulseintegralTab">
                                 <TabItem.Header>
@@ -303,6 +319,18 @@
                                         <TextBlock Text="PulseIntegral" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
+                                <lvc:CartesianChart Name="_pulseintegral_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
                             </TabItem>
                             <TabItem Name="singleslowTab">
                                 <TabItem.Header>
@@ -310,6 +338,18 @@
                                         <TextBlock Text="Singles Low" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
+                                <lvc:CartesianChart Name="_singleslow_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
                             </TabItem>
                             <TabItem Name="singleshighTab">
                                 <TabItem.Header>
@@ -317,6 +357,18 @@
                                         <TextBlock Text="Singles High" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
+                                <lvc:CartesianChart Name="_singleshigh_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
                             </TabItem>
                             <TabItem Name="singlesratelowTab">
                                 <TabItem.Header>
@@ -324,6 +376,19 @@
                                         <TextBlock Text="Single Rates Low" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
+                                
+                                <lvc:CartesianChart Name="_rateslow_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
                             </TabItem>
                             <TabItem Name="singlesratehighTab">
                                 <TabItem.Header>
@@ -331,6 +396,18 @@
                                         <TextBlock Text="Single Rates High" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
+                                <lvc:CartesianChart Name="_rateshigh_latestDataChart" 
+                                            Series="{Binding _evSeriesCollection}" 
+                                            LegendLocation="Right" 
+                                            Height="300" Margin="0,0,0,0">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Event Count" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Hour of the Day" LabelFormatter="{Binding XFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+
                             </TabItem>
                         </TabControl>
 
@@ -338,10 +415,10 @@
 
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Margin="792,30,15,260">
+                    <StackPanel Orientation="Vertical" Margin="822,30,15,240">
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontSize" Value="12"/>
                                 <Setter Property="Foreground" Value="Black"/>
                             </Style>
                         </StackPanel.Resources>
@@ -349,10 +426,10 @@
                         <TextBlock 
                             Text="Configuration:"
                             Foreground="Black"
-                            FontSize="26"
+                            FontSize="22"
                             Margin="0,0,0,5"
                             />
-                        <TabControl BorderThickness="0">
+                        <TabControl BorderThickness="0,1,0,0" Background="GhostWhite">
                             <TabControl.Resources>
                                 <Style TargetType="TabItem">
                                     <Setter Property="Template">
@@ -363,7 +440,7 @@
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         ContentSource="Header"
-                                        Margin="35,2"/>
+                                        Margin="31,2"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsSelected" Value="True">
@@ -385,7 +462,7 @@
                                         <TextBlock Text="Master" Margin="0,0,0,0" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </TabItem.Header>
-                                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                                <StackPanel Orientation="Vertical" Margin="10,15,0,20">
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Serial: "/>
@@ -424,7 +501,7 @@
                                     </StackPanel>
                                 </TabItem.Header>
 
-                                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                                <StackPanel Orientation="Vertical" Margin="10,15,0,20">
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Serial: "/>
@@ -456,18 +533,18 @@
                                 </StackPanel>
 
                             </TabItem>
+                            
                         </TabControl>
 
 
-                        <StackPanel Orientation="Horizontal" Height="40" Margin="0,0,0,0">
+                        <StackPanel Orientation="Horizontal" Height="40" Margin="0,0,0,35">
                             <Button Name="confMoreButton" Content="More info" Width="75" Margin="0,8,10,8" Click="ConfMoreButton_Click"/>
                         </StackPanel>
-
 
                         <TextBlock 
                             Text="Location:"
                             Foreground="Black"
-                            FontSize="26"
+                            FontSize="22"
                             />
 
                         <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
@@ -491,7 +568,7 @@
                     <m:Map x:Name="stationMap" 
                            CredentialsProvider="VptlZZkRfRZj3vFeyLEN~KEz7B36YuDsYV4F61t3K0Q~AtzIKqAVjOqDr5ABYY0-49WyshG3nRUUPSCL3Pss79htpRAJmehGD7jMRlt4LpOs" 
                            Mode="Road"
-                           Margin="790,378,15,45" 
+                           Margin="820,408,15,45" 
                            ZoomLevel="16"
                            Culture="en-gb"/>
                 </Grid>
@@ -502,6 +579,9 @@
                         <TextBlock Text="Data" Margin="2,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+                
+                
+                
             </TabItem>
             <TabItem>
                 <TabItem.Header>

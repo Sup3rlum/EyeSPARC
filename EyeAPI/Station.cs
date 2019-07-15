@@ -25,6 +25,17 @@ namespace EyeAPI
             Configuration = new Configuration(_config);
 
             IsSelected = false;
+
+            string slv_ver = Configuration.GetAttribute<string>("slv_version").Replace("\"", "").Replace("    ", "-");
+
+            if (slv_ver == "Hardware: 0-FPGA: 0")
+            {
+                DetectorConfiguration = DetectorConfiguration.Master;
+            }
+            else
+            {
+                DetectorConfiguration = DetectorConfiguration.MasterAndSlave;
+            }
         }
 
         public bool IsSelected { get; set; }
