@@ -343,5 +343,16 @@ namespace EyeSPARC
         }
 
         ShowDataSheet _eventtime, _pulseheight, _pulseintegral, _singleslow, _singleshigh, _singlesratelow, _singlesratehigh;
+
+        private void hpWebsiteItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.hisparc.nl");
+        }
+
+        private void AboutMenu_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow _about = new AboutWindow();
+            _about.Show();
+        }
     }
 }

@@ -10,13 +10,23 @@
         mc:Ignorable="d"
         Title="EyeSPARC" Height="768" Width="1366" Background="#FF363636">
     <Grid>
-        <DockPanel Background="#20272f">
+
+            <DockPanel Background="#20272f">
             <Menu DockPanel.Dock="Top" Background="GhostWhite">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New"  BorderThickness="0"/>
                     <MenuItem Header="_Open" BorderThickness="0"/>
                     <MenuItem Header="_Save" BorderThickness="0"/>
                     <MenuItem Header="_Exit" BorderThickness="0"/>
+                </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem Header="_Settings" BorderThickness="0"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_HiSPARC Website"  BorderThickness="0" Click="hpWebsiteItem_Click"/>
+                    <MenuItem Header="_Documentation"  BorderThickness="0"/>
+                    <MenuItem Header="_License"  BorderThickness="0"/>
+                    <MenuItem Header="_About" BorderThickness="0" Click="AboutMenu_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -198,7 +208,7 @@
                                 Foreground="DarkGray"
                                 />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10,0,0,50">
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                             <Ellipse 
                                 Name="dsEllipse"
                                 Width="10"
@@ -209,6 +219,21 @@
 
                             <TextBlock 
                                 Name="dataStatusLabel"
+                                Text="N/A"
+                                Foreground="DarkGray"
+                                />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,50">
+                            <Ellipse 
+                                Name="dconfEllipse"
+                                Width="10"
+                                Height="10"
+                                Fill="DarkGray"
+                                Margin="0,0,7,0"
+                                />
+
+                            <TextBlock 
+                                Name="dconfLabel"
                                 Text="N/A"
                                 Foreground="DarkGray"
                                 />
