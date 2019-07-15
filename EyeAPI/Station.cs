@@ -15,6 +15,7 @@ namespace EyeAPI
     {
         public NodeStatus LatestDataStatus = NodeStatus.Unknown;
         public NodeStatus LatestDetectorStatus = NodeStatus.Unknown;
+        public DetectorConfiguration DetectorConfiguration = DetectorConfiguration.Master;
 
         public Configuration Configuration { get; set; }
         
@@ -59,5 +60,9 @@ namespace EyeAPI
         Down,
         Unknown
     }
-    
+    public enum DetectorConfiguration
+    {
+        Master,
+        MasterAndSlave
+    }
 }

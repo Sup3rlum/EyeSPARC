@@ -140,7 +140,9 @@
       <Name>EyeAPI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="res\reload.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="res\eye_splashscreen.png" />
   </ItemGroup>

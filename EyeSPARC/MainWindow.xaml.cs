@@ -58,9 +58,9 @@ namespace EyeSPARC
         }
         public void LoadNetworkItems()
         {
-            _network.Load();
+            /*_network.Load();
 
-            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });
+            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });*/
         }
 
         private async void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -96,19 +96,34 @@ namespace EyeSPARC
                 dataStatusLabel.Foreground = new SolidColorBrush(GetStatusColor(_latestDataStatus));
                 dsEllipse.Fill = new SolidColorBrush(GetStatusColor(_latestDataStatus));
 
-                float ch1_volt = _selectedStation.Configuration.GetAttribute<float>("mas_ch1_voltage");
-                float ch2_volt = _selectedStation.Configuration.GetAttribute<float>("mas_ch2_voltage");
+                float mas_ch1_volt = _selectedStation.Configuration.GetAttribute<float>("mas_ch1_voltage");
+                float mas_ch2_volt = _selectedStation.Configuration.GetAttribute<float>("mas_ch2_voltage");
 
-                label_mas_ch1_volt.Text = ((int)ch1_volt).ToString();
-                label_mas_ch2_volt.Text = ((int)ch2_volt).ToString();
 
-                string[] _ver = _selectedStation.Configuration.GetAttribute<string>("mas_version").Replace("\"","").Replace("    ", "-").Split('-');
+                float slv_ch1_volt = _selectedStation.Configuration.GetAttribute<float>("slv_ch1_voltage");
+                float slv_ch2_volt = _selectedStation.Configuration.GetAttribute<float>("slv_ch2_voltage");
 
-                string _serial = _ver[0].Split(':')[1];
-                string _fpga = _ver[1].Split(':')[1];
+                label_mas_ch1_volt.Text = ((int)mas_ch1_volt).ToString();
+                label_mas_ch2_volt.Text = ((int)mas_ch2_volt).ToString();
 
-                label_mas_ver_fpga.Text = _fpga;
-                label_mas_ver_serial.Text = _serial;
+                label_slv_ch1_volt.Text = ((int)slv_ch1_volt).ToString();
+                label_slv_ch2_volt.Text = ((int)slv_ch2_volt).ToString();
+
+                string[] mas_ver = _selectedStation.Configuration.GetAttribute<string>("mas_version").Replace("\"","").Replace("    ", "-").Split('-');
+                string[] slv_ver = _selectedStation.Configuration.GetAttribute<string>("slv_version").Replace("\"","").Replace("    ", "-").Split('-');
+
+                string mas_serial = mas_ver[0].Split(':')[1];
+                string mas_fpga = mas_ver[1].Split(':')[1];
+
+                string slv_serial = slv_ver[0].Split(':')[1];
+                string slv_fpga = slv_ver[1].Split(':')[1];
+
+
+                label_mas_ver_fpga.Text = mas_fpga;
+                label_mas_ver_serial.Text = mas_serial;
+
+                label_slv_ver_fpga.Text = slv_fpga;
+                label_slv_ver_serial.Text = slv_serial;
 
                 await Task.Run(() => DownloadShowData(_selectedStation));
 

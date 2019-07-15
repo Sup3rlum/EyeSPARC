@@ -42,7 +42,7 @@
         </StackPanel>
 
         <TextBlock
-            Text="V0.1"
+            Text="V0.2"
             FontFamily="Gill Sans MT"
             FontSize="80"
             Margin="310,340,0,0"
