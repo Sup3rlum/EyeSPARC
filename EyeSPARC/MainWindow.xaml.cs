@@ -51,15 +51,13 @@ namespace EyeSPARC
         public Func<int, string> XFormatter { get; set; }
 
 
+        public EyeProject _currentProject;
 
         public MainWindow()
         {
             InitializeComponent();
 
-
-            EyeProject _proj = new EyeProject("test");
-
-            projectTreeView.ItemsSource = new List<EyeProject>() { _proj };
+            projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _currentProject };
         }
         public void LoadNetworkItems()
         {
@@ -388,6 +386,15 @@ namespace EyeSPARC
         }
 
         ShowDataSheet _eventtime, _pulseheight, _pulseintegral, _singleslow, _singleshigh, _singlesratelow, _singlesratehigh;
+
+        private void newProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectCreationWindow _p = new ProjectCreationWindow();
+
+            _p.ShowDialog();
+
+            _currentProject = new EyeProject(_p.SelectedName, _p.SelectedProjectType);
+        }
 
         private void hpWebsiteItem_Click(object sender, RoutedEventArgs e)
         {

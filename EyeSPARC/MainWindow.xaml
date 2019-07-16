@@ -660,8 +660,21 @@
                         <TextBlock Text="Data" Margin="2,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Scripting" Margin="2,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
-                    <TabControl Margin="835,5,5,5" BorderBrush="#FF87C8FA">
+
+                    <Button Name="_newProjectButton" Content="New Project" Width="20" Height="20" Click="newProjectButton_Click"/>
+
+                    <RichTextBox Margin="10,10,250,200"></RichTextBox>
+
+
+                    <TabControl Margin="835,5,5,300" BorderBrush="#FF87C8FA">
                         <TabControl.Resources>
                             <Style TargetType="TabItem">
                                 <Setter Property="Foreground" Value="Black"/>
@@ -689,60 +702,66 @@
                             </Style>
                         </TabControl.Resources>
                         <TabItem>
+
                             <TabItem.Header>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Project" Margin="2,0,0,0" VerticalAlignment="Center" />
                                 </StackPanel>
                             </TabItem.Header>
-                            <TreeView 
+                            <StackPanel Orientation="Vertical">
+                                <TreeView 
                                 BorderThickness="0"
-                                Name="projectTreeView">
-                                <TreeView.Resources>
-                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                Name="projectTreeView"
+                                Height="285">
+                                    <TreeView.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
                       Color="LightGray" />
-                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
                       Color="Black" />
-                                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
                       Color="LightGray" />
-                                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
                       Color="Black" />
-                                </TreeView.Resources>
-                                <TreeView.ItemTemplate>
+                                    </TreeView.Resources>
+                                    <TreeView.ItemTemplate>
 
-                                    <HierarchicalDataTemplate DataType="{x:Type project:EyeProject}" ItemsSource="{Binding Files}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="res/eye_other.png" Height="16" Width="16" Margin="0,0,5,0"/>
-                                            <TextBlock Text="{Binding Name}" />
-                                        </StackPanel>
-                                        <HierarchicalDataTemplate.ItemTemplate>
-                                            <HierarchicalDataTemplate DataType="{x:Type project:ProjectFile}">
-                                                <StackPanel Orientation="Horizontal">
-                                                    
-                                                    <Image Height="16" Width="16" Margin="0,0,5,0">
-                                                        <Image.Style>
-                                                            <Style TargetType="{x:Type Image}">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding FileType}" Value="CSharp">
-                                                                        <Setter Property="Source" Value="res/css_logo.ico"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding FileType}" Value="IronPython">
-                                                                        <Setter Property="Source" Value="res/py_logo.png"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding FileType}" Value="Xml">
-                                                                        <Setter Property="Source" Value="res/xml_icon.png"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Image.Style>
-                                                    </Image>
-                                                    <TextBlock Text="{Binding Name}"/>
+                                        <HierarchicalDataTemplate DataType="{x:Type project:EyeProject}" ItemsSource="{Binding Files}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="res/eye_other.png" Height="16" Width="16" Margin="0,0,5,0"/>
+                                                <TextBlock Text="{Binding Name}" />
+                                            </StackPanel>
+                                            <HierarchicalDataTemplate.ItemTemplate>
+                                                <HierarchicalDataTemplate DataType="{x:Type project:ProjectFile}">
+                                                    <StackPanel Orientation="Horizontal">
 
-                                                </StackPanel>
-                                            </HierarchicalDataTemplate>
-                                        </HierarchicalDataTemplate.ItemTemplate>
-                                    </HierarchicalDataTemplate>
-                                </TreeView.ItemTemplate>
-                            </TreeView>
+                                                        <Image Height="16" Width="16" Margin="0,0,5,0">
+                                                            <Image.Style>
+                                                                <Style TargetType="{x:Type Image}">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding FileType}" Value="CSharp">
+                                                                            <Setter Property="Source" Value="res/css_logo.ico"/>
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding FileType}" Value="IronPython">
+                                                                            <Setter Property="Source" Value="res/py_logo.png"/>
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding FileType}" Value="Xml">
+                                                                            <Setter Property="Source" Value="res/xml_icon.png"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Image.Style>
+                                                        </Image>
+                                                        <TextBlock Text="{Binding Name}"/>
+
+                                                    </StackPanel>
+                                                </HierarchicalDataTemplate>
+                                            </HierarchicalDataTemplate.ItemTemplate>
+                                        </HierarchicalDataTemplate>
+                                    </TreeView.ItemTemplate>
+                                </TreeView>
+
+                                <Button Content="Add New" Margin="0"/>
+                            </StackPanel>
                         </TabItem>
                         <TabItem>
                             <TabItem.Header>

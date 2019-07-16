@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 using System.IO;
 using System.Xml;
@@ -14,11 +15,16 @@ namespace EyeSPARC.Scripting
         public string Name { get { return _name; } }
         private string _name;
 
-        public List<ProjectFile> Files { get; set; }
+        public ObservableCollection<ProjectFile> Files { get; set; }
 
-        public EyeProject(string name)
+        public ProjectType ProjectType { get { return _projectType; } }
+        private ProjectType _projectType;
+
+
+        public EyeProject(string name, ProjectType _type)
         {
             _name = name.Replace(" ", "_");
+            _projectType = _type;
 
             if (!Directory.Exists("./projects/"))
             {
@@ -30,25 +36,47 @@ namespace EyeSPARC.Scripting
                 Directory.CreateDirectory($"./projects/{Name}/");
 
             }
-            else
-            {
-                //throw new Exception($"Project with name { Name } already exists");
-            }
 
+            Files = new ObservableCollection<ProjectFile>();
 
-            Files = new List<ProjectFile>();
+            AddNewConfigFile($"{Name}");
+            AddNewFile("script1");
 
-            File.Create($"./projects/{Name}/script1.ipy");
-            File.Create($"./projects/{Name}/script2.cs");
-            File.Create($"./projects/{Name}/{Name}.config.xml");
-
-
-
-            Files.Add(new ProjectFile($"./projects/{Name}/script1.ipy"));
-            Files.Add(new ProjectFile($"./projects/{Name}/script2.cs"));
-            Files.Add(new ProjectFile($"./projects/{Name}/{Name}.config.xml"));
 
             WriteProjectFile();
+        }
+        public bool AddNewFile(string name)
+        {
+            string extension = GetDefaultExtension(_projectType);
+            string _full = $"./project/{Name}/{name}{extension}";
+
+            if (!File.Exists(_full))
+            {
+                File.Create(_full);
+                Files.Add(new ProjectFile(_full));
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool AddNewConfigFile(string name)
+        {
+            string _full = $"./project/{Name}/{name}.config.xml";
+
+            if (!File.Exists(_full))
+            {
+                File.Create(_full);
+                Files.Add(new ProjectFile(_full));
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public void WriteProjectFile()
         {
@@ -79,5 +107,49 @@ namespace EyeSPARC.Scripting
 
             _writer.Flush();
         }
+        public static bool Exists(string Name)
+        {
+            return Directory.Exists($"./projects/{Name.Replace(" ", "_")}/");
+        }
+
+        public static string GetDefaultExtension(FileType _t)
+        {
+            if (_t == FileType.CSharp)
+            {
+                return ".cs";
+            }
+            else if (_t == FileType.IronPython)
+            {
+                return ".py";
+            }
+            else if (_t == FileType.Xml)
+            {
+                return ".xml";
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public static string GetDefaultExtension(ProjectType _t)
+        {
+            if (_t == ProjectType.CSharp)
+            {
+                return ".cs";
+            }
+            else if (_t == ProjectType.IronPython)
+            {
+                return ".py";
+            }
+            else
+            {
+                return "";
+            }
+        }
+    }
+    public enum ProjectType
+    {
+        IronPython,
+        CSharp
     }
 }
