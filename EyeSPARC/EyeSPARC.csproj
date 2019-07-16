@@ -83,8 +83,9 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scripting\EyeScript.cs" />
     <Compile Include="Scripting\ScriptFactory.cs" />
+    <Compile Include="Scripting\EyeProject.cs" />
+    <Compile Include="Scripting\ProjectFile.cs" />
     <Compile Include="SplashScreenWindow.xaml.cs">
       <DependentUpon>SplashScreenWindow.xaml</DependentUpon>
     </Compile>
@@ -154,6 +155,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\eye_splashscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\css_logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\py_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\xml_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\eye_other.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

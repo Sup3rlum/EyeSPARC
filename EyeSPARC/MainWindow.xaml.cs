@@ -24,6 +24,7 @@ using LiveCharts.Defaults;
 using EyeAPI;
 using EyeAPI.Data;
 
+using EyeSPARC.Scripting;
 
 namespace EyeSPARC
 {
@@ -55,12 +56,17 @@ namespace EyeSPARC
         {
             InitializeComponent();
 
+
+            EyeProject _proj = new EyeProject("test");
+
+            projectTreeView.ItemsSource = new List<EyeProject>() { _proj };
         }
         public void LoadNetworkItems()
         {
             /*_network.Load();
 
             Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });*/
+
         }
 
         private async void NetworkTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
