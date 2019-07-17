@@ -671,7 +671,6 @@
 
                     <Button Name="_newProjectButton" Content="New Project" Width="20" Height="20" Click="newProjectButton_Click"/>
 
-                    <RichTextBox Margin="10,10,250,200"></RichTextBox>
 
 
                     <TabControl Margin="835,5,5,300" BorderBrush="#FF87C8FA">

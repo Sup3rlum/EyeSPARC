@@ -156,6 +156,10 @@
       <Project>{620a3e56-0154-4b6b-bd00-bf3cd4cba1ca}</Project>
       <Name>EyeAPI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EyeSyntaxHighlighter\EyeSyntaxHighlighter.csproj">
+      <Project>{c20f7462-5f99-4074-b6fc-c44881709285}</Project>
+      <Name>EyeSyntaxHighlighter</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\reload.png" />

@@ -27,7 +27,7 @@ namespace EyeSyntaxHighlighter
         {
             Highlighters = new Dictionary<string, IHighlighter>();
 
-            var gfdgd = Application.GetResourceStream(new Uri("pack://application:,,,/AurelienRibon.Ui.SyntaxHighlightBox;component/resources/syntax.xsd"));
+            var gfdgd = Application.GetResourceStream(new Uri("pack://application:,,,/EyeSyntaxHighlighter;component/resources/syntax.xsd"));
             var schemaStream = gfdgd.Stream;
             XmlSchema schema = XmlSchema.Read(schemaStream, (s, e) => {
                 Debug.WriteLine("Xml schema validation error : " + e.Message);
