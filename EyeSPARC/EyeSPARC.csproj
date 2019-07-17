@@ -80,26 +80,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AboutWindow.xaml.cs">
+    <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProjectCreationWindow.xaml.cs">
+    <Compile Include="Windows\ProjectCreationWindow.xaml.cs">
       <DependentUpon>ProjectCreationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scripting\ScriptFactory.cs" />
     <Compile Include="Scripting\EyeProject.cs" />
     <Compile Include="Scripting\ProjectFile.cs" />
-    <Compile Include="SplashScreenWindow.xaml.cs">
+    <Compile Include="Windows\SplashScreenWindow.xaml.cs">
       <DependentUpon>SplashScreenWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StationConfigWindow.xaml.cs">
+    <Compile Include="Windows\StationConfigWindow.xaml.cs">
       <DependentUpon>StationConfigWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AboutWindow.xaml">
+    <Page Include="Windows\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -107,19 +107,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProjectCreationWindow.xaml">
+    <Page Include="Windows\ProjectCreationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SplashScreenWindow.xaml">
+    <Page Include="Windows\SplashScreenWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StationConfigWindow.xaml">
+    <Page Include="Windows\StationConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,25 +162,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\reload.png" />
+    <Resource Include="Windows\resources\reload.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\eye_splashscreen.png" />
+    <Resource Include="Windows\resources\eye_splashscreen.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\css_logo.ico" />
+    <Resource Include="Windows\resources\css_logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\py_logo.png" />
+    <Resource Include="Windows\resources\py_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\xml_icon.png" />
+    <Resource Include="Windows\resources\xml_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\eye_other.png" />
+    <Resource Include="Windows\resources\eye_other.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\csharp_logo.png" />
+    <Resource Include="Windows\resources\csharp_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

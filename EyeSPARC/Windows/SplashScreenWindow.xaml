@@ -19,7 +19,7 @@
     <Grid>
         <Border CornerRadius="8" Margin="15">
             <Border.Background>
-                <ImageBrush ImageSource="res\eye_splashscreen.png" 
+                <ImageBrush ImageSource="resources/eye_splashscreen.png" 
                         Stretch="Fill" />
             </Border.Background>
         </Border>

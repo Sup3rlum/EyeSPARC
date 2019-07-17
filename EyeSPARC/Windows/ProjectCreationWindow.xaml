@@ -9,7 +9,7 @@
     <Grid Background="GhostWhite">
 
 
-        <Image Margin="40,30,190,100" Source="res/csharp_logo.png">
+        <Image Margin="40,30,190,100" Source="resources/csharp_logo.png">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Style.Triggers>
@@ -25,7 +25,7 @@
             </Image.Style>
         </Image>
 
-        <Image Margin="190,35,40,100" Source="res/py_logo.png" >
+        <Image Margin="190,35,40,100" Source="resources/py_logo.png" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Style.Triggers>
