@@ -12,7 +12,7 @@
         Title="EyeSPARC" Height="768" Width="1366" Background="#FF363636">
     <Grid>
 
-            <DockPanel Background="#20272f">
+        <DockPanel Background="#20272f">
             <Menu DockPanel.Dock="Top" Background="GhostWhite">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New"  BorderThickness="0"/>

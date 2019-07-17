@@ -89,6 +89,9 @@
     <Compile Include="Scripting\ScriptFactory.cs" />
     <Compile Include="Scripting\EyeProject.cs" />
     <Compile Include="Scripting\ProjectFile.cs" />
+    <Compile Include="Windows\ScriptEditorWindow.xaml.cs">
+      <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SplashScreenWindow.xaml.cs">
       <DependentUpon>SplashScreenWindow.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\ProjectCreationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ScriptEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Windows\resources\csharp_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
