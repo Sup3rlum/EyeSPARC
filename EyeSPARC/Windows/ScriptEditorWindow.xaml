@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyeSPARC.Windows"
+        xmlns:scripting="clr-namespace:EyeSPARC.Scripting"
         mc:Ignorable="d"
         Title="EyeScriptEditor" Height="768" Width="1366">
     <Window.Resources>
@@ -38,6 +39,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="TabControl">
+            <Setter Property="BorderBrush" Value="#FF87C8FA"/>
+        </Style>
     </Window.Resources>
     <Grid>
 
@@ -59,8 +63,67 @@
 
         </ToolBar>
 
-        <TabControl Name="_mainTabcontrol" Margin="5,50,240,5">
+        <DockPanel Margin="5,50,5,5">
+            <TabControl Name="_projectTabcontrol" Width="200" DockPanel.Dock="Right">
+                <TabItem Header="Files">
+                    <TreeView 
+                    BorderThickness="0"
+                    Name="projectTreeView">
+                        <TreeView.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                      Color="LightGray" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+                      Color="Black" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                      Color="LightGray" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
+                      Color="Black" />
+                        </TreeView.Resources>
 
-        </TabControl>
+                        <TreeView.ItemTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type scripting:EyeProject}" ItemsSource="{Binding Files}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="resources/eye_other.png" Height="16" Width="16" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <HierarchicalDataTemplate DataType="{x:Type scripting:EyeProjectFile}">
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <Image Height="16" Width="16" Margin="0,0,5,0">
+                                                <Image.Style>
+                                                    <Style TargetType="{x:Type Image}">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding FileType}" Value="CSharp">
+                                                                <Setter Property="Source" Value="resources/css_logo.ico"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding FileType}" Value="IronPython">
+                                                                <Setter Property="Source" Value="resources/py_logo.png"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding FileType}" Value="Xml">
+                                                                <Setter Property="Source" Value="resources/xml_icon.png"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <TextBlock Text="{Binding Name}"/>
+
+                                        </StackPanel>
+                                    </HierarchicalDataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </TabItem>
+                <TabItem Header="Properties">
+
+                </TabItem>
+            </TabControl>
+
+            <TabControl Name="_mainTabcontrol"  Margin="0,0,5,0"/>
+            
+        </DockPanel>
     </Grid>
 </Window>

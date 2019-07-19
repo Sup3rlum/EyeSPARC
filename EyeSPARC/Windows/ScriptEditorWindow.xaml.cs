@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 using EyeSPARC.Scripting;
 
@@ -33,8 +34,10 @@ namespace EyeSPARC.Windows
 
             foreach (var v in _currentProject.Files)
             {
-                _mainTabcontrol.Items.Add(new TabItem() { Header = v.Name });
+                _mainTabcontrol.Items.Add(new TabItem() { Header = v.Name, Content = new TextBox() { Text = v.Content } });
             }
+
+            projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _proj };
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:local="clr-namespace:EyeSPARC"
-        xmlns:project="clr-namespace:EyeSPARC.Scripting"
+        xmlns:scripting="clr-namespace:EyeSPARC.Scripting"
         xmlns:eye="clr-namespace:EyeAPI;assembly=EyeAPI"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
@@ -724,13 +724,13 @@
                                     </TreeView.Resources>
                                     <TreeView.ItemTemplate>
 
-                                        <HierarchicalDataTemplate DataType="{x:Type project:EyeProject}" ItemsSource="{Binding Files}">
+                                        <HierarchicalDataTemplate DataType="{x:Type scripting:EyeProject}" ItemsSource="{Binding Files}">
                                             <StackPanel Orientation="Horizontal">
-                                                <Image Source="res/eye_other.png" Height="16" Width="16" Margin="0,0,5,0"/>
+                                                <Image Source="resources/eye_other.png" Height="16" Width="16" Margin="0,0,5,0"/>
                                                 <TextBlock Text="{Binding Name}" />
                                             </StackPanel>
                                             <HierarchicalDataTemplate.ItemTemplate>
-                                                <HierarchicalDataTemplate DataType="{x:Type project:EyeProjectFile}">
+                                                <HierarchicalDataTemplate DataType="{x:Type scripting:EyeProjectFile}">
                                                     <StackPanel Orientation="Horizontal">
 
                                                         <Image Height="16" Width="16" Margin="0,0,5,0">
@@ -738,13 +738,13 @@
                                                                 <Style TargetType="{x:Type Image}">
                                                                     <Style.Triggers>
                                                                         <DataTrigger Binding="{Binding FileType}" Value="CSharp">
-                                                                            <Setter Property="Source" Value="res/css_logo.ico"/>
+                                                                            <Setter Property="Source" Value="resources/css_logo.ico"/>
                                                                         </DataTrigger>
                                                                         <DataTrigger Binding="{Binding FileType}" Value="IronPython">
-                                                                            <Setter Property="Source" Value="res/py_logo.png"/>
+                                                                            <Setter Property="Source" Value="resources/py_logo.png"/>
                                                                         </DataTrigger>
                                                                         <DataTrigger Binding="{Binding FileType}" Value="Xml">
-                                                                            <Setter Property="Source" Value="res/xml_icon.png"/>
+                                                                            <Setter Property="Source" Value="resources/xml_icon.png"/>
                                                                         </DataTrigger>
                                                                     </Style.Triggers>
                                                                 </Style>

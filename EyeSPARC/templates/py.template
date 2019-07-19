@@ -1,0 +1,11 @@
+﻿import clr
+
+from clr import System
+from clr import System.Text
+from clr import System.Collections.Generic
+from clr import System.Linq
+from clr import System.IO
+
+
+def __eyeInnit__():
+	printf("Hello world!")

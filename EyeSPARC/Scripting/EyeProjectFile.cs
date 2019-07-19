@@ -20,6 +20,8 @@ namespace EyeSPARC.Scripting
 
         public string Extension { get { return Path.GetExtension(_filepath); } }
 
+        public string Content { get; set; }
+
         public EyeProjectFile(string filepath)
         {
 
@@ -39,6 +41,12 @@ namespace EyeSPARC.Scripting
                 _fileType = FileType.Xml;
             }
         }
+
+        public void Save()
+        {
+            File.WriteAllText(_filepath, Content);
+        }
+
     }
 
     public enum FileType

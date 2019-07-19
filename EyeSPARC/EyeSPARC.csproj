@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Scripting\Templates.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -154,6 +155,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="templates\cs.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\py.template" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -162,14 +167,6 @@
     <ProjectReference Include="..\EyeAPI\EyeAPI.csproj">
       <Project>{620a3e56-0154-4b6b-bd00-bf3cd4cba1ca}</Project>
       <Name>EyeAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EyeDataTools\EyeTools.fsproj">
-      <Project>{56ae3616-418a-4f63-9889-50765f7bd315}</Project>
-      <Name>EyeTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EyeSyntaxHighlighter\EyeSyntaxHighlighter.fsproj">
-      <Project>{b133e47e-d5ef-45cb-8b6d-8f8eb541e0b8}</Project>
-      <Name>EyeSyntaxHighlighter</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
