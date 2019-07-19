@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using EyeSPARC.Scripting;
+
 namespace EyeSPARC.Windows
 {
     /// <summary>
@@ -20,11 +22,19 @@ namespace EyeSPARC.Windows
     public partial class ScriptEditorWindow : Window
     {
 
+        EyeProject _currentProject;
 
-
-        public ScriptEditorWindow()
+        public ScriptEditorWindow(EyeProject _proj)
         {
             InitializeComponent();
+
+            _currentProject = _proj;
+
+
+            foreach (var v in _currentProject.Files)
+            {
+                _mainTabcontrol.Items.Add(new TabItem() { Header = v.Name });
+            }
         }
     }
 }

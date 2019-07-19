@@ -48,7 +48,7 @@ namespace EyeSPARC.Scripting
         public bool AddNewFile(string name)
         {
             string extension = GetDefaultExtension(_projectType);
-            string _full = $"./project/{Name}/{name}{extension}";
+            string _full = $"./projects/{Name}/{name}{extension}";
 
             if (!File.Exists(_full))
             {
@@ -64,7 +64,7 @@ namespace EyeSPARC.Scripting
         }
         public bool AddNewConfigFile(string name)
         {
-            string _full = $"./project/{Name}/{name}.config.xml";
+            string _full = $"./projects/{Name}/{name}.config.xml";
 
             if (!File.Exists(_full))
             {

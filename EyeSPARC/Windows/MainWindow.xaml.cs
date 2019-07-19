@@ -26,7 +26,7 @@ using EyeAPI.Data;
 
 using EyeSPARC.Scripting;
 
-namespace EyeSPARC
+namespace EyeSPARC.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -386,6 +386,14 @@ namespace EyeSPARC
         }
 
         ShowDataSheet _eventtime, _pulseheight, _pulseintegral, _singleslow, _singleshigh, _singlesratelow, _singlesratehigh;
+
+        ScriptEditorWindow _scriptEditor;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _scriptEditor = new ScriptEditorWindow(_currentProject);
+            _scriptEditor.Show();
+        }
 
         private void newProjectButton_Click(object sender, RoutedEventArgs e)
         {

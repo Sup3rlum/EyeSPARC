@@ -28,13 +28,11 @@ namespace EyeSPARC
         MainWindow _mainWindow;
         SplashScreenWindow _splashWindow;
 
-        ScriptEditorWindow _scriptEditor;
-
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
             _mainWindow = new MainWindow();
             _splashWindow = new SplashScreenWindow();
-            _scriptEditor = new ScriptEditorWindow();
+
 
             _splashWindow.Show();
 
@@ -43,8 +41,6 @@ namespace EyeSPARC
             _splashWindow.Close();
             _mainWindow.Show();
 
-
-            _scriptEditor.Show();
 
         }
     }

@@ -163,8 +163,12 @@
       <Project>{620a3e56-0154-4b6b-bd00-bf3cd4cba1ca}</Project>
       <Name>EyeAPI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EyeSyntaxHighlighter\EyeSyntaxHighlighter.csproj">
-      <Project>{c20f7462-5f99-4074-b6fc-c44881709285}</Project>
+    <ProjectReference Include="..\EyeDataTools\EyeTools.fsproj">
+      <Project>{56ae3616-418a-4f63-9889-50765f7bd315}</Project>
+      <Name>EyeTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeSyntaxHighlighter\EyeSyntaxHighlighter.fsproj">
+      <Project>{b133e47e-d5ef-45cb-8b6d-8f8eb541e0b8}</Project>
       <Name>EyeSyntaxHighlighter</Name>
     </ProjectReference>
   </ItemGroup>
