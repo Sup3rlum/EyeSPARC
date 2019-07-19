@@ -15,7 +15,7 @@ namespace EyeSPARC.Scripting
         public string Name { get { return _name; } }
         private string _name;
 
-        public ObservableCollection<ProjectFile> Files { get; set; }
+        public ObservableCollection<EyeProjectFile> Files { get; set; }
 
         public ProjectType ProjectType { get { return _projectType; } }
         private ProjectType _projectType;
@@ -37,7 +37,7 @@ namespace EyeSPARC.Scripting
 
             }
 
-            Files = new ObservableCollection<ProjectFile>();
+            Files = new ObservableCollection<EyeProjectFile>();
 
             AddNewConfigFile($"{Name}");
             AddNewFile("script1");
@@ -53,7 +53,7 @@ namespace EyeSPARC.Scripting
             if (!File.Exists(_full))
             {
                 File.Create(_full);
-                Files.Add(new ProjectFile(_full));
+                Files.Add(new EyeProjectFile(_full));
 
                 return true;
             }
@@ -69,7 +69,7 @@ namespace EyeSPARC.Scripting
             if (!File.Exists(_full))
             {
                 File.Create(_full);
-                Files.Add(new ProjectFile(_full));
+                Files.Add(new EyeProjectFile(_full));
 
                 return true;
             }

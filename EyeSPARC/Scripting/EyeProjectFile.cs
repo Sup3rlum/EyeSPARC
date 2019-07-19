@@ -7,7 +7,7 @@ using System.IO;
 
 namespace EyeSPARC.Scripting
 {
-    public class ProjectFile
+    public class EyeProjectFile
     {
 
         public string Name { get { return Path.GetFileName(_filepath); } }
@@ -20,7 +20,7 @@ namespace EyeSPARC.Scripting
 
         public string Extension { get { return Path.GetExtension(_filepath); } }
 
-        public ProjectFile(string filepath)
+        public EyeProjectFile(string filepath)
         {
 
             _filepath = filepath;

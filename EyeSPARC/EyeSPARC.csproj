@@ -88,7 +88,7 @@
     </Compile>
     <Compile Include="Scripting\ScriptFactory.cs" />
     <Compile Include="Scripting\EyeProject.cs" />
-    <Compile Include="Scripting\ProjectFile.cs" />
+    <Compile Include="Scripting\EyeProjectFile.cs" />
     <Compile Include="Windows\ScriptEditorWindow.xaml.cs">
       <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
     </Compile>
