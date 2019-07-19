@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using EyeSPARC.Windows;
+using EyeSPARC.Scripting;
 
 namespace EyeSPARC
 {
@@ -30,6 +31,8 @@ namespace EyeSPARC
 
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
+            Templates.LoadAll();
+
             _mainWindow = new MainWindow();
             _splashWindow = new SplashScreenWindow();
 

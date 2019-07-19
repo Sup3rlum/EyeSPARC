@@ -12,6 +12,7 @@ namespace EyeSPARC.Scripting
     {
 
         private static string _csharp;
+        private static string _py;
 
         public static void LoadAll()
         {
@@ -22,9 +23,23 @@ namespace EyeSPARC.Scripting
 
             if (File.Exists("./templates/py.template"))
             {
-                _csharp = File.ReadAllText("./templates/py.template");
+                _py = File.ReadAllText("./templates/py.template");
             }
         }
-
+        public static string GetContent(FileType _type, string projectname, string filename)
+        {
+            if (_type == FileType.CSharp)
+            {
+                return _csharp.Replace("$project_name$", projectname).Replace("$file_name$", filename);
+            }
+            else if (_type == FileType.IronPython)
+            {
+                return _py;
+            }
+            else
+            {
+                return "<xml></xml>";
+            }
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace EyeSPARC.Scripting
 
             if (!File.Exists(_full))
             {
-                File.Create(_full);
+                File.WriteAllText(_full, Templates.GetContent(GetDefaultType(_projectType), Name, name));
                 Files.Add(new EyeProjectFile(_full));
 
                 return true;
@@ -144,6 +144,17 @@ namespace EyeSPARC.Scripting
             else
             {
                 return "";
+            }
+        }
+        public FileType GetDefaultType(ProjectType _type)
+        {
+            if (_type == ProjectType.CSharp)
+            {
+                return FileType.CSharp;
+            }
+            else
+            {
+                return FileType.IronPython;
             }
         }
     }
