@@ -68,7 +68,7 @@ namespace EyeSPARC.Scripting
 
             if (!File.Exists(_full))
             {
-                File.Create(_full);
+                File.Create(_full).Close();
                 Files.Add(new EyeProjectFile(_full));
 
                 return true;

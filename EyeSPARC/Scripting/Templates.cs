@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.IO;
 
 
@@ -20,10 +21,18 @@ namespace EyeSPARC.Scripting
             {
                 _csharp = File.ReadAllText("./templates/cs.template");
             }
+            else
+            {
+                MessageBox.Show("Could not find file template, empty file will be created");
+            }
 
             if (File.Exists("./templates/py.template"))
             {
                 _py = File.ReadAllText("./templates/py.template");
+            }
+            else
+            {
+                MessageBox.Show("Could not find file template, empty file will be created");
             }
         }
         public static string GetContent(FileType _type, string projectname, string filename)

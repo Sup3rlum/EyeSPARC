@@ -40,6 +40,8 @@ namespace EyeSPARC.Scripting
             {
                 _fileType = FileType.Xml;
             }
+
+            Content = File.ReadAllText(filepath);
         }
 
         public void Save()

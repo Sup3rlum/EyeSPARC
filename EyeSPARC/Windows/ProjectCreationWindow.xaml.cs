@@ -56,11 +56,13 @@ namespace EyeSPARC
 
         private void ProjectTypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems[0].ToString() == "C#")
+            Console.WriteLine(((ComboBoxItem)e.AddedItems[0]).Content.ToString());
+
+            if (((ComboBoxItem)e.AddedItems[0]).Content.ToString() == "C#")
             {
                 SelectedProjectType = ProjectType.CSharp;
             }
-            else if (e.AddedItems[0].ToString() == "IronPython")
+            else if (((ComboBoxItem)e.AddedItems[0]).Content.ToString() == "IronPython")
             {
                 SelectedProjectType = ProjectType.IronPython;
             }
