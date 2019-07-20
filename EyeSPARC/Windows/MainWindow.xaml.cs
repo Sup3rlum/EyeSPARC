@@ -57,7 +57,7 @@ namespace EyeSPARC.Windows
         {
             InitializeComponent();
 
-            projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _currentProject };
+            //projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _currentProject };
         }
         public void LoadNetworkItems()
         {
@@ -391,6 +391,7 @@ namespace EyeSPARC.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             _scriptEditor = new ScriptEditorWindow(_currentProject);
             _scriptEditor.Show();
         }

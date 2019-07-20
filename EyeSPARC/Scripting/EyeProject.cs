@@ -12,6 +12,9 @@ namespace EyeSPARC.Scripting
 {
     public class EyeProject
     {
+        public static readonly string Version = "1.0";
+
+
         public string Name { get { return _name; } }
         private string _name;
 
@@ -82,9 +85,13 @@ namespace EyeSPARC.Scripting
         {
             XmlWriter _writer = XmlWriter.Create($"projects/{Name}/{Name}.eyeproj", new XmlWriterSettings() { Indent = true });
 
-
             _writer.WriteStartDocument();
             _writer.WriteStartElement("EyeProject");
+
+            _writer.WriteAttributeString("Name", Name);
+            _writer.WriteAttributeString("Version", Version);
+            _writer.WriteAttributeString("Type", _projectType.ToString());
+
 
             _writer.WriteStartElement("Files");
 
@@ -156,6 +163,29 @@ namespace EyeSPARC.Scripting
             {
                 return FileType.IronPython;
             }
+        }
+        public static EyeProject Load(string filepath)
+        {
+
+            string _version;
+            string _type;
+            string _name;
+
+            XmlReader _r = XmlReader.Create(filepath);
+
+            while (_r.ReadToFollowing("EyeProject"))
+            {
+                _name = _r.GetAttribute("Name");
+                _version = _r.GetAttribute("Version");
+                _type = _r.GetAttribute("Type");
+
+                if (_version != Version)
+                {
+                    Console.WriteLine($"Version mismatch, current version: {Version}, project version: {_version}");
+                }
+            }
+
+            EyeProject _proj = new EyeProject(_name, )
         }
     }
     public enum ProjectType

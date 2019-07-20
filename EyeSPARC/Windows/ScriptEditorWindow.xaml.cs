@@ -17,13 +17,13 @@ using EyeSPARC.Scripting;
 
 namespace EyeSPARC.Windows
 {
-    /// <summary>
-    /// Interaction logic for ScriptEditorWindow.xaml
-    /// </summary>
     public partial class ScriptEditorWindow : Window
     {
 
         EyeProject _currentProject;
+
+
+        TabControlViewModel _vm;
 
         public ScriptEditorWindow(EyeProject _proj)
         {
@@ -31,13 +31,37 @@ namespace EyeSPARC.Windows
 
             _currentProject = _proj;
 
+            _vm = new TabControlViewModel();
 
-            foreach (var v in _currentProject.Files)
+            DataContext = _vm;
+            
+            foreach (var v in _proj.Files)
             {
-                _mainTabcontrol.Items.Add(new TabItem() { Header = v.Name, Content = new TextBox() { Text = v.Content } });
+                _vm.Tabs.Add(new FileTabItem() { FileName = v.Name + v.Extension, Content = v.Content });
             }
 
+
             projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _proj };
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+    }
+    public sealed class FileTabItem
+    {
+        public string FileName { get; set; }
+        public string Content { get; set; }
+    }
+    public sealed class TabControlViewModel
+    {
+        public ObservableCollection<FileTabItem> Tabs { get; set; }
+        public FileTabItem SelectedTab { get; set; }
+
+        public TabControlViewModel()
+        {
+            Tabs = new ObservableCollection<FileTabItem>();
         }
     }
 }

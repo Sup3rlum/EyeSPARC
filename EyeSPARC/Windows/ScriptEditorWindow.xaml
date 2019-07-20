@@ -31,18 +31,13 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Header">
-                <Setter.Value>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="2,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Setter.Value>
-            </Setter>
+
         </Style>
         <Style TargetType="TabControl">
             <Setter Property="BorderBrush" Value="#FF87C8FA"/>
         </Style>
     </Window.Resources>
+
     <Grid>
 
         <DockPanel Background="#20272f">
@@ -60,7 +55,7 @@
 
         </DockPanel>
         <ToolBar Height="32" VerticalAlignment="Top" Margin="0,20,0,0" Background="GhostWhite">
-
+            <Button Content="Debug" Click="Button_Click"/>
         </ToolBar>
 
         <DockPanel Margin="5,50,5,5">
@@ -125,8 +120,24 @@
                 </TabItem>
             </TabControl>
 
-            <TabControl Name="_mainTabcontrol"  Margin="0,0,5,0"/>
-            
+            <TabControl Name="_mainTabcontrol"  Margin="0,0,5,0" ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTabm, Mode=TwoWay}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding FileName}" Margin="0,0,5,0"/>
+                            <Button Background="Transparent" BorderThickness="0" Width="16">
+                                <Image Source="resources/cross.png" Width="8" Height="8"/>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Content, Mode=TwoWay}" BorderThickness="0"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+
         </DockPanel>
     </Grid>
 </Window>
