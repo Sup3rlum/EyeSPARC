@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeSPARC", "EyeSPARC\EyeSPA
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EyeTools", "EyeDataTools\EyeTools.fsproj", "{56AE3616-418A-4F63-9889-50765F7BD315}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EyeSyntaxHighlighter", "EyeSyntaxHighlighter\EyeSyntaxHighlighter.fsproj", "{B133E47E-D5EF-45CB-8B6D-8F8EB541E0B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeSyntaxHighlighterBox", "EyeSyntaxHighlighterBox\EyeSyntaxHighlighterBox.csproj", "{18FD269C-CAC6-43A0-838B-2DBF52DAEF09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{56AE3616-418A-4F63-9889-50765F7BD315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56AE3616-418A-4F63-9889-50765F7BD315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56AE3616-418A-4F63-9889-50765F7BD315}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B133E47E-D5EF-45CB-8B6D-8F8EB541E0B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B133E47E-D5EF-45CB-8B6D-8F8EB541E0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B133E47E-D5EF-45CB-8B6D-8F8EB541E0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B133E47E-D5EF-45CB-8B6D-8F8EB541E0B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18FD269C-CAC6-43A0-838B-2DBF52DAEF09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18FD269C-CAC6-43A0-838B-2DBF52DAEF09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18FD269C-CAC6-43A0-838B-2DBF52DAEF09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18FD269C-CAC6-43A0-838B-2DBF52DAEF09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
