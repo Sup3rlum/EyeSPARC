@@ -402,7 +402,7 @@ namespace EyeSPARC.Windows
 
             _p.ShowDialog();
 
-            _currentProject = new EyeProject(_p.SelectedName, _p.SelectedProjectType);
+            _currentProject = EyeProject.New(_p.SelectedName, _p.SelectedProjectType);
         }
 
         private void hpWebsiteItem_Click(object sender, RoutedEventArgs e)

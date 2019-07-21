@@ -9,17 +9,21 @@ using System.IO;
 
 namespace EyeSPARC.Scripting
 {
-    public static class Templates
+    public class Templates
     {
+        public static ScriptTemplate CSharp { get; private set; }
+        public static ScriptTemplate IronPython { get; private set; }
 
-        private static string _csharp;
-        private static string _py;
 
         public static void LoadAll()
         {
             if (File.Exists("./templates/cs.template"))
             {
-                _csharp = File.ReadAllText("./templates/cs.template");
+                CSharp = new ScriptTemplate()
+                {
+                    Content = File.ReadAllText("./templates/cs.template"),
+                    TargetType = FileType.CSharp
+                };
             }
             else
             {
@@ -28,27 +32,33 @@ namespace EyeSPARC.Scripting
 
             if (File.Exists("./templates/py.template"))
             {
-                _py = File.ReadAllText("./templates/py.template");
+                IronPython = new ScriptTemplate()
+                {
+                    Content = File.ReadAllText("./templates/py.template"),
+                    TargetType = FileType.IronPython
+                };
             }
             else
             {
                 MessageBox.Show("Could not find file template, empty file will be created");
             }
         }
-        public static string GetContent(FileType _type, string projectname, string filename)
+        public static ScriptTemplate ForProject(ProjectType _pType) =>
+            _pType switch
+            {
+                ProjectType.IronPython  => IronPython,
+                ProjectType.CSharp      => CSharp,
+                _                       => CSharp
+            };
+    }
+    public class ScriptTemplate
+    {
+        public FileType TargetType { get; set; }
+        public string Content { get; set; }
+
+        public string Parse(string _projName, string _fileName)
         {
-            if (_type == FileType.CSharp)
-            {
-                return _csharp.Replace("$project_name$", projectname).Replace("$file_name$", filename);
-            }
-            else if (_type == FileType.IronPython)
-            {
-                return _py;
-            }
-            else
-            {
-                return "<xml></xml>";
-            }
+            return Content.Replace("$project_name$", _projName).Replace("$file_name$", _fileName);
         }
     }
 }

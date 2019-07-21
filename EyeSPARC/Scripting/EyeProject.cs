@@ -14,62 +14,65 @@ namespace EyeSPARC.Scripting
     {
         public static readonly string Version = "1.0";
 
-        
 
-        public string Name { get { return _name; } }
-        private string _name;
+
+        public string Name { get; private set; }
 
         public ObservableCollection<EyeProjectFile> Files { get; set; }
 
-        public ProjectType ProjectType { get { return _projectType; } }
-        private ProjectType _projectType;
+        public ProjectType ProjectType { get; private set; }
 
-
-        public EyeProject(string name, ProjectType _type)
+        public static EyeProject New(string name, ProjectType type)
         {
-            _name = name.Replace(" ", "_");
-            _projectType = _type;
+            EyeProject _proj = new EyeProject();
+
+            _proj.Name = name.Replace(" ", "_");
+            _proj.ProjectType = type;
+
 
             if (!Directory.Exists("./projects/"))
             {
                 Directory.CreateDirectory("./projects/");
 
             }
-            if (!Directory.Exists($"./projects/{Name}/"))
+            if (Directory.Exists($"./projects/{name}"))
             {
-                Directory.CreateDirectory($"./projects/{Name}/");
+                return null;
+            }
+            else
+            {
+                Directory.CreateDirectory($"./projects/{name}/");
 
             }
 
-            Files = new ObservableCollection<EyeProjectFile>();
+            _proj.Files = new ObservableCollection<EyeProjectFile>();
 
-            AddNewConfigFile($"{Name}");
-            AddNewFile("script1");
+            _proj.AddNewConfigFile($"{name}");
+            _proj.AddNewFile("script1");
 
 
-            WriteProjectFile();
+            _proj.WriteProjectFile();
+
+            return _proj;
         }
-
-        public bool AddNewFile(string name)
+        public bool AddNewFile(string filename)
         {
-            string extension = GetDefaultExtension(_projectType);
-            string _full = $"./projects/{Name}/{name}{extension}";
+            string extension = GetDefaultExtension(ProjectType);
+            string _full = $"./projects/{Name}/{filename}{extension}";
 
             if (!File.Exists(_full))
             {
-                File.WriteAllText(_full, Templates.GetContent(GetDefaultType(_projectType), Name, name));
+                File.WriteAllText(_full, Templates.ForProject(ProjectType).Parse(Name, filename));
                 Files.Add(new EyeProjectFile(_full));
 
                 return true;
             }
             else
-            {
                 return false;
-            }
         }
-        public bool AddNewConfigFile(string name)
+        public bool AddNewConfigFile(string filename)
         {
-            string _full = $"./projects/{Name}/{name}.config.xml";
+            string _full = $"./projects/{Name}/{filename}.config.xml";
 
             if (!File.Exists(_full))
             {
@@ -79,14 +82,12 @@ namespace EyeSPARC.Scripting
                 return true;
             }
             else
-            {
                 return false;
-            }
         }
         public void WriteProjectFile()
         {
             XDocument _doc =
-                new XDocument(new XElement("EyeProject", new XAttribute("Name", Name), new XAttribute("Version", Version), new XAttribute("Type", _projectType),
+                new XDocument(new XElement("EyeProject", new XAttribute("Name", Name), new XAttribute("Version", Version), new XAttribute("Type", ProjectType),
                     new XElement("Files",
                         Files.Select(p => new XElement("File", new XAttribute("Path", p.Filepath))).ToArray()
                         )
@@ -118,7 +119,7 @@ namespace EyeSPARC.Scripting
                 _                       => ""
             };
 
-        public FileType GetDefaultType(ProjectType _type) =>
+        public static FileType GetDefaultType(ProjectType _type) =>
             _type switch
             {
                 ProjectType.CSharp      => FileType.CSharp,
@@ -145,9 +146,10 @@ namespace EyeSPARC.Scripting
                 Console.WriteLine($"Version mismatch, current version: {Version}, project version: {_version}");
             }
 
+            EyeProject _proj = new EyeProject();
 
-
-            EyeProject _proj = new EyeProject(_name, (ProjectType)Enum.Parse(typeof(ProjectType), _type));
+            _proj.Name = _name;
+            _proj.ProjectType = (ProjectType)Enum.Parse(typeof(ProjectType), _type);
 
             return _proj;
         }
