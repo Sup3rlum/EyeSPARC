@@ -35,10 +35,7 @@ namespace EyeAPI.Data
         }
         public static IEnumerable<int> IntegerCast(string[] values)
         {
-            for (int i = 1; i < values.Length; i++)
-            {
-                yield return Int32.Parse(values[i]);
-            }
+            return values.Skip(1).Select(p => Int32.Parse(p));
         }
     }
     public class ShowDataSheet

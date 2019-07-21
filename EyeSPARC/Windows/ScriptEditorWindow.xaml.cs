@@ -37,7 +37,11 @@ namespace EyeSPARC.Windows
             
             foreach (var v in _proj.Files)
             {
-                _vm.Tabs.Add(new FileTabItem() { FileName = v.Name + v.Extension, Content = v.Content });
+                _vm.Tabs.Add(new FileTabItem()
+                {
+                    FileName = v.Name + v.Extension,
+                    Content = v.Content
+                });
             }
 
 

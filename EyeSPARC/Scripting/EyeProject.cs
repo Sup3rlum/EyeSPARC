@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 using System.IO;
-using System.Xml;
+using System.Xml.Linq;
 
 namespace EyeSPARC.Scripting
 {
@@ -14,6 +14,7 @@ namespace EyeSPARC.Scripting
     {
         public static readonly string Version = "1.0";
 
+        
 
         public string Name { get { return _name; } }
         private string _name;
@@ -48,6 +49,7 @@ namespace EyeSPARC.Scripting
 
             WriteProjectFile();
         }
+
         public bool AddNewFile(string name)
         {
             string extension = GetDefaultExtension(_projectType);
@@ -83,109 +85,71 @@ namespace EyeSPARC.Scripting
         }
         public void WriteProjectFile()
         {
-            XmlWriter _writer = XmlWriter.Create($"projects/{Name}/{Name}.eyeproj", new XmlWriterSettings() { Indent = true });
+            XDocument _doc =
+                new XDocument(new XElement("EyeProject", new XAttribute("Name", Name), new XAttribute("Version", Version), new XAttribute("Type", _projectType),
+                    new XElement("Files",
+                        Files.Select(p => new XElement("File", new XAttribute("Path", p.Filepath))).ToArray()
+                        )
+                    )
+                );
 
-            _writer.WriteStartDocument();
-            _writer.WriteStartElement("EyeProject");
+            _doc.Save($"projects/{Name}/{Name}.eyeproj");
 
-            _writer.WriteAttributeString("Name", Name);
-            _writer.WriteAttributeString("Version", Version);
-            _writer.WriteAttributeString("Type", _projectType.ToString());
-
-
-            _writer.WriteStartElement("Files");
-
-
-            foreach (var v in Files)
-            {
-                _writer.WriteStartElement("File");
-
-                _writer.WriteString(v.Filepath);
-
-                _writer.WriteEndElement();
-            }
-
-            _writer.WriteEndElement();
-
-            _writer.WriteEndElement();
-            _writer.WriteEndDocument();
-
-            _writer.Close();
-
-            _writer.Flush();
         }
         public static bool Exists(string Name)
         {
             return Directory.Exists($"./projects/{Name.Replace(" ", "_")}/");
         }
 
-        public static string GetDefaultExtension(FileType _t)
-        {
-            if (_t == FileType.CSharp)
+        public static string GetDefaultExtension(FileType _t) =>
+            _t switch
             {
-                return ".cs";
-            }
-            else if (_t == FileType.IronPython)
+                FileType.CSharp     => ".cs",
+                FileType.IronPython => ".py",
+                FileType.Xml        => ".xml",
+                _                   => ""
+            };
+
+        public static string GetDefaultExtension(ProjectType _t) =>
+            _t switch
             {
-                return ".py";
-            }
-            else if (_t == FileType.Xml)
+                ProjectType.CSharp      => ".cs",
+                ProjectType.IronPython  => ".py",
+                _                       => ""
+            };
+
+        public FileType GetDefaultType(ProjectType _type) =>
+            _type switch
             {
-                return ".xml";
-            }
-            else
-            {
-                return "";
-            }
-        }
-        public static string GetDefaultExtension(ProjectType _t)
-        {
-            if (_t == ProjectType.CSharp)
-            {
-                return ".cs";
-            }
-            else if (_t == ProjectType.IronPython)
-            {
-                return ".py";
-            }
-            else
-            {
-                return "";
-            }
-        }
-        public FileType GetDefaultType(ProjectType _type)
-        {
-            if (_type == ProjectType.CSharp)
-            {
-                return FileType.CSharp;
-            }
-            else
-            {
-                return FileType.IronPython;
-            }
-        }
+                ProjectType.CSharp      => FileType.CSharp,
+                ProjectType.IronPython  => FileType.IronPython,
+                _                       => FileType.CSharp,
+            };
+
+
         public static EyeProject Load(string filepath)
         {
+            XDocument _doc = XDocument.Load(filepath);
 
-            string _version;
-            string _type;
-            string _name;
 
-            XmlReader _r = XmlReader.Create(filepath);
+            var files = from p in _doc.Descendants("Files")
+                        select p.Attribute("Path").Value;
 
-            while (_r.ReadToFollowing("EyeProject"))
+            string _name        = _doc.Element("EyeProject").Attribute("Name").Value;
+            string _version     = _doc.Element("EyeProject").Attribute("Version").Value;
+            string _type        = _doc.Element("EyeProject").Attribute("Type").Value;
+
+
+            if (_version != Version)
             {
-                _name = _r.GetAttribute("Name");
-                _version = _r.GetAttribute("Version");
-                _type = _r.GetAttribute("Type");
-
-                if (_version != Version)
-                {
-                    Console.WriteLine($"Version mismatch, current version: {Version}, project version: {_version}");
-                }
+                Console.WriteLine($"Version mismatch, current version: {Version}, project version: {_version}");
             }
 
-            EyeProject _proj = new EyeProject(_name, )
+
+
+            EyeProject _proj = new EyeProject(_name, (ProjectType)Enum.Parse(typeof(ProjectType), _type));
+
+            return _proj;
         }
     }
     public enum ProjectType
