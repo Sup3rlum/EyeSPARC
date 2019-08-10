@@ -668,9 +668,10 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-
-                    <Button Name="_newProjectButton" Content="New Project" Width="20" Height="20" Click="newProjectButton_Click"/>
-
+                    <StackPanel>
+                        <Button Name="_newProjectButton" Content="New Project" Width="80" Height="20" Click="newProjectButton_Click"/>
+                        <Button Name="_openProjectButton" Content="Open Project" Width="80" Height="20" Click="openProjectButton_Click"/>
+                    </StackPanel>
 
 
                     <TabControl Margin="835,5,5,300" BorderBrush="#FF87C8FA">

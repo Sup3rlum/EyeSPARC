@@ -1,0 +1,32 @@
+﻿<Window x:Class="EyeSPARC.Windows.ProjectOpenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyeSPARC.Windows"
+        mc:Ignorable="d"
+        Title="Open Project" Height="400" Width="500"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen"
+        Topmost="True">
+    <Grid>
+        <ListView 
+            ScrollViewer.VerticalScrollBarVisibility="Auto" 
+            ItemsSource="{Binding Projects}"  
+            Margin="40,40,40,70"
+            BorderThickness="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="resources/css_logo.ico"/>
+                        <StackPanel Orientation="Vertical" Margin="5,0,0,0">
+                            <TextBlock Text="{Binding Name}" FontSize="20"/>
+                            <TextBlock Text="{Binding Path}" Foreground="DarkGray"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Name="_openButton" Content="Open" Margin="360,320,40,20" Click="_openButton_Click"/>
+    </Grid>
+</Window>

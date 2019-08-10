@@ -35,19 +35,19 @@ namespace EyeSPARC.Scripting
                 Directory.CreateDirectory("./projects/");
 
             }
-            if (Directory.Exists($"./projects/{name}"))
+            if (Directory.Exists($"./projects/{_proj.Name}"))
             {
                 return null;
             }
             else
             {
-                Directory.CreateDirectory($"./projects/{name}/");
+                Directory.CreateDirectory($"./projects/{_proj.Name}/");
 
             }
 
             _proj.Files = new ObservableCollection<EyeProjectFile>();
 
-            _proj.AddNewConfigFile($"{name}");
+            _proj.AddNewConfigFile($"{_proj.Name}");
             _proj.AddNewFile("script1");
 
 

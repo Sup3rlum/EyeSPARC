@@ -404,6 +404,13 @@ namespace EyeSPARC.Windows
 
             _currentProject = EyeProject.New(_p.SelectedName, _p.SelectedProjectType);
         }
+        private void openProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectOpenWindow _p = new ProjectOpenWindow();
+
+            _p.ShowDialog();
+
+        }
 
         private void hpWebsiteItem_Click(object sender, RoutedEventArgs e)
         {
