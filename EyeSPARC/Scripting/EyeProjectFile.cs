@@ -10,45 +10,43 @@ namespace EyeSPARC.Scripting
     public class EyeProjectFile
     {
 
-        public string Name { get { return Path.GetFileName(_filepath); } }
-        private string _filepath;
+        //  Properties
 
-        public FileType FileType { get { return _fileType; } }
-        private FileType _fileType;
+        public FileType FileType    { get; private set; }
 
-        public string Filepath { get { return _filepath; } }
+        public string   Filepath    { get; private set; }
+        public string   Content     { get; set; }
+        public string   Extension   { get => Path.GetExtension(Filepath); }
+        public string   Name        { get => Path.GetFileNameWithoutExtension(Filepath); }
 
-        public string Extension { get { return Path.GetExtension(_filepath); } }
 
-        public string Content { get; set; }
+        // Functionality
 
         public EyeProjectFile(string filepath)
         {
 
-            _filepath = filepath;
-
-
-            if (Extension == ".py" || Extension == ".ipy")
-            {
-                _fileType = FileType.IronPython;
-            }
-            else if (Extension == ".cs" || Extension == ".csharp")
-            {
-                _fileType = FileType.CSharp;
-            }
-            else if (Extension == ".xml")
-            {
-                _fileType = FileType.Xml;
-            }
+            Filepath = filepath;
+            FileType = GetType(Extension);
 
             Content = File.ReadAllText(filepath);
         }
 
         public void Save()
         {
-            File.WriteAllText(_filepath, Content);
+            File.WriteAllText(Filepath, Content);
         }
 
+
+        // Static Members
+
+        public static FileType GetType(string _e) =>
+            _e switch
+            {
+                ".py" => FileType.IronPython,
+                ".cs" => FileType.CSharp,
+                ".xml" => FileType.Xml,
+                _ => throw new ArgumentException($"File(s) with extension {_e} are not supported")
+            };
     }
 
     public enum FileType

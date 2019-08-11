@@ -20,21 +20,25 @@ namespace EyeSPARC.Windows
     public partial class ScriptEditorWindow : Window
     {
 
-        EyeProject _currentProject;
 
 
+        public EyeProject CurrentProject { get; private set; }
         TabControlViewModel _vm;
 
-        public ScriptEditorWindow(EyeProject _proj)
+        public ScriptEditorWindow()
         {
             InitializeComponent();
 
-            _currentProject = _proj;
+
+        }
+
+        public void SetProject(EyeProject _proj)
+        {
+            CurrentProject = _proj;
 
             _vm = new TabControlViewModel();
 
-            DataContext = _vm;
-            
+
             foreach (var v in _proj.Files)
             {
                 _vm.Tabs.Add(new FileTabItem()
@@ -44,7 +48,7 @@ namespace EyeSPARC.Windows
                 });
             }
 
-
+            DataContext = _vm;
             projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _proj };
         }
 
@@ -53,10 +57,14 @@ namespace EyeSPARC.Windows
            
         }
     }
+
+    // -- ViewModel
+
+
     public sealed class FileTabItem
     {
-        public string FileName { get; set; }
-        public string Content { get; set; }
+        public string FileName  { get; set; }
+        public string Content   { get; set; }
     }
     public sealed class TabControlViewModel
     {

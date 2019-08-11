@@ -57,13 +57,13 @@ namespace EyeSPARC.Windows
         {
             InitializeComponent();
 
-            //projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _currentProject };
+            projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _currentProject };
         }
         public void LoadNetworkItems()
         {
-            /*_network.Load();
+            _network.Load();
 
-            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });*/
+            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });
 
         }
 
