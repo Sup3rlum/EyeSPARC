@@ -57,13 +57,14 @@ namespace EyeSPARC.Windows
         {
             InitializeComponent();
 
+
             projectTreeView.ItemsSource = new ObservableCollection<EyeProject> { _currentProject };
         }
         public void LoadNetworkItems()
         {
-            _network.Load();
+            /*_network.Load();
 
-            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });
+            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });*/
 
         }
 
@@ -247,20 +248,20 @@ namespace EyeSPARC.Windows
             }
             else if (singleslowTab.IsSelected)
             {
-                chartTitle.Text = "Singles (per second above low treshold)";
+                chartTitle.Text = "Singles (per second above low threshold)";
 
             }
             else if (singleshighTab.IsSelected)
             {
-                chartTitle.Text = "Singles (per second above high treshold)";
+                chartTitle.Text = "Singles (per second above high threshold)";
             }
             else if (singlesratelowTab.IsSelected)
             {
-                chartTitle.Text = "Singles rate histogram (above low treshold)";
+                chartTitle.Text = "Singles rate histogram (above low threshold)";
             }
             else if (singlesratehighTab.IsSelected)
             {
-                chartTitle.Text = "Singles rate histogram (above high treshold)";
+                chartTitle.Text = "Singles rate histogram (above high threshold)";
             }
         }
         public void DownloadShowData(Station _st)
@@ -392,8 +393,7 @@ namespace EyeSPARC.Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            _scriptEditor = new ScriptEditorWindow(_currentProject);
-            _scriptEditor.Show();
+
         }
 
         private void newProjectButton_Click(object sender, RoutedEventArgs e)
@@ -403,12 +403,23 @@ namespace EyeSPARC.Windows
             _p.ShowDialog();
 
             _currentProject = EyeProject.New(_p.SelectedName, _p.SelectedProjectType);
+
+
+            _scriptEditor = new ScriptEditorWindow();
+            _scriptEditor.SetProject(_currentProject);
+            _scriptEditor.Show();
         }
         private void openProjectButton_Click(object sender, RoutedEventArgs e)
         {
             ProjectOpenWindow _p = new ProjectOpenWindow();
 
             _p.ShowDialog();
+
+            _currentProject = EyeProject.Load(_p.ChosenPath);
+
+            _scriptEditor = new ScriptEditorWindow();
+            _scriptEditor.SetProject(_currentProject);
+            _scriptEditor.Show();
 
         }
 

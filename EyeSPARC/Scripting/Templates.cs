@@ -17,11 +17,11 @@ namespace EyeSPARC.Scripting
 
         public static void LoadAll()
         {
-            if (File.Exists("./templates/cs.template"))
+            if (File.Exists(Environment.TemplatesFolderPath + "cs.template"))
             {
                 CSharp = new ScriptTemplate()
                 {
-                    Content = File.ReadAllText("./templates/cs.template"),
+                    Content = File.ReadAllText(Environment.TemplatesFolderPath + "cs.template"),
                     TargetType = FileType.CSharp
                 };
             }
@@ -30,11 +30,11 @@ namespace EyeSPARC.Scripting
                 MessageBox.Show("Could not find file template, empty file will be created");
             }
 
-            if (File.Exists("./templates/py.template"))
+            if (File.Exists(Environment.TemplatesFolderPath + "py.template"))
             {
                 IronPython = new ScriptTemplate()
                 {
-                    Content = File.ReadAllText("./templates/py.template"),
+                    Content = File.ReadAllText(Environment.TemplatesFolderPath + "py.template"),
                     TargetType = FileType.IronPython
                 };
             }

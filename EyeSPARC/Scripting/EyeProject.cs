@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 using System.IO;
+using System.Windows;
 using System.Xml.Linq;
+using Microsoft.Scripting.Utils;
 
 namespace EyeSPARC.Scripting
 {
@@ -28,7 +30,7 @@ namespace EyeSPARC.Scripting
         public bool AddNewFile(string filename)
         {
             string _extension = GetDefaultExtension(ProjectType);
-            string _full = $"./projects/{Name}/{filename}{_extension}";
+            string _full = Environment.ProjectFolderPath + $"{Name}\\{filename}{_extension}";
 
             if (!File.Exists(_full))
             {
@@ -42,7 +44,7 @@ namespace EyeSPARC.Scripting
         }
         public bool AddConfigFile(string filename)
         {
-            string _full = $"./projects/{Name}/{filename}.config.xml";
+            string _full = Environment.ProjectFolderPath + $"{Name}\\{filename}.config.xml";
 
             if (!File.Exists(_full))
             {
@@ -64,7 +66,7 @@ namespace EyeSPARC.Scripting
                     )
                 );
 
-            _doc.Save($"projects/{Name}/{Name}.eyeproj");
+            _doc.Save(Environment.ProjectFolderPath + $"{Name}\\{Name}.eyeproj");
 
         }
 
@@ -87,8 +89,15 @@ namespace EyeSPARC.Scripting
             XDocument _doc = XDocument.Load(filepath);
 
 
-            var files = from p in _doc.Descendants("Files")
+            if (_doc.Element("EyeProject") == null)
+            {
+                MessageBox.Show($"Invalid project file {filepath}");
+                return null;
+            }
+
+            var files = from p in _doc.Element("EyeProject").Element("Files").Descendants()
                         select p.Attribute("Path").Value;
+
 
             string _name        = _doc.Element("EyeProject").Attribute("Name").Value;
             string _version     = _doc.Element("EyeProject").Attribute("Version").Value;
@@ -105,6 +114,9 @@ namespace EyeSPARC.Scripting
             _proj.Name = _name;
             _proj.ProjectType = (ProjectType)Enum.Parse(typeof(ProjectType), _type);
 
+            _proj.Files = new ObservableCollection<EyeProjectFile>();
+            _proj.Files.AddRange(files.Select(f => new EyeProjectFile(f)));
+
             return _proj;
         }
 
@@ -116,20 +128,18 @@ namespace EyeSPARC.Scripting
             _proj.ProjectType = type;
 
 
-            if (!Directory.Exists("./projects/"))
+            if (!Directory.Exists(Environment.ProjectFolderPath))
             {
-                Directory.CreateDirectory("./projects/");
+                Directory.CreateDirectory(Environment.ProjectFolderPath);
             }
 
-            if (Directory.Exists($"./projects/{_proj.Name}"))
+            if (Directory.Exists(Environment.ProjectFolderPath + _proj.Name))
             {
+                MessageBox.Show($"A project file with the name {name} already exists!");
                 return null;
             }
-            else
-            {
-                Directory.CreateDirectory($"./projects/{_proj.Name}/");
 
-            }
+            Directory.CreateDirectory(Environment.ProjectFolderPath + _proj.Name);
 
             _proj.Files = new ObservableCollection<EyeProjectFile>();
 
@@ -150,7 +160,7 @@ namespace EyeSPARC.Scripting
 
         public static bool Exists(string Name)
         {
-            return Directory.Exists($"./projects/{Name.Replace(" ", "_")}/");
+            return Directory.Exists(Environment.ProjectFolderPath + Name.Replace(" ", "_"));
         }
 
         public static string GetExtension(FileType _t) =>

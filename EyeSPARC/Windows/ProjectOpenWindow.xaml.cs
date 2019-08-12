@@ -22,13 +22,17 @@ namespace EyeSPARC.Windows
     /// </summary>
     public partial class ProjectOpenWindow : Window
     {
-        public string Chosen { get; set; }
+        public string ChosenName { get; set; }
+        public string ChosenPath { get; set; }
+        public ProjectType ChosenType { get; set; }
+
+        private ListViewViewModel _listViewViewModel;
 
         public ProjectOpenWindow()
         {
             InitializeComponent();
 
-            ListViewViewModel vm = new ListViewViewModel();
+            _listViewViewModel = new ListViewViewModel();
 
 
             var _dirs = Directory.GetDirectories("./projects/");
@@ -41,19 +45,38 @@ namespace EyeSPARC.Windows
                 {
                     if (Path.GetExtension(p) == ".eyeproj")
                     {
-                        vm.Projects.Add(new ListViewItemModel() { Path = p, Name = Path.GetFileNameWithoutExtension(p).Replace("_", " ") });
+                        _listViewViewModel.Projects.Add(new ListViewItemModel() { Path = p, Name = Path.GetFileNameWithoutExtension(p).Replace("_", " ") });
                     }
                 }
             }
 
-            DataContext = vm;
+            DataContext = _listViewViewModel;
         }
 
         private void _openButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (ListView.SelectedItem != null)
+            {
+                ChosenName = ((ListViewItemModel) ListView.SelectedItem).Name;
+                ChosenPath = ((ListViewItemModel) ListView.SelectedItem).Path;
+                ChosenType = ((ListViewItemModel) ListView.SelectedItem).Type;
+
+
+              /*  Console.WriteLine(ChosenName);
+                Console.WriteLine(ChosenPath);
+                Console.WriteLine(ChosenType);*/
+
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please select a project");
+            }
         }
     }
+
+    // --- ViewModel
+
     public sealed class ListViewViewModel
     {
         public ObservableCollection<ListViewItemModel> Projects { get; set; }
@@ -66,7 +89,7 @@ namespace EyeSPARC.Windows
     }
     public sealed class ListViewItemModel
     {
-        ProjectType Type { get; set; }
+        public ProjectType Type { get; set; }
         public string Path { get; set; }
         public string Name { get; set; }
     }

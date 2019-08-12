@@ -5,56 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyeSPARC"
         mc:Ignorable="d"
-        Title="New EyeProject" Height="320" Width="400">
+        Title="New EyeProject" Height="320" Width="460">
     <Grid Background="GhostWhite">
 
+        <TextBlock Text="Create new EyeProject..." FontSize="22" Margin="50,25"/>
 
-        <Image Margin="40,30,190,100" Source="resources/csharp_logo.png">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect Direction="325" Color="#FFB6C2CB" ShadowDepth="8" BlurRadius="14" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
+            <StackPanel Orientation="Vertical" Margin="50,80,20,10" HorizontalAlignment="Left">
 
-        <Image Margin="190,35,40,100" Source="resources/py_logo.png" >
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect Direction="325" Color="#FFB6C2CB" ShadowDepth="8" BlurRadius="14" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-
-
-        <StackPanel Orientation="Vertical" Margin="50,180,40,10">
             <TextBlock Text="Project Type:" Margin="0,0,0,5"/>
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Name="projectTypeBox" Width="210" Margin="0,0,15,0" SelectionChanged="ProjectTypeBox_SelectionChanged">
+            <ComboBox Name="projectTypeBox" Width="350" Margin="0,0,15,0" SelectionChanged="ProjectTypeBox_SelectionChanged">
                     <ComboBoxItem Content="IronPython"/>
                     <ComboBoxItem Content="C#"/>
-                </ComboBox>
-            </StackPanel>
+            </ComboBox>
+
             <TextBlock Text="Project Name:" Margin="0,0,0,5"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBox Name="projectNameTextBox" Width="210" Margin="0,0,15,0"/>
-                <Button Content="Create" Width="60" Click="Button_Click"/>
-            </StackPanel>
+            <TextBox Name="projectNameTextBox" Width="350" Margin="0,0,15,0"/>
+
+            <TextBlock Text="Project Path:" Margin="0,0,0,5"/>
+            <TextBox Name="projectPathTextBox" Width="350" Margin="0,0,15,0" IsEnabled="False"/>
+
+            <Button Content="Create" Width="60" Margin="0,25,0,0" Click="Button_Click" HorizontalAlignment="Left"/>
+
 
         </StackPanel>
     </Grid>

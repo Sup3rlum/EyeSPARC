@@ -83,7 +83,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\CSVParser.cs" />
+    <Compile Include="Data\Parser.cs" />
+    <Compile Include="Environment.cs" />
     <Compile Include="Scripting\Templates.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>

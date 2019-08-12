@@ -29,6 +29,7 @@ namespace EyeSPARC
         public ProjectCreationWindow()
         {
             InitializeComponent();
+            projectPathTextBox.Text = Environment.ProjectFolderPath;
 
         }
 

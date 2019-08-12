@@ -5,16 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyeSPARC.Windows"
         mc:Ignorable="d"
-        Title="Open Project" Height="400" Width="500"
+        Title="Open Project" Height="500" Width="500"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
         Topmost="True">
     <Grid>
-        <ListView 
+        <TextBlock Text="Open an EyeProject..." FontSize="22" Margin="40,25"/>
+
+            <ListView
+            Name="ListView"
             ScrollViewer.VerticalScrollBarVisibility="Auto" 
             ItemsSource="{Binding Projects}"  
-            Margin="40,40,40,70"
+            Margin="40,80,40,70"
             BorderThickness="0">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -27,6 +31,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Name="_openButton" Content="Open" Margin="360,320,40,20" Click="_openButton_Click"/>
+        <Button Name="_openButton" Content="Open" Margin="360,420,40,20" Click="_openButton_Click"/>
     </Grid>
 </Window>

@@ -31,6 +31,7 @@ namespace EyeSPARC
 
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
+            Environment.LoadConifguration();
             Templates.LoadAll();
 
             _mainWindow = new MainWindow();
@@ -39,7 +40,11 @@ namespace EyeSPARC
 
             _splashWindow.Show();
 
-            await Task.Run(() => _mainWindow.LoadNetworkItems());
+            await Task.Run(() =>
+            {
+
+                _mainWindow.LoadNetworkItems();
+            });
 
             _splashWindow.Close();
             _mainWindow.Show();
