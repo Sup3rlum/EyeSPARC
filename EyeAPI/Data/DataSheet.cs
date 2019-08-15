@@ -10,14 +10,9 @@ namespace EyeAPI.Data
 {
     public class DataSheet
     {
-        DataTable _tableInternal;
-        public DataTable DataTable { get { return _tableInternal; } }
+        public DataTable DataTable { get; private set; }
 
-        DateTime _start;
-        DateTime _end;
-
-        PublicDataType _type;
-        public PublicDataType Type { get { return _type; } }
+        public PublicDataType Type { get; private set; }
 
         public string Name { get; set; }
 
@@ -27,57 +22,56 @@ namespace EyeAPI.Data
 
             if (type == PublicDataType.Events)
             {
-                _tableInternal = new DataTable(name);
+                DataTable = new DataTable(name);
 
-                _tableInternal.Columns.Add(new DataColumn("UnixTimestamp", typeof(ulong)));
-                _tableInternal.Columns.Add(new DataColumn("NanosecondTimestamp", typeof(ulong)));
+                DataTable.Columns.Add(new DataColumn("UnixTimestamp", typeof(ulong)));
+                DataTable.Columns.Add(new DataColumn("NanosecondTimestamp", typeof(ulong)));
 
                 // --- Pulseheights
 
-                _tableInternal.Columns.Add(new DataColumn("Pulseheight_Mas_Ch1", typeof(int)));
-                _tableInternal.Columns.Add(new DataColumn("Pulseheight_Mas_Ch2", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Pulseheight_Mas_Ch1", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Pulseheight_Mas_Ch2", typeof(int)));
 
-                _tableInternal.Columns.Add(new DataColumn("Pulseheight_Slv_Ch1", typeof(int)));
-                _tableInternal.Columns.Add(new DataColumn("Pulseheight_Slv_Ch2", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Pulseheight_Slv_Ch1", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Pulseheight_Slv_Ch2", typeof(int)));
 
                 // --- Integral
 
-                _tableInternal.Columns.Add(new DataColumn("Integral_Mas_Ch1", typeof(int)));
-                _tableInternal.Columns.Add(new DataColumn("Integral_Mas_Ch2", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Integral_Mas_Ch1", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Integral_Mas_Ch2", typeof(int)));
 
-                _tableInternal.Columns.Add(new DataColumn("Integral_Slv_Ch1", typeof(int)));
-                _tableInternal.Columns.Add(new DataColumn("Integral_Slv_Ch2", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Integral_Slv_Ch1", typeof(int)));
+                DataTable.Columns.Add(new DataColumn("Integral_Slv_Ch2", typeof(int)));
 
                 // --- MIPS
 
-                _tableInternal.Columns.Add(new DataColumn("Mips_Mas_Ch1", typeof(float)));
-                _tableInternal.Columns.Add(new DataColumn("Mips_Mas_Ch2", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Mips_Mas_Ch1", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Mips_Mas_Ch2", typeof(float)));
 
-                _tableInternal.Columns.Add(new DataColumn("Mips_Slv_Ch1", typeof(float)));
-                _tableInternal.Columns.Add(new DataColumn("Mips_Slv_Ch2", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Mips_Slv_Ch1", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Mips_Slv_Ch2", typeof(float)));
 
                 // --- Arrival times
 
-                _tableInternal.Columns.Add(new DataColumn("Arrivals_Mas_Ch1", typeof(float)));
-                _tableInternal.Columns.Add(new DataColumn("Arrivals_Mas_Ch2", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Arrivals_Mas_Ch1", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Arrivals_Mas_Ch2", typeof(float)));
 
-                _tableInternal.Columns.Add(new DataColumn("Arrivals_Slv_Ch1", typeof(float)));
-                _tableInternal.Columns.Add(new DataColumn("Arrivals_Slv_Ch2", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Arrivals_Slv_Ch1", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Arrivals_Slv_Ch2", typeof(float)));
 
-
-                _tableInternal.Columns.Add(new DataColumn("TriggerTime", typeof(float)));
-                _tableInternal.Columns.Add(new DataColumn("Zenith", typeof(float)));
-                _tableInternal.Columns.Add(new DataColumn("Azimuth", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("TriggerTime", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Zenith", typeof(float)));
+                DataTable.Columns.Add(new DataColumn("Azimuth", typeof(float)));
             }
         }
         public void AddRow(params object[] values)
         {
-            _tableInternal.Rows.Add(values);
+            DataTable.Rows.Add(values);
 
         }
         public T Compute<T>(string expr, string filter)
         {
-            return (T)_tableInternal.Compute(expr, filter);
+            return (T)DataTable.Compute(expr, filter);
         }
     }
 }

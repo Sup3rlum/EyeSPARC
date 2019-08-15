@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 
 
-namespace EyeSPARC.Data
+namespace EyeSPARC.Data.Custom
 {
     public class Parser
     {
