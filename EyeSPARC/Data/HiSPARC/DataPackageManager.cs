@@ -83,9 +83,9 @@ namespace EyeSPARC.Data.HiSPARC
             }
         }
 
-        public static DataPackage RequestPackage(DateTime start, DateTime end)
+       /* public static DataPackage RequestPackage(DateTime start, DateTime end)
         {
 
-        }
+        }*/
     }
 }

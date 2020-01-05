@@ -1,0 +1,51 @@
+﻿<Window x:Class="EyeSPARC_StationViewer.Windows.SplashScreenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyeSPARC_StationViewer.Windows"
+        mc:Ignorable="d"
+        Title="SplashScreenWindow" 
+        Height="500" 
+        Width="500"
+        ShowInTaskbar="False" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" 
+        Background="Transparent" 
+        AllowsTransparency="True"
+        SizeToContent="Width" 
+        Topmost="True">
+    <Grid>
+        <Border CornerRadius="8" Margin="15">
+            <Border.Background>
+                <ImageBrush ImageSource="resources/eye_splashscreen.png" 
+                        Stretch="Fill" />
+            </Border.Background>
+        </Border>
+
+        <TextBlock 
+                Text="Loading network.." 
+                Margin="56,360,0,0"
+                FontFamily="Gill Sans MT"
+                FontSize="30"
+                Foreground="#FF20272F"/>
+        <StackPanel Margin="56,430,55,0">
+            <TextBlock
+                Text="The EyeSPARC project and the EyeSPARC logo are licensed under the GPLv3.0"
+                Foreground="Gray"
+                FontFamily="Gill Sans MT"/>
+            <TextBlock
+                Text="Devoleped and maintained by Toma Kolev exclusively for the HiSPARC project"
+                Foreground="Gray"
+                FontFamily="Gill Sans MT"/>
+        </StackPanel>
+
+        <TextBlock
+            Text="V0.4"
+            FontFamily="Gill Sans MT"
+            FontSize="80"
+            Margin="310,340,0,0"
+            Foreground="Gray"/>
+    </Grid>
+</Window>

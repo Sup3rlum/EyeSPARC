@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Windows\resources\cross.png" />
+    <None Remove="Windows\resources\csharp_logo.png" />
+    <None Remove="Windows\resources\css_logo.ico" />
+    <None Remove="Windows\resources\eye_other.png" />
+    <None Remove="Windows\resources\eye_splashscreen.png" />
+    <None Remove="Windows\resources\py_logo.png" />
+    <None Remove="Windows\resources\reload.png" />
+    <None Remove="Windows\resources\xml_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Windows\resources\cross.png" />
+    <Resource Include="Windows\resources\csharp_logo.png" />
+    <Resource Include="Windows\resources\css_logo.ico" />
+    <Resource Include="Windows\resources\eye_other.png" />
+    <Resource Include="Windows\resources\eye_splashscreen.png" />
+    <Resource Include="Windows\resources\py_logo.png" />
+    <Resource Include="Windows\resources\reload.png" />
+    <Resource Include="Windows\resources\xml_icon.png" />
+  </ItemGroup>
+
+</Project>
