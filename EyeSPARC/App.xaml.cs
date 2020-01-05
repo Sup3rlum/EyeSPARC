@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using EyeSPARC.Data.HiSPARC;
 using EyeSPARC.Windows;
 using EyeSPARC.Scripting;
 
@@ -32,7 +32,9 @@ namespace EyeSPARC
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
             Environment.LoadConifguration();
+
             Templates.LoadAll();
+            DataPackageManager.Initialize();
 
             _mainWindow = new MainWindow();
             _splashWindow = new SplashScreenWindow();

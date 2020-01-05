@@ -19,6 +19,7 @@ namespace EyeSPARC
         public static string ProjectFolderPath { get; private set; }
         public static string TemplatesFolderPath { get; private set; }
         public static string ApplicationPath { get; private set; }
+        public static string DataPackagePath { get; private set; }
 
         public static void LoadConifguration()
         {
@@ -60,6 +61,7 @@ namespace EyeSPARC
 
                         ProjectFolderPath = _xpathElements.Element("Projects").Attribute("Value").Value;
                         TemplatesFolderPath = _xpathElements.Element("Templates").Attribute("Value").Value;
+                        DataPackagePath = _xpathElements.Element("DataPackages").Attribute("Value").Value;
 
                     }
                     catch (Exception ex)
@@ -77,6 +79,7 @@ namespace EyeSPARC
 
             string _projectPath = ApplicationPath + "\\projects\\";
             string _templatesPath = ApplicationPath + "\\templates\\";
+            string _datapackagesPath = ApplicationPath + "\\datapackages\\";
 
             XDocument _doc = new XDocument
                 (
@@ -86,7 +89,8 @@ namespace EyeSPARC
                             new XElement("EnvironmentVariables",
                                 new XElement("Path",
                                     new XElement("Projects",new XAttribute("Value", _projectPath)),
-                                    new XElement("Templates", new XAttribute("Value", _templatesPath))
+                                    new XElement("Templates", new XAttribute("Value", _templatesPath)),
+                                    new XElement("DataPackages", new XAttribute("Value", _datapackagesPath))
                                 )
                             )
                         )

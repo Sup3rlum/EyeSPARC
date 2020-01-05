@@ -100,6 +100,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\Custom\Parser.cs" />
     <Compile Include="Data\HiSPARC\DataPackage.cs" />
+    <Compile Include="Data\HiSPARC\DataPackageManager.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="Scripting\Templates.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
