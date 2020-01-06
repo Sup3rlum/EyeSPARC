@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="OxyPlot.Core" Version="2.0.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Windows\resources\cross.png" />
     <Resource Include="Windows\resources\csharp_logo.png" />
     <Resource Include="Windows\resources\css_logo.ico" />

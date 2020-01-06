@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyeSPARC_StationViewer.Windows"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="EyeSPARC Station Viewer" Height="768" Width="1366" Background="#FF363636">
     <Grid>
-
+        <DockPanel Background="#20272f">
+            <Menu DockPanel.Dock="Top" Background="GhostWhite">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New"  BorderThickness="0"/>
+                    <MenuItem Header="_Open" BorderThickness="0"/>
+                    <MenuItem Header="_Save" BorderThickness="0"/>
+                    <MenuItem Header="_Exit" BorderThickness="0"/>
+                </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem Header="_Settings" BorderThickness="0"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About" BorderThickness="0" Click="AboutMenu_Click"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
     </Grid>
 </Window>
