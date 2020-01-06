@@ -31,7 +31,7 @@ namespace EyeSPARC_StationViewer
             await Task.Run(() =>
             {
 
-                //_mainWindow.LoadNetworkItems();
+                _mainWindow.LoadNetworkItems();
 
             });
 

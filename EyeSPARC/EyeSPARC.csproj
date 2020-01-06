@@ -195,12 +195,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EyeAPI\EyeAPI.csproj">
-      <Project>{620a3e56-0154-4b6b-bd00-bf3cd4cba1ca}</Project>
-      <Name>EyeAPI</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Windows\resources\reload.png" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +224,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EyeAPI\EyeAPI.csproj">
+      <Project>{620a3e56-0154-4b6b-bd00-bf3cd4cba1ca}</Project>
+      <Name>EyeAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

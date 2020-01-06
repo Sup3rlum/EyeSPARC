@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EyeAPICore\EyeAPICore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Windows\resources\cross.png" />
     <Resource Include="Windows\resources\csharp_logo.png" />
     <Resource Include="Windows\resources\css_logo.ico" />

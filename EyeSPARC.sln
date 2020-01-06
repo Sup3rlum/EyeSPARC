@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeAPI", "EyeAPI\EyeAPI.csproj", "{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeSPARC", "EyeSPARC\EyeSPARC.csproj", "{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeSyntaxHighlighterBox", "EyeSyntaxHighlighterBox\EyeSyntaxHighlighterBox.csproj", "{18FD269C-CAC6-43A0-838B-2DBF52DAEF09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeSPARC_StationViewer", "EyeSPARC_StationViewer\EyeSPARC_StationViewer.csproj", "{38AC22BC-094F-443B-813F-CFFF1097C850}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EyeSPARC_StationViewer", "EyeSPARC_StationViewer\EyeSPARC_StationViewer.csproj", "{38AC22BC-094F-443B-813F-CFFF1097C850}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeAPI", "EyeAPI\EyeAPI.csproj", "{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeAPICore", "EyeAPICore\EyeAPICore.csproj", "{4E4030BE-7216-469F-BC59-D848F05329CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD0032E8-6191-405A-BD70-5FDB2DF8B9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +31,14 @@ Global
 		{38AC22BC-094F-443B-813F-CFFF1097C850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38AC22BC-094F-443B-813F-CFFF1097C850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38AC22BC-094F-443B-813F-CFFF1097C850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{620A3E56-0154-4B6B-BD00-BF3CD4CBA1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4030BE-7216-469F-BC59-D848F05329CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4030BE-7216-469F-BC59-D848F05329CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4030BE-7216-469F-BC59-D848F05329CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4030BE-7216-469F-BC59-D848F05329CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
