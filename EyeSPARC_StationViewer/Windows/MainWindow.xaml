@@ -437,11 +437,11 @@
                         Margin="30,300,600,60" 
                         Loaded="mapControl_Loaded"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="500,30,20,20">
+                    <StackPanel Orientation="Horizontal" Margin="600,30,20,20">
 
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontSize" Value="18"/>
                                 <Setter Property="Margin" Value="20,0,20,0"/>
                             </Style>
 
@@ -449,16 +449,20 @@
 
                         <StackPanel Orientation="Vertical">
 
-
-                            
                             <TextBlock 
                                 Text="Master"
-                                FontSize="32"
-                                Margin="90,0,90,0"/>
+                                FontSize="25"
+                                Margin="70,0,70,0"/>
+
 
                             <Rectangle Margin="20,20" Fill="Black" Height="2"/>
 
-                            <DataGrid Name="dgMaster" Height ="300" AutoGenerateColumns="False" ItemsSource="{Binding CollectionView}">
+                            <DataGrid Name="dgMaster" AutoGenerateColumns="False" ItemsSource="{Binding CollectionView}" GridLinesVisibility="None" HeadersVisibility="None" BorderBrush="White">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="14"/>
+                                    </Style>
+                                </DataGrid.Resources>
                                 <DataGrid.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.ContainerStyle>
@@ -466,11 +470,10 @@
                                                 <Setter Property="Template">
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="{x:Type GroupItem}">
-                                                            <StackPanel>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <TextBlock Text="{Binding Name}" />
-                                                                    <TextBlock Text="{Binding ItemCount, StringFormat=Count: {0}}" Margin="30,0,0,0" />
-                                                                </StackPanel>
+                                                            <StackPanel Background="White">
+                                                                <TextBlock Text="{Binding Name}" 
+                                                                           Margin="40,10,10,10" 
+                                                                           FontSize="18"/>
                                                                 <ItemsPresenter />
                                                             </StackPanel>
                                                         </ControlTemplate>
@@ -481,7 +484,7 @@
                                     </GroupStyle>
                                 </DataGrid.GroupStyle>
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Property" Binding="{Binding Property}"/>
+                                    <DataGridTextColumn Header="Property" Binding="{Binding Property}" Width="140"/>
                                     <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
@@ -490,21 +493,19 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
 
-                            <StackPanel.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="FontSize" Value="18"/>
-                                    <Setter Property="Margin" Value="20,0,20,0"/>
-                                </Style>
-                            </StackPanel.Resources>
-
                             <TextBlock 
                                 Text="Slave"
-                                FontSize="32"
-                                Margin="90,0,90,0"/>
+                                FontSize="25"
+                                Margin="70,0,70,0"/>
 
                             <Rectangle Margin="20,20" Fill="Black" Height="2"/>
 
-                            <DataGrid Name="dgSlave" Height ="300" AutoGenerateColumns="False" ItemsSource="{Binding CollectionView}" HeadersVisibility="None" GridLinesVisibility="None">
+                            <DataGrid Name="dgSlave" AutoGenerateColumns="False" ItemsSource="{Binding CollectionView}" GridLinesVisibility="None" HeadersVisibility="None" BorderBrush="White">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="14"/>
+                                    </Style>
+                                </DataGrid.Resources>
                                 <DataGrid.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.ContainerStyle>
@@ -512,10 +513,10 @@
                                                 <Setter Property="Template">
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="{x:Type GroupItem}">
-                                                            <StackPanel>
+                                                            <StackPanel Background="White">
                                                                 <TextBlock 
                                                                     Text="{Binding Name}" 
-                                                                    Margin="20,10,10,10"/>
+                                                                    Margin="40,10,10,10"/>
                                                                 <ItemsPresenter />
                                                             </StackPanel>
                                                         </ControlTemplate>
@@ -526,15 +527,19 @@
                                     </GroupStyle>
                                 </DataGrid.GroupStyle>
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Property" Binding="{Binding Property}"/>
+                                    <DataGridTextColumn Header="Property" Binding="{Binding Property}" Width="140"/>
                                     <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
+
                                 </DataGrid.Columns>
                             </DataGrid>
-
+                
                         </StackPanel>
 
                     </StackPanel>
 
+                    <WrapPanel Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Vertical">
+                        <Button Content="Full Config" Width="80"/>
+                    </WrapPanel>
 
                 </Grid>
             </TabItem>

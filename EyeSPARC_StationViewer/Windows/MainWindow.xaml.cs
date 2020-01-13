@@ -107,28 +107,6 @@ namespace EyeSPARC_StationViewer.Windows
                 dsEllipse.Fill = new SolidColorBrush(GetStatusColor(_latestDataStatus));
 
 
-                float mas_ch1_volt = _selectedStation.Configuration.GetFloat("mas_ch1_voltage");
-                float mas_ch2_volt = _selectedStation.Configuration.GetFloat("mas_ch2_voltage");
-
-
-                float slv_ch1_volt = _selectedStation.Configuration.GetFloat("slv_ch1_voltage");
-                float slv_ch2_volt = _selectedStation.Configuration.GetFloat("slv_ch2_voltage");
-
-
-            //    label_mas_ch1_volt.Text = mas_ch1_volt.ToString();
-
-
-
-
-
-                /*   label_mas_ver_fpga.Text = mas_fpga;
-                   label_mas_ver_serial.Text = mas_serial;
-
-                   label_slv_ver_fpga.Text = slv_fpga;
-                   label_slv_ver_serial.Text = slv_serial;*/
-
-
-
 
                 ConfigGridViewModel cgvm = new ConfigGridViewModel(_selectedStation, DetectorType.Master);
                 ConfigGridViewModel cgvm2 = new ConfigGridViewModel(_selectedStation, DetectorType.Slave);
