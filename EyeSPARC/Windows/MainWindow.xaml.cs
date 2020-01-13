@@ -62,9 +62,9 @@ namespace EyeSPARC.Windows
         }
         public void LoadNetworkItems()
         {
-            /*_network.Load();
+            _network.Load();
 
-            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });*/
+            Dispatcher.Invoke(() => networkTreeView.ItemsSource = new List<Network>() { _network });
 
         }
 

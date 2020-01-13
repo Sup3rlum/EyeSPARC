@@ -16,6 +16,12 @@ using System.Windows.Shapes;
 using EyeAPICore;
 using EyeAPICore.Data;
 
+
+using OxyPlot;
+
+using GMap.NET;
+using GMap.NET.MapProviders;
+
 namespace EyeSPARC_StationViewer.Windows
 {
     /// <summary>
@@ -24,17 +30,39 @@ namespace EyeSPARC_StationViewer.Windows
     public partial class MainWindow : Window
     {
 
-        Station _selectedStation;
+        public Station _selectedStation { get; set; }
 
         Network _network = new Network();
 
 
-        ShowDataSheet _eventtime, _pulseheight, _pulseintegral, _singleslow, _singleshigh, _singlesratelow, _singlesratehigh;
+        DataPlotViewModel _eventTimeModel;
+        DataPlotViewModel _pulseHeightModel;
+        DataPlotViewModel _pulseIntegralModel;
+        DataPlotViewModel _singlesLowModel;
+        DataPlotViewModel _singlesHighModel;
+        DataPlotViewModel _singlesRateLowModel;
+        DataPlotViewModel _singlesRateHighModel;
 
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _eventTimeModel = new DataPlotViewModel("Event Time", ShowDataType.EventTime);
+            _pulseHeightModel = new DataPlotViewModel("Pulse Height", ShowDataType.PulseHeight);
+            _pulseIntegralModel = new DataPlotViewModel("Pulse Integral", ShowDataType.PulseIntegral);
+            _singlesLowModel = new DataPlotViewModel("Single rate histogram (per second above low threshold)", ShowDataType.SinglesLow);
+            _singlesHighModel = new DataPlotViewModel("Single rate histogram (per second above high threshold)", ShowDataType.SinglesHigh);
+            _singlesRateLowModel = new DataPlotViewModel("Singles (per second above high threshold)", ShowDataType.SinglesRateLow);
+            _singlesRateHighModel = new DataPlotViewModel("Singles (per second above high threshold)", ShowDataType.SinglesRateHigh);
+
+            _eventTimePlot.DataContext = _eventTimeModel;
+            _pulseHeightPlot.DataContext = _pulseHeightModel;
+            _pulseIntegralPlot.DataContext = _pulseIntegralModel;
+            _singlesLowPlot.DataContext = _singlesLowModel;
+            _singlesHighPlot.DataContext = _singlesHighModel;
+            _singlesRateLowPlot.DataContext = _singlesRateLowModel;
+            _singlesRateHighPlot.DataContext = _singlesRateHighModel;
         }
         private void AboutMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -55,16 +83,15 @@ namespace EyeSPARC_StationViewer.Windows
                 _selectedStation = ((Station)e.NewValue);
 
                 StationTitleLabel.Text = _selectedStation.Name;
+                StationIDLabel.Text = _selectedStation.ID.ToString();
 
 
                 float lat = _selectedStation.Configuration.GetFloat("gps_latitude");
                 float lon = _selectedStation.Configuration.GetFloat("gps_longitude");
                 float alt = _selectedStation.Configuration.GetFloat("gps_altitude");
 
+                mapControl.Position = new PointLatLng(lat, lon);
 
-                LongitudeBoxValue.Text = lon.ToString();
-                LatitudeBoxValue.Text = lat.ToString();
-                AltitudeBoxValue.Text = alt.ToString();
 
 
                 var _latestDetectorStatus = _selectedStation.LatestDetectorStatus;
@@ -79,6 +106,7 @@ namespace EyeSPARC_StationViewer.Windows
                 dataStatusLabel.Foreground = new SolidColorBrush(GetStatusColor(_latestDataStatus));
                 dsEllipse.Fill = new SolidColorBrush(GetStatusColor(_latestDataStatus));
 
+
                 float mas_ch1_volt = _selectedStation.Configuration.GetFloat("mas_ch1_voltage");
                 float mas_ch2_volt = _selectedStation.Configuration.GetFloat("mas_ch2_voltage");
 
@@ -86,53 +114,36 @@ namespace EyeSPARC_StationViewer.Windows
                 float slv_ch1_volt = _selectedStation.Configuration.GetFloat("slv_ch1_voltage");
                 float slv_ch2_volt = _selectedStation.Configuration.GetFloat("slv_ch2_voltage");
 
-                label_mas_ch1_volt.Text = ((int)mas_ch1_volt).ToString();
-                label_mas_ch2_volt.Text = ((int)mas_ch2_volt).ToString();
 
-                label_slv_ch1_volt.Text = ((int)slv_ch1_volt).ToString();
-                label_slv_ch2_volt.Text = ((int)slv_ch2_volt).ToString();
-
-                string[] mas_ver = _selectedStation.Configuration.GetString("mas_version").Replace("\"", "").Replace("    ", "-").Split('-');
-                string[] slv_ver = _selectedStation.Configuration.GetString("slv_version").Replace("\"", "").Replace("    ", "-").Split('-');
-
-                string mas_serial = mas_ver[0].Split(':')[1];
-                string mas_fpga = mas_ver[1].Split(':')[1];
-
-                string slv_serial = slv_ver[0].Split(':')[1];
-                string slv_fpga = slv_ver[1].Split(':')[1];
+            //    label_mas_ch1_volt.Text = mas_ch1_volt.ToString();
 
 
-                label_mas_ver_fpga.Text = mas_fpga;
-                label_mas_ver_serial.Text = mas_serial;
-
-                label_slv_ver_fpga.Text = slv_fpga;
-                label_slv_ver_serial.Text = slv_serial;
-
-                float mas_ch1_tresh_low = _selectedStation.Configuration.GetFloat("mas_ch1_thres_low");
-                float mas_ch1_tresh_high = _selectedStation.Configuration.GetFloat("mas_ch1_thres_high");
-
-                float mas_ch2_tresh_low = _selectedStation.Configuration.GetFloat("mas_ch2_thres_low");
-                float mas_ch2_tresh_high = _selectedStation.Configuration.GetFloat("mas_ch2_thres_high");
 
 
-                float slv_ch1_tresh_low = _selectedStation.Configuration.GetFloat("slv_ch1_thres_low");
-                float slv_ch1_tresh_high = _selectedStation.Configuration.GetFloat("slv_ch1_thres_high");
 
-                float slv_ch2_tresh_low = _selectedStation.Configuration.GetFloat("slv_ch2_thres_low");
-                float slv_ch2_tresh_high = _selectedStation.Configuration.GetFloat("slv_ch2_thres_high");
+                /*   label_mas_ver_fpga.Text = mas_fpga;
+                   label_mas_ver_serial.Text = mas_serial;
 
-                label_mas_ch1_treshold_low.Text = ((int)mas_ch1_tresh_low).ToString();
-                label_mas_ch1_treshold_high.Text = ((int)mas_ch1_tresh_high).ToString();
+                   label_slv_ver_fpga.Text = slv_fpga;
+                   label_slv_ver_serial.Text = slv_serial;*/
 
-                label_mas_ch2_treshold_low.Text = ((int)mas_ch1_tresh_low).ToString();
-                label_mas_ch2_treshold_high.Text = ((int)mas_ch1_tresh_high).ToString();
 
-                await Task.Run(() => DownloadShowData(_selectedStation));
 
-               // DisplayShowData();
 
-               /* YFormatter = value => value.ToString();
-                XFormatter = value => TimeSpan.FromHours((double)value).ToString("hh:mm");*/
+                ConfigGridViewModel cgvm = new ConfigGridViewModel(_selectedStation, DetectorType.Master);
+                ConfigGridViewModel cgvm2 = new ConfigGridViewModel(_selectedStation, DetectorType.Slave);
+
+                dgMaster.DataContext = cgvm;
+                dgSlave.DataContext = cgvm2;
+
+
+                _eventTimeModel.SetStation(_selectedStation);
+                _pulseHeightModel.SetStation(_selectedStation);
+                _pulseIntegralModel.SetStation(_selectedStation);
+                _singlesLowModel.SetStation(_selectedStation);
+                _singlesHighModel.SetStation(_selectedStation);
+                _singlesRateLowModel.SetStation(_selectedStation);
+                _singlesRateHighModel.SetStation(_selectedStation);
 
 
                 if (_selectedStation.DetectorConfiguration == DetectorConfiguration.MasterOnly)
@@ -150,51 +161,16 @@ namespace EyeSPARC_StationViewer.Windows
             }
 
         }
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void mapControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (eventtimeTab.IsSelected)
-            {
-                chartTitle.Text = "Event count histogram";
-            }
-            else if (pulseheightsTab.IsSelected)
-            {
-                chartTitle.Text = "Pulseheight histogram";
+            GMaps.Instance.Mode = AccessMode.ServerAndCache;
+            mapControl.MapProvider = GMapProviders.BingMap;
 
-            }
-            else if (pulseintegralTab.IsSelected)
-            {
-                chartTitle.Text = "Pulseintegral histogram";
-            }
-            else if (singleslowTab.IsSelected)
-            {
-                chartTitle.Text = "Singles (per second above low threshold)";
-
-            }
-            else if (singleshighTab.IsSelected)
-            {
-                chartTitle.Text = "Singles (per second above high threshold)";
-            }
-            else if (singlesratelowTab.IsSelected)
-            {
-                chartTitle.Text = "Singles rate histogram (above low threshold)";
-            }
-            else if (singlesratehighTab.IsSelected)
-            {
-                chartTitle.Text = "Singles rate histogram (above high threshold)";
-            }
+            mapControl.Zoom = 12;
+            mapControl.ShowCenter = false;
         }
-        public void DownloadShowData(Station _st)
-        {
-            _eventtime = ShowDB.Query(_selectedStation, ShowDataType.EventTime);
-            _pulseheight = ShowDB.Query(_selectedStation, ShowDataType.PulseHeight);
-            _pulseintegral = ShowDB.Query(_selectedStation, ShowDataType.PulseIntegral);
 
-            _singleslow = ShowDB.Query(_selectedStation, ShowDataType.SinglesLow);
-            _singleshigh = ShowDB.Query(_selectedStation, ShowDataType.SinglesHigh);
-
-            _singlesratelow = ShowDB.Query(_selectedStation, ShowDataType.SinglesRateLow);
-            _singlesratehigh = ShowDB.Query(_selectedStation, ShowDataType.SinglesRateHigh);
-        }
         public Color GetStatusColor(NodeStatus _status) =>
             _status switch
             {
@@ -205,6 +181,6 @@ namespace EyeSPARC_StationViewer.Windows
 
                 _ => Colors.Black
             };
-        
+
     }
 }

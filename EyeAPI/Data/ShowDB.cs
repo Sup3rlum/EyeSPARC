@@ -17,7 +17,7 @@ namespace EyeAPI.Data
         {
             WebClient _wc = new WebClient();
 
-            DateTime _yesterday = DateTime.Now.AddDays(-2);
+            DateTime _yesterday = DateTime.Now.AddDays(-1);
 
             string url = $"http://data.hisparc.nl/show/source/{_type.ToString().ToLower()}/{_station.ID}/{_yesterday.Year}/{_yesterday.Month}/{_yesterday.Day}/";
 

@@ -39,7 +39,7 @@
                 </Hyperlink>
             </TextBlock>
             <TextBlock Margin="0,15,0,0">
-                For any queries:: <LineBreak/>
+                For any inqueries:: <LineBreak/>
                 toma.kolev@gmail.com
             </TextBlock>
         </StackPanel>
